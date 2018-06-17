@@ -1,0 +1,124 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  	
+  	<modelVersion>4.0.0</modelVersion>
+  	
+  	<groupId>net.faru</groupId>
+  	<artifactId>FaruGamesAPI</artifactId>
+  	
+  	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>src</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<createDependencyReducedPom>false</createDependencyReducedPom>
+					<artifactSet>
+						<includes>
+							<include>org.apache.commons</include>
+							<include>*</include>
+							<include>*.yml</include>
+						</includes>
+					</artifactSet>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<finalName>${artifactId}</finalName>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+  
+	<!-- REPOSITORIES -->
+	<repositories>
+		
+		<!-- SPIGOT -->
+		<repository>
+			<id>spigot-repo</id>
+			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+		</repository>
+	</repositories>
+
+	<!-- DEPENDENCIES -->
+	<dependencies>
+	
+		<!-- JSON -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20090211</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<!-- Apache API -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-pool2</artifactId>
+			<version>2.4.2</version>
+		</dependency>
+  	  
+		<!-- Spigot-API -->
+		<dependency>
+			<groupId>org.spigot</groupId>
+			<artifactId>spigot-api</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/Spigot-1.9.4.jar</systemPath>
+		</dependency>
+		
+		<!-- BungeeCord-Travertine-API -->
+		<dependency>
+			<groupId>org.travertine</groupId>
+			<artifactId>travertine-api</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/Travertine-b23.jar</systemPath>
+		</dependency>
+		
+		<!-- Faru-Data -->
+		<dependency>
+			<groupId>net.faru</groupId>
+			<artifactId>faru-data</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/faru-data.jar</systemPath>
+		</dependency>
+	</dependencies>
+  
+	<version>0.0.1-SNAPSHOT</version>
+	<name>FaruGamesAPI</name>
+	
+</project>
