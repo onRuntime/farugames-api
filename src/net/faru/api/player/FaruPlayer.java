@@ -10,9 +10,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import net.faru.api.player.currency.Currency;
+import net.faru.api.player.data.DataType;
 import net.faru.api.player.rank.Rank;
 import net.faru.api.tools.player.UUIDManager;
 import net.faru.data.database.currency.ICurrency;
+import net.faru.data.database.player.IData;
+import net.faru.data.database.player.IExperience;
 import net.faru.data.database.player.IPermission;
 import net.faru.data.database.rank.IRank;
 
@@ -23,7 +26,10 @@ public class FaruPlayer {
 	
 	private Rank rank;
 	
+	private Integer experience;
+	
 	private Map<Currency, Integer> mapCurrency = new HashMap<Currency, Integer>();
+	private Map<DataType, Object> mapData = new HashMap<DataType, Object>();
 	
 	private List<String> permissionsList = new ArrayList<String>();
 	
@@ -34,10 +40,14 @@ public class FaruPlayer {
 		IRank.createAccount(uuid);
 		IPermission.createAccount(uuid);
 		ICurrency.createAccount(uuid);
+		IExperience.createAccount(uuid);
+		IData.createAccount(uuid, player);
 		
+		this.loadData();
 		this.setRank(IRank.getRank(uuid));
 		this.loadPermissions();
 		this.loadCoins();
+		this.loadExperience();
 	}
 	
 	public UUID getUUID() {
@@ -100,5 +110,49 @@ public class FaruPlayer {
 	
 	public void removeCoins(Currency currency, Integer coins) {
 		this.mapCurrency.put(currency, getCoins(currency) - coins);
+	}
+	
+	public void pushData() {
+		for (DataType dataType : DataType.values()) {
+			IData.setData(uuid, dataType, this.mapData.get(dataType));
+		}
+	}
+	
+	public void pushData(DataType dataType) {
+		IData.setData(uuid, dataType, this.mapData.get(dataType));
+	}
+	
+	public void loadData() {
+		for (DataType dataType : DataType.values()) {
+			this.mapData.put(dataType, IData.getData(uuid, dataType));
+		}
+	}
+	
+	public void setData(DataType dataType, boolean values) {
+		this.mapData.put(dataType, values);
+	}
+
+	public boolean getData(DataType dataType) {
+		return (boolean) this.mapData.get(dataType);
+	}
+	
+	public void pushExperience() {
+		IExperience.setExperience(uuid, this.getExperience());
+	}
+	
+	public void loadExperience() {
+		this.experience = IExperience.getExperience(uuid);
+	}
+	
+	public Integer getExperience() {
+		return this.experience;
+	}
+
+	public void addExperience(Integer coins) {
+		this.experience = experience + coins;
+	}
+	
+	public void removeExperience(Integer coins) {
+		this.experience = experience - coins;
 	}
 }
