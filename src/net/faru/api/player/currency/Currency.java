@@ -2,7 +2,8 @@ package net.faru.api.player.currency;
 
 public enum Currency {
 
-	COINS("Coins", "coins", 0);
+	COINS("Coins", "coins", 0),
+	CREDITS("Crédits", "credits", 0);
 	
 	private String name;
 	private String column;
