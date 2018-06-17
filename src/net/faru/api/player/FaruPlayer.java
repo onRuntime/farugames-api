@@ -18,6 +18,7 @@ import net.faru.data.database.player.IData;
 import net.faru.data.database.player.IExperience;
 import net.faru.data.database.player.IPermission;
 import net.faru.data.database.rank.IRank;
+import net.faru.data.spigot.SpigotFaruData;
 
 public class FaruPlayer {
 
@@ -25,6 +26,9 @@ public class FaruPlayer {
 	private Player player;
 	
 	private Rank rank;
+	
+	private Boolean muted;
+	private Boolean banned;
 	
 	private Integer experience;
 	
@@ -64,6 +68,22 @@ public class FaruPlayer {
 	
 	public void setRank(Rank rank) {
 		this.rank = rank;
+	}
+	
+	public Boolean isMuted() {
+		return this.muted;
+	}
+	
+	public void setMuted(Boolean muted) {
+		this.muted = muted;
+	}
+	
+	public Boolean isBanned() {
+		return this.banned;
+	}
+	
+	public void setBanned(Boolean banned) {
+		this.banned = banned;
 	}
 	
 	public void pushPermissions() {
@@ -154,5 +174,11 @@ public class FaruPlayer {
 	
 	public void removeExperience(Integer coins) {
 		this.experience = experience - coins;
+	}
+	
+	public static FaruPlayer getPlayer(UUID uuid) {
+		return SpigotFaruData.iFaruPlayer.get(uuid) != null ?
+				SpigotFaruData.iFaruPlayer.get(uuid) :
+					SpigotFaruData.iFaruPlayer.put(uuid, new FaruPlayer(UUIDManager.getName(uuid.toString())));
 	}
 }
