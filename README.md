@@ -1,1 +1,1 @@
-![FaruGames](https://i.goopics.net/x8mAQ.png "Logo de FaruGames" =100x20)
+![FaruGames](https://i.goopics.net/x8mAQ.png =100x20 "Logo de FaruGames")
