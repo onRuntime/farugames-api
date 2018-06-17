@@ -1,1 +1,1 @@
-Soon by ChocoIG tg
+![FaruGames](https://i.goopics.net/x8mAQ.png "Logo de FaruGames")
