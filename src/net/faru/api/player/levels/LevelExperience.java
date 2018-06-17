@@ -2,18 +2,18 @@ package net.faru.api.player.levels;
 
 public enum LevelExperience {
 
-	LEVEL_1("1", 250),
-	LEVEL_100("MAX", 45000);
+	LEVEL_1(1, 250),
+	LEVEL_100(100, 45000);
 	
-	private String level;
+	private Integer level;
 	private Integer experience;
 	
-	LevelExperience(String level, Integer experience) {
+	LevelExperience(Integer level, Integer experience) {
 		this.level = level;
 		this.experience = experience;
 	}
 	
-	public String getLevel() {
+	public Integer getLevel() {
 		return this.level;
 	}
 	
