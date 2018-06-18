@@ -1,9 +1,16 @@
 package net.faru.api.spigot;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.bukkit.plugin.java.JavaPlugin;
+
+import net.faru.api.servers.FaruServerAPI;
 
 public class SpigotFaruAPI extends JavaPlugin {
 
+	public static Map<String, FaruServerAPI> iFaruServers = new HashMap<String, FaruServerAPI>();
+	
 	private static SpigotFaruAPI instance;
 	
 	public void onLoad() {
