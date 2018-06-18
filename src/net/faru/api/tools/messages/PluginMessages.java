@@ -19,7 +19,7 @@ public class PluginMessages {
 		boolean isBold = false;
 
 		for (char c : message.toCharArray()) {
-			if (c == 'ยง') {
+			if (c == 'ง') {
 				previousCode = true;
 				continue;
 			} else if (previousCode == true) {
