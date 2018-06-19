@@ -1,7 +1,7 @@
 package net.faru.api.servers;
 
 import net.faru.api.spigot.SpigotFaruAPI;
-import net.faru.data.database.servers.IServer;
+import net.farugames.data.database.servers.IServer;
 
 public class FaruServerAPI {
 	

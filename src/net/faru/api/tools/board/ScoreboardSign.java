@@ -192,9 +192,9 @@ public class ScoreboardSign {
 		}
 		StringBuilder prefix = new StringBuilder(string.substring(0, string.length() >= 16 ? 16 : string.length()));
 		StringBuilder suffix = new StringBuilder(string.length() > 16 ? string.substring(16) : "");
-		if (prefix.charAt(prefix.length() - 1) == '§') {
+		if (prefix.charAt(prefix.length() - 1) == 'ï¿½') {
 			prefix.deleteCharAt(prefix.length() - 1);
-			suffix.insert(0, '§');
+			suffix.insert(0, 'ï¿½');
 		}
 		if (!suffix.toString().isEmpty())
 			suffix.insert(0, ChatColor.getLastColors(prefix.toString()));
