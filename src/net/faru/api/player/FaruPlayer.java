@@ -13,12 +13,12 @@ import net.faru.api.player.currency.Currency;
 import net.faru.api.player.data.DataType;
 import net.faru.api.player.rank.Rank;
 import net.faru.api.tools.player.UUIDManager;
-import net.farugames.data.database.currency.ICurrency;
-import net.farugames.data.database.player.IData;
-import net.farugames.data.database.player.IExperience;
-import net.farugames.data.database.player.IPermission;
-import net.farugames.data.database.rank.IRank;
-import net.farugames.data.spigot.SpigotFaruData;
+import net.faru.data.database.currency.ICurrency;
+import net.faru.data.database.player.IData;
+import net.faru.data.database.player.IExperience;
+import net.faru.data.database.player.IPermission;
+import net.faru.data.database.rank.IRank;
+import net.faru.data.spigot.SpigotFaruData;
 
 public class FaruPlayer {
 
