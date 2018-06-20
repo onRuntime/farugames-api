@@ -2,7 +2,8 @@ package net.faru.api.servers;
 
 public enum ServerType {
 
-	NONE("Unknown", "unknown#", "null"),
+	NONE("Unknown", "unknown#", null),
+	PROXY("Proxy", "proxy#", null),
 	HUB("Hub", "hub#", "/hubs/");
 	
 	private String name;
