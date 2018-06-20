@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 
 import net.faru.api.player.currency.Currency;
 import net.faru.api.player.data.DataType;
+import net.faru.api.player.languages.Lang;
 import net.faru.api.player.rank.Rank;
 import net.faru.api.tools.player.UUIDManager;
 import net.faru.data.database.currency.ICurrency;
@@ -174,6 +175,10 @@ public class FaruPlayer {
 	
 	public void removeExperience(Integer coins) {
 		this.experience = experience - coins;
+	}
+	
+	public Lang getLanguage() {
+		return Lang.valueOf(String.valueOf(this.getData(DataType.LANGUAGE)));
 	}
 	
 	public static FaruPlayer getPlayer(UUID uuid) {

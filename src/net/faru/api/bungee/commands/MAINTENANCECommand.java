@@ -2,6 +2,7 @@ package net.faru.api.bungee.commands;
 
 import net.faru.api.bungee.BungeeFaruAPI;
 import net.faru.api.player.FaruPlayer;
+import net.faru.api.player.languages.Lang;
 import net.faru.api.player.rank.Rank;
 import net.faru.api.tools.messages.PluginMessages;
 import net.faru.api.tools.messages.Prefix;
