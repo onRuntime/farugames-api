@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.faru.api.managers.BungeeListenerManager;
+import net.faru.api.sanctions.Sanction;
 import net.faru.api.servers.FaruServerAPI;
 import net.faru.api.servers.ServerType;
 import net.faru.data.database.servers.IMaintenance;
@@ -15,6 +16,8 @@ public class BungeeFaruAPI extends Plugin {
 	
 	private static Boolean maintenance = false;
 	private static List<String> maintenancePlayers = new ArrayList<String>();
+	
+	public static List<Sanction> sanctions = new ArrayList<Sanction>();
 	
 	public void onLoad() {
 		instance = this;

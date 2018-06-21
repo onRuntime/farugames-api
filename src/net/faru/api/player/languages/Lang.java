@@ -81,7 +81,15 @@ public enum Lang {
 	GAME_JOIN_MESSAGE("%player_rank_prefix% %player%" + ChatColor.YELLOW + " has joined the game !",
 			"%player_rank_prefix% %player%" + ChatColor.YELLOW + " a rejoint la partie !",
 			"%player_rank_prefix% %player%" + ChatColor.YELLOW + "",
-			"%player_rank_prefix% %player%" + ChatColor.YELLOW + " entro en la partida !");
+			"%player_rank_prefix% %player%" + ChatColor.YELLOW + " entro en la partida !"),
+	/* =========================== */
+	
+	
+	/*  ========== JOIN ==========  */
+	UNPUNISHABLE_PLAYER(ChatColor.GRAY + "This player cannot be punished",
+			ChatColor.GRAY + "Ce joueur ne peut pas être sanctionné",
+			ChatColor.GRAY + "",
+			ChatColor.GRAY + "");
 	/* =========================== */
 		
 	public String english, french, german, spanish;

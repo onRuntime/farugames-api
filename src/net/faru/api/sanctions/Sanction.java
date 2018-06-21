@@ -1,9 +1,12 @@
 package net.faru.api.sanctions;
 
 import java.util.Date;
+import java.util.List;
 
+import net.faru.api.bungee.BungeeFaruAPI;
 import net.faru.api.menus.sanctions.SanctionMainMenu;
 import net.faru.api.player.FaruPlayer;
+import net.faru.data.database.player.ISanction;
 
 public class Sanction {
 	
@@ -39,10 +42,12 @@ public class Sanction {
 				new SanctionMainMenu(this);
 				break;
 		}
+		addSanction(this);
 	}
 	
 	public void create() {
-		// ISanction.create(this);
+		ISanction.create(this);
+		removeSanction(this.target);
 	}
 	
 	public FaruPlayer getAuthor() {
@@ -51,6 +56,10 @@ public class Sanction {
 	
 	public FaruPlayer getTarget() {
 		return this.target;
+	}
+	
+	public void setSanction(SanctionType sanctionType) {
+		this.sanction = sanctionType;
 	}
 	
 	public SanctionType getSanction() {
@@ -79,5 +88,39 @@ public class Sanction {
 	
 	public Integer getTime() {
 		return this.time;
+	}
+	
+	public static void addSanction(Sanction sanction) {
+		BungeeFaruAPI.sanctions.add(sanction);
+	}
+	
+	public static void removeSanction(FaruPlayer faruTarget) {
+		for(Sanction sanction : getSanctions()) {
+			if(sanction.getTarget() == faruTarget) {
+				BungeeFaruAPI.sanctions.remove(sanction);
+			}
+		}
+	}
+	
+	public static List<Sanction> getSanctions() {
+		return BungeeFaruAPI.sanctions;
+	}
+	
+	public static Sanction getSanction(FaruPlayer faruTarget) {
+		for(Sanction sanction : getSanctions()) {
+			if(sanction.getTarget() == faruTarget) {
+				return sanction;
+			}
+		}
+		return null;
+	}
+	
+	public static Boolean isSanctionned(FaruPlayer faruTarget) {
+		for(Sanction sanction : getSanctions()) {
+			if(sanction.getTarget() == faruTarget) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

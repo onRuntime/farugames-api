@@ -29,6 +29,7 @@ public class SANCTIONCommand extends Command {
 			FaruPlayer faruTarget = FaruPlayer.getPlayer(UUIDManager.getUUID(args[1])) != null ?
 					FaruPlayer.getPlayer(UUIDManager.getUUID(args[1])) :
 						null;
+			if(faruPlayer == faruTarget) { player.sendMessage(Lang.ERROR.in(lang) + "\n" + Lang.UNPUNISHABLE_PLAYER.in(lang)); return; }
 			if(faruTarget == null) { player.sendMessage(Lang.ERROR.in(lang) + "\n" + Lang.BAD_ACCOUNT.in(lang)); return; }
 			new Sanction(faruPlayer, faruTarget, null);
 			return;

@@ -18,6 +18,7 @@ import net.faru.api.player.languages.Lang;
 import net.faru.api.sanctions.Sanction;
 import net.faru.api.spigot.SpigotFaruAPI;
 import net.faru.api.tools.builders.InventoryBuilder;
+import net.faru.api.tools.player.UUIDManager;
 
 public class SanctionMainMenu implements Listener {
 
@@ -57,18 +58,22 @@ public class SanctionMainMenu implements Listener {
 
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event) {
-		Player player = (Player) event.getWhoClicked();
 		if (event.getInventory() == null)
 			return;
 		if (event.getCurrentItem() == null)
 			return;
 		if (event.getCurrentItem().getType().equals(Material.AIR))
 			return;
-		if (!(event.getInventory().getName().equalsIgnoreCase(invName)))
+		FaruPlayer faruTarget = event.getInventory().getName().replaceAll(invName, "") != null ?
+				FaruPlayer.getPlayer(UUIDManager.getUUID(event.getInventory().getName().replaceAll(invName, ""))) :
+					null;
+		if (!(event.getInventory().getName().equalsIgnoreCase(invName + faruTarget.getPlayer().getName())))
 			return;
-		if (!(event.getInventory().equals(menuInventoryMap.get(player))))
+		FaruPlayer faruPlayer = FaruPlayer.getPlayer(UUIDManager.getUUID(event.getWhoClicked().getName()));
+		if (!(event.getInventory().equals(menuInventoryMap.get(faruPlayer.getPlayer()))))
 			return;
 		event.setCancelled(true);
+		Sanction sanction = Sanction.getSanction(faruTarget);
 		switch (event.getCurrentItem().getType()) {
 		case COMMAND:
 			break;
