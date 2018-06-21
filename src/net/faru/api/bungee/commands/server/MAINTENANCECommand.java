@@ -1,4 +1,4 @@
-package net.faru.api.bungee.commands;
+package net.faru.api.bungee.commands.server;
 
 import net.faru.api.bungee.BungeeFaruAPI;
 import net.faru.api.player.FaruPlayer;
@@ -30,14 +30,14 @@ public class MAINTENANCECommand extends Command {
 		if(args == null || args.length > 2 || args[0].equalsIgnoreCase("help")) { player.sendMessage(this.HELP()); return; }
 		
 		if(args[0].equalsIgnoreCase("set")) {
+			if(!args[1].equalsIgnoreCase("false") || !args[1].equalsIgnoreCase("true")) { player.sendMessage(this.HELP()); return; }
+			IMaintenance.setState(Boolean.valueOf(args[1]));
 			if(args[1].equalsIgnoreCase("true")) {
 				if(BungeeFaruAPI.isMaintenance()) { player.sendMessage(Lang.ERROR.in(lang) + "\n" + Lang.MAINTENANCE_ALREADY_ENABLED.in(lang)); return; }
-				IMaintenance.setState(true);
 				player.sendMessage(Lang.MAINTENANCE_ENABLE.in(lang));
 				return;
 			}
 			if(!BungeeFaruAPI.isMaintenance()) { player.sendMessage(Lang.ERROR.in(lang) + "\n" + Lang.MAINTENANCE_ALREADY_DISABLED.in(lang)); return; }
-			IMaintenance.setState(false);
 			player.sendMessage(Lang.MAINTENANCE_DISABLE.in(lang));
 			return;
 		}

@@ -5,68 +5,83 @@ import org.bukkit.ChatColor;
 public enum Lang {
 	
 	/*  ========== LANGUAGES ==========  */
-	FRENCH("French", "Français", "", ""),
-	ENGLISH("English", "Anglais", "", ""),
-	GERMAN("German", "Allemand", "", ""),
-	SPANISH("Spanish", "Espagnol", "", ""),
+	FRENCH("French", "Français", "Französische", "Francès"),
+	ENGLISH("English", "Anglais", "Englisch", "Inglès"),
+	GERMAN("German", "Allemand", "Deutsch", "Alemán"),
+	SPANISH("Spanish", "Espagnol", "Spanisch", "Español"),
 	/* ================================ */
 	
 	
 	/*  ========== TYPES ==========  */
 	ERROR(ChatColor.DARK_RED + "" + ChatColor.BOLD + "✘" + ChatColor.WHITE + "" + ChatColor.BOLD + " ∣ " + ChatColor.RED + "" + ChatColor.BOLD + "Error :",
 			ChatColor.DARK_RED + "" + ChatColor.BOLD + "✘" + ChatColor.WHITE + "" + ChatColor.BOLD + " ∣ " + ChatColor.RED + "" + ChatColor.BOLD + "Erreur :",
+			ChatColor.DARK_RED + "" + ChatColor.BOLD + "✘" + ChatColor.WHITE + "" + ChatColor.BOLD + " ∣ " + ChatColor.RED + "" + ChatColor.BOLD + "Fehler :",
+			null),
+	/* ============================ */
+	
+	
+	/*  ========== PLAYER ==========  */
+	BAD_ACCOUNT(ChatColor.RED + "Our systems are having some problems with this player account. Contact an administrator for more informations.",
+			ChatColor.RED + "Nos systèmes rencontrent des problèmes avec ce compte joueur. Contactez un administrateur pour plus d'informations.",
 			"",
-			""),
-	/* ============================== */
+			ChatColor.RED + "Nuestros sistemas encuentran problemas con la cuenta del jugador. Contacte al administrador para obtener más informaciones."),
+	/* ============================= */
 	
 	
 	/*  ========== GENERAL ==========  */
 	NO_PERMISSION_MESSAGE(ChatColor.RED + "You do not have the permission.",
 			ChatColor.RED + "Vous n'avez pas la permission.",
-			"",
-			""),
+			ChatColor.RED + "",
+			ChatColor.RED + "Usted no tiene el permiso."),
 	
 	ERROR_HAS_OCCURRED(ChatColor.RED + "An error has occurred.",
 			ChatColor.RED + "Une erreur est survenue.",
-			"",
-			""),
+			ChatColor.RED + "",
+			ChatColor.RED + "Ocurrió un error."),
 	/* ============================== */
 	
 	
-	/*  ========== MAINTENANCE ==========  */
-	WORKING_FEATURE(ChatColor.RED + "This feature is in work.",
+	/*  ========== FEATURES ==========  */
+	WORKING_FEATURE(ChatColor.RED + "This feature is under development.",
 			ChatColor.RED + "Cette fonctionnalité est en développement.",
-			"",
-			""),
+			ChatColor.RED + "Dieses feature ist in der Entwicklung.",
+			ChatColor.RED + "Esta funcionalidad es en desarrollo."),
 	/* ============================== */
 	
 	
 	/*  ========== MAINTENANCE ==========  */
 	MAINTENANCE_ENABLE(ChatColor.GRAY + "The maintenance is now " + ChatColor.GREEN + "enabled" + ChatColor.GRAY + ".",
 			ChatColor.GRAY + "La maintenance est maintenant " + ChatColor.GREEN + "activée" + ChatColor.GRAY + ".",
-			"",
-			""),
+			ChatColor.RED + "",
+			ChatColor.RED + "El mantenimiento ahora es activado."),
 	
 	MAINTENANCE_DISABLE(ChatColor.GRAY + "The maintenance is now " + ChatColor.RED + "disabled" + ChatColor.GRAY + ".",
 			ChatColor.GRAY + "La maintenance est maintenant " + ChatColor.RED + "désactivée" + ChatColor.GRAY + ".",
-			"",
-			""),
+			ChatColor.RED + "",
+			ChatColor.RED + "El mantenimiento ahora es desactivado."),
 	
 	MAINTENANCE_ALREADY_ENABLED(ChatColor.RED + "The maintenance is already enabled.",
 			ChatColor.RED + "La maintenance est déjà activée.",
-			"",
-			""),
+			ChatColor.RED + "",
+			ChatColor.RED + "El mantenimiento es ya activado."),
 	
 	MAINTENANCE_ALREADY_DISABLED(ChatColor.RED + "The maintenance is already disabled.",
 			ChatColor.RED + "La maintenance est déjà désactivée.",
-			"",
-			""),
+			ChatColor.RED + "",
+			ChatColor.RED + "El mantenimiento es ya desactivado."),
 	/* ============================== */
 	
 	
 	/*  ========== JOIN ==========  */
-	JOIN_MESSAGE(ChatColor.GRAY + " has joined the Hub !", ChatColor.GRAY + " a rejoint le Hub !", "", ""),
-	GAME_JOIN_MESSAGE(ChatColor.GRAY + " has joined the game !", ChatColor.GRAY + " a rejoint la partie !", "", "");
+	JOIN_MESSAGE("%player_rank_prefix% %player%" + ChatColor.GRAY + " has joined the Hub !",
+			"%player_rank_prefix% %player%" + ChatColor.GRAY + " a rejoint le Hub !",
+			"%player_rank_prefix% %player%" + ChatColor.GRAY + "",
+			"%player_rank_prefix% %player%" + ChatColor.GRAY + " entro en el Hub !"),
+	
+	GAME_JOIN_MESSAGE("%player_rank_prefix% %player%" + ChatColor.YELLOW + " has joined the game !",
+			"%player_rank_prefix% %player%" + ChatColor.YELLOW + " a rejoint la partie !",
+			"%player_rank_prefix% %player%" + ChatColor.YELLOW + "",
+			"%player_rank_prefix% %player%" + ChatColor.YELLOW + " entro en la partida !");
 	/* =========================== */
 		
 	public String english, french, german, spanish;
@@ -94,6 +109,6 @@ public enum Lang {
 			default:
 				break;
 		}
-		return message + ChatColor.RESET;
+		return message != null ? message : this.english + ChatColor.RESET;
 	}
 }

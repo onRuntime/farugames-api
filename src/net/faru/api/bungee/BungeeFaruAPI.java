@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.faru.api.managers.BungeeListenerManager;
+import net.faru.api.servers.FaruServerAPI;
+import net.faru.api.servers.ServerType;
 import net.faru.data.database.servers.IMaintenance;
 import net.md_5.bungee.api.plugin.Plugin;
 
@@ -22,6 +24,8 @@ public class BungeeFaruAPI extends Plugin {
 	}
 	
 	public void onEnable() {
+		new FaruServerAPI(ServerType.PROXY).register();
+		
 		new BungeeListenerManager().register();
 		
 		super.onEnable();

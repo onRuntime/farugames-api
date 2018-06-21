@@ -2,9 +2,10 @@ package net.faru.api.servers;
 
 public enum ServerType {
 
-	NONE("Unknown", "unknown#", null),
-	PROXY("Proxy", "proxy#", null),
-	HUB("Hub", "hub#", "/hubs/");
+	PROXY("Proxy", "pxy#", null),
+	HUB("Hub", "hub#", "/hubs/"),
+	
+	BUILD_BATTLE("BuildBattle", "bdb#", "/bdb/");
 	
 	private String name;
 	private String nameID;
