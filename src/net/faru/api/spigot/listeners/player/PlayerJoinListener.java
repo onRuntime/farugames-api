@@ -6,10 +6,10 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import net.faru.api.patchs.player.Collisions;
-import net.faru.api.patchs.player.PvP;
 import net.faru.api.player.FaruPlayer;
 import net.faru.api.player.rank.Rank;
+import net.faru.api.spigot.player.patchs.Collisions;
+import net.faru.api.spigot.player.patchs.PvP;
 
 public class PlayerJoinListener implements Listener {
 

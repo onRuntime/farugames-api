@@ -1,6 +1,6 @@
 package net.faru.api.bungee.listeners.proxiedplayer;
 
-import net.faru.api.bungee.player.FaruBungeePlayer;
+import net.faru.api.bungee.proxiedplayer.FaruBungeePlayer;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.event.ServerConnectEvent;
 import net.md_5.bungee.api.plugin.Listener;

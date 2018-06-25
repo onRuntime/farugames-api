@@ -1,9 +1,9 @@
 package net.faru.api.bungee.commands.server;
 
-import net.faru.api.bungee.player.FaruBungeePlayer;
-import net.faru.api.player.languages.Lang;
-import net.faru.api.player.rank.Rank;
-import net.faru.api.servers.ServerStatut;
+import net.faru.api.bungee.proxiedplayer.FaruBungeePlayer;
+import net.faru.api.bungee.servers.ServerStatut;
+import net.faru.api.spigot.player.languages.Lang;
+import net.faru.api.spigot.player.rank.Rank;
 import net.faru.data.database.servers.IServer;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;

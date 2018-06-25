@@ -1,4 +1,4 @@
-package net.faru.api.player.levels;
+package net.faru.api.spigot.player.level;
 
 public enum LevelExperience {
 

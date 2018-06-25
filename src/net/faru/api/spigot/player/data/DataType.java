@@ -1,4 +1,4 @@
-package net.faru.api.player.data;
+package net.faru.api.spigot.player.data;
 
 public enum DataType {
 
@@ -17,7 +17,8 @@ public enum DataType {
 	ALLOW_CHAT(12, "Chat usage and visibility", "allow_chat"),
 	ALLOW_PLAYER_VISIBLITY(13, "Players visibility", "allow_player_visibility"),
 	ALLOW_LOBBY_DOUBLE_PROCESS_COMMAND(14, "Lobby command protection", "allow_lobby_double_process_command"),
-	ALLOW_CAHT_MENTIONS(15, "Player's mentions", "allow_chat_mention");
+	ALLOW_CAHT_MENTIONS(15, "Player's mentions", "allow_chat_mention"),
+	VERSION(16, "Player's protocol version", "version");
 
 	private Integer id;
 	private String name;

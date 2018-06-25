@@ -1,4 +1,4 @@
-package net.faru.api.patchs.player;
+package net.faru.api.spigot.player.patchs;
 
 import java.util.Set;
 import java.util.UUID;

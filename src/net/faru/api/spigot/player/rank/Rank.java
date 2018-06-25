@@ -1,4 +1,4 @@
-package net.faru.api.player.rank;
+package net.faru.api.spigot.player.rank;
 
 import net.md_5.bungee.api.ChatColor;
 

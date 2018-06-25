@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,11 +12,11 @@ import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
+import net.faru.api.bungee.sanctions.Sanction;
+import net.faru.api.bungee.servers.FaruServerAPI;
+import net.faru.api.bungee.servers.ServerStatut;
 import net.faru.api.managers.BungeeCommandManager;
 import net.faru.api.managers.BungeeListenerManager;
-import net.faru.api.sanctions.Sanction;
-import net.faru.api.servers.FaruServerAPI;
-import net.faru.api.servers.ServerStatut;
 import net.faru.data.database.servers.IMaintenance;
 import net.faru.data.database.servers.IServer;
 import net.md_5.bungee.BungeeCord;
@@ -34,7 +35,7 @@ public class BungeeFaruAPI extends Plugin {
 	public static Protocol protocol;
 	
 	public static Map<String, FaruServerAPI> iFaruServers = new HashMap<String, FaruServerAPI>();
-	public List<ProxiedPlayer> proxyPlayers = new ArrayList<ProxiedPlayer>();
+	public Collection<ProxiedPlayer> proxyPlayers = new ArrayList<ProxiedPlayer>();
 
 	public static Boolean maintenance = false;
 	private static List<String> maintenancePlayers = new ArrayList<String>();
@@ -67,9 +68,7 @@ public class BungeeFaruAPI extends Plugin {
             public void run() {
             	for(FaruServerAPI server : iFaruServers.values()) {
             		if(!IServer.exists(server.getName())) server.unregister();
-            		for(ProxiedPlayer player : server.getOnlinePlayers()) {
-            			proxyPlayers.add(player);
-            		}
+            		proxyPlayers = getProxy().getPlayers();
             	}
             	for(FaruServerAPI faruServer : IServer.getServers()) {
             		if(faruServer.getStatut() == ServerStatut.FINISH) {
@@ -99,7 +98,7 @@ public class BungeeFaruAPI extends Plugin {
 	}
 
 	public static void registerServer(String name, Integer port) {
-		BungeeCord.getInstance().getConfig().addServer(new BungeeServerInfo(name, new InetSocketAddress("127.0.0.1", port), null, false));
+		BungeeCord.getInstance().getConfig().addServer(new BungeeServerInfo(name, new InetSocketAddress("149.202.102.63", port), null, false));
 	}
 	
 	public static void unregisterServer(String name) {

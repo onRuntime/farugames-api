@@ -1,12 +1,12 @@
-package net.faru.api.bungee.player;
+package net.faru.api.bungee.proxiedplayer;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import net.faru.api.player.data.DataType;
-import net.faru.api.player.languages.Lang;
-import net.faru.api.player.rank.Rank;
+import net.faru.api.spigot.player.data.DataType;
+import net.faru.api.spigot.player.languages.Lang;
+import net.faru.api.spigot.player.rank.Rank;
 import net.faru.data.bungee.BungeeFaruData;
 import net.faru.data.database.player.IData;
 import net.faru.data.database.rank.IRank;

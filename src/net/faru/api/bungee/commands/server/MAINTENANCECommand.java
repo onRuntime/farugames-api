@@ -1,7 +1,10 @@
 package net.faru.api.bungee.commands.server;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import net.faru.api.bungee.BungeeFaruAPI;
-import net.faru.api.bungee.player.FaruBungeePlayer;
+import net.faru.api.bungee.proxiedplayer.FaruBungeePlayer;
 import net.faru.api.player.languages.Lang;
 import net.faru.api.player.rank.Rank;
 import net.md_5.bungee.api.CommandSender;
@@ -17,6 +20,8 @@ public class MAINTENANCECommand extends Command {
 	private String HELP() {
 		return "";
 	}
+	
+	private Integer i;
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -28,21 +33,26 @@ public class MAINTENANCECommand extends Command {
 		if(faruPlayer.getRank().getPower() < Rank.DEVELOPER.getPower()) { player.sendMessage(Lang.ERROR.in(lang) + "\n" + Lang.NO_PERMISSION_MESSAGE.in(lang)); return; }
 		if(args.length == 0 || args.length > 2 || args[0].equalsIgnoreCase("help")) { player.sendMessage(this.HELP()); return; }
 		
-		if(args[0].equalsIgnoreCase("set")) {
-			if(args[1].equalsIgnoreCase("true") || args[1].equalsIgnoreCase("false")) {
-				if(args[1].equalsIgnoreCase("true")) {
-					if(BungeeFaruAPI.isMaintenance()) { player.sendMessage(Lang.ERROR.in(lang) + "\n" + Lang.MAINTENANCE_ALREADY_ENABLED.in(lang)); return; }
-					player.sendMessage(Lang.MAINTENANCE_ENABLE.in(lang));
-
-				} else {
-					if(!BungeeFaruAPI.isMaintenance()) { player.sendMessage(Lang.ERROR.in(lang) + "\n" + Lang.MAINTENANCE_ALREADY_DISABLED.in(lang)); return; }
-					player.sendMessage(Lang.MAINTENANCE_DISABLE.in(lang));
-
-				}
-				BungeeFaruAPI.maintenance = Boolean.valueOf(args[1]);
-				return;
-			} else { player.sendMessage(this.HELP()); return; }
-		}
+		if(args[1].equalsIgnoreCase("true") || args[1].equalsIgnoreCase("false")) {
+			if(args[1].equalsIgnoreCase("true")) {
+				if(BungeeFaruAPI.isMaintenance()) { player.sendMessage(Lang.ERROR.in(lang) + "\n" + Lang.MAINTENANCE_ALREADY_ENABLED.in(lang)); return; }
+				player.sendMessage(Lang.MAINTENANCE_ENABLE.in(lang));
+			} else {
+				if(!BungeeFaruAPI.isMaintenance()) { player.sendMessage(Lang.ERROR.in(lang) + "\n" + Lang.MAINTENANCE_ALREADY_DISABLED.in(lang)); return; }
+				player.sendMessage(Lang.MAINTENANCE_DISABLE.in(lang));
+			}
+			while(BungeeFaruAPI.maintenance != Boolean.valueOf(args[1])) {
+				i = 1;
+				Timer timer = new Timer();
+		    	timer.schedule(new TimerTask() {
+		    	       @Override
+		    	       public void run() {
+		    	    	   if(i == 15) { BungeeFaruAPI.maintenance = Boolean.valueOf(args[1]); timer.cancel(); return; }
+		    	    	   i++;
+		    	       }
+		    	    }, 0, 1000);
+			}
+		} else { player.sendMessage(this.HELP()); return; }
 		
 		if(args[0].equalsIgnoreCase("add")) {
 			player.sendMessage(Lang.WORKING_FEATURE.in(lang));

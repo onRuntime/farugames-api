@@ -1,4 +1,4 @@
-package net.faru.api.servers;
+package net.faru.api.bungee.servers;
 
 public enum ServerStatut {
 

@@ -1,7 +1,7 @@
 package net.faru.api.bungee.commands.server;
 
 import net.faru.api.bungee.BungeeFaruAPI;
-import net.faru.api.bungee.player.FaruBungeePlayer;
+import net.faru.api.bungee.proxiedplayer.FaruBungeePlayer;
 import net.faru.api.player.languages.Lang;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;

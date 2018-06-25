@@ -1,8 +1,5 @@
 package net.faru.api.spigot;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -21,11 +18,7 @@ public class SpigotFaruAPI extends JavaPlugin {
 	}
 	
 	public void onEnable() {
-		try {
-			IServer.create(Bukkit.getServerName(), InetAddress.getLocalHost().getHostAddress(), Bukkit.getPort(), null, null);
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
+		IServer.create(Bukkit.getServerName(), "149.202.102.63", Bukkit.getPort(), null, null);
 		
 		new BukkitListenerManager().register();
 		

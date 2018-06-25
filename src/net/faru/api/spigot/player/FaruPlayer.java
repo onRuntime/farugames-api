@@ -1,4 +1,4 @@
-package net.faru.api.player;
+package net.faru.api.spigot.player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,10 +10,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import net.faru.api.bungee.player.FaruBungeePlayer;
-import net.faru.api.player.currency.Currency;
-import net.faru.api.player.languages.Lang;
-import net.faru.api.player.rank.Rank;
 import net.faru.api.spigot.SpigotFaruAPI;
+import net.faru.api.spigot.player.currency.Currency;
+import net.faru.api.spigot.player.languages.Lang;
+import net.faru.api.spigot.player.rank.Rank;
 import net.faru.api.tools.player.UUIDManager;
 import net.faru.data.database.currency.ICurrency;
 import net.faru.data.database.player.IExperience;

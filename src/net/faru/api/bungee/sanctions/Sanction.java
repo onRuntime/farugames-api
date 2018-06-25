@@ -1,4 +1,4 @@
-package net.faru.api.sanctions;
+package net.faru.api.bungee.sanctions;
 
 import java.util.Date;
 import java.util.List;

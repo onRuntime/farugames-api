@@ -1,7 +1,8 @@
-package net.faru.api.servers;
+package net.faru.api.bungee.servers;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -30,6 +31,8 @@ public class FaruServerAPI {
 		
 		this.mode = this.port == 25000 ? ServerMode.DEFAULT : ServerMode.RANDOM;
 		this.statut = ServerStatut.UNREGISTERED;
+		
+		players = new ArrayList<ProxiedPlayer>();
 	}
 	
 	public void register() {
@@ -44,8 +47,7 @@ public class FaruServerAPI {
     	timer.schedule(new TimerTask() {
     	       @Override
     	       public void run() {
-    	    	   if(ProxyServer.getInstance().getServerInfo(name) == null) timer.cancel();
-    	    	   players = ProxyServer.getInstance().getServerInfo(name).getPlayers();
+    	    	   players = ProxyServer.getInstance().getServerInfo(name) == null ? null : ProxyServer.getInstance().getServerInfo(name).getPlayers();
     	       }
     	    }, 0, 500);
 	}
@@ -87,8 +89,12 @@ public class FaruServerAPI {
 		return this.joinable;
 	}
 	
-	public Collection<ProxiedPlayer> getOnlinePlayers() {
+	public Collection<ProxiedPlayer> getPlayers() {
 		return this.players;
+	}
+	
+	public Integer getOnlinePlayers() {
+		return this.players == null ? 0 : this.players.size();
 	}
 	
 	public static FaruServerAPI getServer(String name, String host, Integer port) {

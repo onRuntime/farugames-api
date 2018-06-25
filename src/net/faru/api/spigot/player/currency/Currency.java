@@ -1,4 +1,4 @@
-package net.faru.api.player.currency;
+package net.faru.api.spigot.player.currency;
 
 public enum Currency {
 
