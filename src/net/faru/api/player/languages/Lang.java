@@ -1,6 +1,6 @@
 package net.faru.api.player.languages;
 
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 
 public enum Lang {
 	
@@ -25,6 +25,11 @@ public enum Lang {
 			ChatColor.RED + "Nos systèmes rencontrent des problèmes avec ce compte joueur. Contactez un administrateur pour plus d'informations.",
 			"",
 			ChatColor.RED + "Nuestros sistemas encuentran problemas con la cuenta del jugador. Contacte al administrador para obtener más informaciones."),
+	
+	ALREADY_CONNECTED("This account is already connected.",
+			"Ce compte est déjà connecté.",
+			"",
+			""),
 	/* ============================= */
 	
 	
@@ -38,6 +43,33 @@ public enum Lang {
 			ChatColor.RED + "Une erreur est survenue.",
 			ChatColor.RED + "",
 			ChatColor.RED + "Ocurrió un error."),
+	
+	NORMAL_MOTD("",
+			"",
+			"",
+			""),
+	
+	SERVER_REQUESTED(ChatColor.GOLD + "Your server " + ChatColor.YELLOW + "%server%" + ChatColor.GOLD + " has been requested, wait a few moment for creation.",
+			ChatColor.GOLD + "Votre serveur " + ChatColor.YELLOW + "%server%" + ChatColor.GOLD + " a été demandé, pentientez un moment pour sa création.",
+			"",
+			""),
+	
+	SERVER_REMOVE(ChatColor.GOLD + "Your server " + ChatColor.YELLOW + "%server%" + ChatColor.GOLD + " will be removed in a few moment.",
+			ChatColor.GOLD + "Votre serveur " + ChatColor.YELLOW + "%server%" + ChatColor.GOLD + " va être supprimé dans quelques instants.",
+			"",
+			""),
+	
+	COMMAND_MESSAGE("",
+			"",
+			"",
+			""),
+	
+	ONLINE_PLAYERS(ChatColor.RED + "FaruGames " + ChatColor.WHITE + "" + ChatColor.BOLD + "» " + ChatColor.YELLOW + "There are currently " + ChatColor.AQUA +
+						"" + ChatColor.BOLD + "%players% " + ChatColor.YELLOW + "players online.",
+			ChatColor.RED + "FaruGames " + ChatColor.WHITE + "" + ChatColor.BOLD + "» " + ChatColor.YELLOW + "Il y a actuellement " + ChatColor.AQUA +
+				"" + ChatColor.BOLD + "%players% " + ChatColor.YELLOW + "joueur en ligne.",
+			"",
+			""),
 	/* ============================== */
 	
 	
@@ -69,6 +101,24 @@ public enum Lang {
 			ChatColor.RED + "La maintenance est déjà désactivée.",
 			ChatColor.RED + "",
 			ChatColor.RED + "El mantenimiento es ya desactivado."),
+	
+	MAINTENANCE_MOTD(ChatColor.RED + "" + ChatColor.BOLD + "F" + ChatColor.YELLOW + "" + ChatColor.BOLD + "a" + ChatColor.GREEN + "" + ChatColor.BOLD + "r"
+						+ ChatColor.AQUA + "" + ChatColor.BOLD + "u" + ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Games"
+						+ ChatColor.WHITE +  ".net" + ChatColor.GRAY + " «» " + ChatColor.GOLD + "Innovative Server" + ChatColor.GRAY + " «» " + ChatColor.WHITE + "["
+						+ ChatColor.AQUA +  "1.9" + ChatColor.WHITE + " - " + ChatColor.AQUA + "1.12" + ChatColor.WHITE + "]\n      " + ChatColor.DARK_RED + ""
+						+ ChatColor.BOLD + "⚠ " + ChatColor.RED + "" + ChatColor.BOLD + "Currently Under Development" + ChatColor.DARK_RED + "" + ChatColor.BOLD + " ⚠",
+			ChatColor.RED + "" + ChatColor.BOLD + "F" + ChatColor.YELLOW + "" + ChatColor.BOLD + "a" + ChatColor.GREEN + "" + ChatColor.BOLD + "r"
+					+ ChatColor.AQUA + "" + ChatColor.BOLD + "u" + ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Games"
+					+ ChatColor.WHITE +  ".net" + ChatColor.GRAY + " «» " + ChatColor.GOLD + "Serveur Innovant" + ChatColor.GRAY + " «» " + ChatColor.WHITE + "["
+					+ ChatColor.AQUA +  "1.9" + ChatColor.WHITE + " - " + ChatColor.AQUA + "1.12" + ChatColor.WHITE + "]\n      " + ChatColor.DARK_RED + ""
+					+ ChatColor.BOLD + "⚠ " + ChatColor.RED + "" + ChatColor.BOLD + "Actuellement en développement" + ChatColor.DARK_RED + "" + ChatColor.BOLD + " ⚠",
+			"",
+			""),
+	
+	MAINTENANCE_DISCONNECT_MESSAGE("",
+			"",
+			"",
+			""),
 	/* ============================== */
 	
 	
@@ -85,16 +135,16 @@ public enum Lang {
 	/* =========================== */
 	
 	
-	/*  ========== JOIN ==========  */
+	/*  ========== SANCTION ==========  */
 	UNPUNISHABLE_PLAYER(ChatColor.GRAY + "This player cannot be punished",
 			ChatColor.GRAY + "Ce joueur ne peut pas être sanctionné",
 			ChatColor.GRAY + "",
 			ChatColor.GRAY + "");
-	/* =========================== */
+	/* =============================== */
 		
 	public String english, french, german, spanish;
 	
-	Lang(String english, String french, String german, String spanish) {
+	private Lang(String english, String french, String german, String spanish) {
 		this.english = english;
 		this.french = french;
 		this.german = german;

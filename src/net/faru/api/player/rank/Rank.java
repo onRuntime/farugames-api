@@ -1,6 +1,6 @@
 package net.faru.api.player.rank;
 
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 
 public enum Rank {
 
@@ -30,7 +30,7 @@ public enum Rank {
 	private ChatColor color;
 	private ChatColor chatColor;
 	
-	Rank(Integer power, String order, String idName, String name, String prefix, ChatColor color, ChatColor chatColor) {
+	private Rank(Integer power, String order, String idName, String name, String prefix, ChatColor color, ChatColor chatColor) {
 		this.power = power;
 		this.order = order;
 		this.idName = idName;
@@ -79,10 +79,10 @@ public enum Rank {
 	
 	public static Rank getRankByPower(Integer power) {
 		for(Rank rank : Rank.values()) {
-			if(rank.getPower() == power) {
+			if(rank.getPower().intValue() == power.intValue()) {
 				return rank;
 			}
 		}
-		return null;
+		return Rank.PLAYER;
 	}
 }

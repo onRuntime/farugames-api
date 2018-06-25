@@ -23,7 +23,7 @@ public enum DataType {
 	private String name;
 	private String column;
 
-	DataType(Integer id, String name, String column) {
+	private DataType(Integer id, String name, String column) {
 		this.id = id;
 		this.name = name;
 		this.column = column;

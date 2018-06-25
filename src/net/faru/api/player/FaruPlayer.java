@@ -9,19 +9,19 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import net.faru.api.bungee.player.FaruBungeePlayer;
 import net.faru.api.player.currency.Currency;
-import net.faru.api.player.data.DataType;
 import net.faru.api.player.languages.Lang;
 import net.faru.api.player.rank.Rank;
+import net.faru.api.spigot.SpigotFaruAPI;
 import net.faru.api.tools.player.UUIDManager;
 import net.faru.data.database.currency.ICurrency;
-import net.faru.data.database.player.IData;
 import net.faru.data.database.player.IExperience;
 import net.faru.data.database.player.IPermission;
 import net.faru.data.database.rank.IRank;
 import net.faru.data.spigot.SpigotFaruData;
 
-public class FaruPlayer {
+public class FaruPlayer extends SpigotFaruAPI {
 
 	private UUID uuid;
 	private Player player;
@@ -34,7 +34,6 @@ public class FaruPlayer {
 	private Integer experience;
 	
 	private Map<Currency, Integer> mapCurrency = new HashMap<Currency, Integer>();
-	private Map<DataType, Object> mapData = new HashMap<DataType, Object>();
 	
 	private List<String> permissionsList = new ArrayList<String>();
 	
@@ -46,9 +45,7 @@ public class FaruPlayer {
 		IPermission.createAccount(uuid);
 		ICurrency.createAccount(uuid);
 		IExperience.createAccount(uuid);
-		IData.createAccount(uuid, player);
 		
-		this.loadData();
 		this.setRank(IRank.getRank(uuid));
 		this.loadPermissions();
 		this.loadCoins();
@@ -133,30 +130,6 @@ public class FaruPlayer {
 		this.mapCurrency.put(currency, getCoins(currency) - coins);
 	}
 	
-	public void pushData() {
-		for (DataType dataType : DataType.values()) {
-			IData.setData(uuid, dataType, this.mapData.get(dataType));
-		}
-	}
-	
-	public void pushData(DataType dataType) {
-		IData.setData(uuid, dataType, this.mapData.get(dataType));
-	}
-	
-	public void loadData() {
-		for (DataType dataType : DataType.values()) {
-			this.mapData.put(dataType, IData.getData(uuid, dataType));
-		}
-	}
-	
-	public void setData(DataType dataType, boolean values) {
-		this.mapData.put(dataType, values);
-	}
-
-	public boolean getData(DataType dataType) {
-		return (boolean) this.mapData.get(dataType);
-	}
-	
 	public void pushExperience() {
 		IExperience.setExperience(uuid, this.getExperience());
 	}
@@ -178,12 +151,15 @@ public class FaruPlayer {
 	}
 	
 	public Lang getLanguage() {
-		return Lang.valueOf(String.valueOf(this.getData(DataType.LANGUAGE)));
+		return this == null ?
+				Lang.ENGLISH :
+					FaruBungeePlayer.getPlayer(uuid).getLanguage();
 	}
 	
 	public static FaruPlayer getPlayer(UUID uuid) {
-		return SpigotFaruData.iFaruPlayer.get(uuid) != null ?
-				SpigotFaruData.iFaruPlayer.get(uuid) :
-					SpigotFaruData.iFaruPlayer.put(uuid, new FaruPlayer(UUIDManager.getName(uuid.toString())));
+		if(SpigotFaruData.iFaruPlayer.get(uuid) == null) {
+			SpigotFaruData.iFaruPlayer.put(uuid, new FaruPlayer(UUIDManager.getName(uuid.toString())));
+		}
+		return SpigotFaruData.iFaruPlayer.get(uuid);
 	}
 }

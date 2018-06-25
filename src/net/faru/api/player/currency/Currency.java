@@ -9,7 +9,7 @@ public enum Currency {
 	private String column;
 	private Integer defaultValue;
 	
-	Currency(String name, String column, Integer defaultValue) {
+	private Currency(String name, String column, Integer defaultValue) {
 		this.name = name;
 		this.column = column;
 		this.defaultValue = defaultValue;

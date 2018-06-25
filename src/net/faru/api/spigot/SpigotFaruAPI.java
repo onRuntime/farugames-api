@@ -1,15 +1,16 @@
 package net.faru.api.spigot;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import net.faru.api.servers.FaruServerAPI;
+import net.faru.api.managers.BukkitListenerManager;
+import net.faru.api.servers.ServerStatut;
+import net.faru.data.database.servers.IServer;
 
 public class SpigotFaruAPI extends JavaPlugin {
-
-	public static Map<String, FaruServerAPI> iFaruServers = new HashMap<String, FaruServerAPI>();
 	
 	private static SpigotFaruAPI instance;
 	
@@ -20,10 +21,20 @@ public class SpigotFaruAPI extends JavaPlugin {
 	}
 	
 	public void onEnable() {
+		try {
+			IServer.create(Bukkit.getServerName(), InetAddress.getLocalHost().getHostAddress(), Bukkit.getPort(), null, null);
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+		
+		new BukkitListenerManager().register();
+		
 		super.onEnable();
 	}
 	
 	public void onDisable() {
+		IServer.remove(Bukkit.getServerName(), ServerStatut.DELETE);
+		
 		super.onDisable();
 	}
 	

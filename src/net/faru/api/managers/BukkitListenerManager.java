@@ -4,6 +4,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 
 import net.faru.api.spigot.SpigotFaruAPI;
+import net.faru.api.spigot.listeners.Listeners;
 
 public class BukkitListenerManager {
 
@@ -16,5 +17,8 @@ public class BukkitListenerManager {
 	}
 	
 	public void register() {
+		for(Listeners listener : Listeners.values()) {
+			this.pluginManager.registerEvents(listener.getListener(), this.plugin);
+		}
 	}
 }
