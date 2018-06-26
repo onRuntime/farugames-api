@@ -8,7 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import net.faru.api.bungee.servers.ServerStatut;
-import net.faru.api.spigot.managers.BukkitListenerManager;
+import net.faru.api.managers.BukkitListenerManager;
 import net.faru.data.database.servers.IServer;
 
 public class SpigotFaruAPI extends JavaPlugin {

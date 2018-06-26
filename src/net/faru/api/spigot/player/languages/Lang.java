@@ -69,15 +69,47 @@ public enum Lang {
 			"",
 			""),
 	
-	SERVER_REQUESTED(ChatColor.GOLD + "Your server " + ChatColor.YELLOW + "%server%" + ChatColor.GOLD + " has been requested, wait a few moment for creation.",
-			ChatColor.GOLD + "Votre serveur " + ChatColor.YELLOW + "%server%" + ChatColor.GOLD + " a été demandé, pentientez un moment pour sa création.",
-			"",
-			""),
+	SERVER_REQUESTED("\n"
+			+ "  §f§l» §6§lServerManager §f❙ §aRequest\n"
+			+ "\n"
+			+ "    §8■ §6You send a(n) §e%server% §arequest §6please wait before connecting...\n"
+			+ "\n"
+			+ "    §8[§a➟ §a§lJoin the requested server§8]\n",
+			"\n"
+			+ "  §f§l» §6§lServerManager §f❙ §aRequest\n"
+			+ "\n"
+			+ "    §8■ §6Vous avez §ademandé §6un §e%server% §6veuillez patienter avant de vous connecter...\n"
+			+ "\n"
+			+ "    §8[§a➟ §a§lRejoignez le serveur demandé§8]\n",
+			"\n"
+			+ "  §f§l» §6§lServerManager §f❙ §aRequest\n"
+			+ "\n"
+			+ "    §8■ §6Sie senden eine %server% §aanfrage§6, bitte warten sie, bevor sie eine verbindung herstellen ...\n"
+			+ "\n"
+			+ "    §8[§a➟ §a§lTrete dem angeforderten server bei§8]\n",
+			"\n"
+			+ "  §f§l» §6§lServerManager §f❙ §aRequest\n"
+			+ "\n"
+			+ "    §8■ §6Usted §apidió §6un §e%server% §6espere por favor antes de conectarse...\n"
+			+ "\n"
+			+ "    §8[§a➟ §a§lÚnete al servidor pedido§8]\n"),
 	
-	SERVER_REMOVE(ChatColor.GOLD + "Your server " + ChatColor.YELLOW + "%server%" + ChatColor.GOLD + " will be removed in a few moment.",
-			ChatColor.GOLD + "Votre serveur " + ChatColor.YELLOW + "%server%" + ChatColor.GOLD + " va être supprimé dans quelques instants.",
-			"",
-			""),
+	SERVER_REMOVE("\n"
+			+ "  §f§l» §6§lServerManager §f❙ §cDelete\n"
+			+ "\n"
+			+ "    §8■ §6You set §e%server% §6to §cdelete §6status.\n",
+			"\n"
+			+ "  §f§l» §6§lServerManager §f❙ §cDelete\n"
+			+ "\n"
+			+ "    §8■ §6Vous passez §e%server% §6au statut §cdelete§6.\n",
+			"\n"
+			+ "  §f§l» §6§lServerManager §f❙ §cDelete\n"
+			+ "\n"
+			+ "    §8■ §6Sie haben §e%server% §6auf den status §cdelete §6gesetzt.\n",
+			"\n"
+			+ "  §f§l» §6§lServerManager §f❙ §cDelete\n"
+			+ "\n"
+			+ "    §8■ §6Pasaste §e%server% §6al estado §cdelete§6.\n"),
 	
 	COMMAND_MESSAGE("",
 			"",
@@ -87,15 +119,15 @@ public enum Lang {
 	ONLINE_PLAYERS("§c§lF§e§la§a§lr§b§lu§d§lGames §f§l» §eThere are currently §b§l%players% §eplayer(s) online.",
 			"§c§lF§e§la§a§lr§b§lu§d§lGames §f§l» §eIl y actuellement §b§l%players% §ejoueur(s) en ligne.",
 			"§c§lF§e§la§a§lr§b§lu§d§lGames §f§l» §eDerzeit sind §b§l%players% §espieler online.",
-			""),
+			"§c§lF§e§la§a§lr§b§lu§d§lGames §f§l» §eHay actualmente §b§l%players% §ejugador(es) en línea."),
 	/* ============================== */
 	
 	
 	/*  ========== FEATURES ==========  */
-	WORKING_FEATURE(ChatColor.RED + "This feature is under development.",
-			ChatColor.RED + "Cette fonctionnalité est en développement.",
-			ChatColor.RED + "Dieses feature ist in der Entwicklung.",
-			ChatColor.RED + "Esta funcionalidad es en desarrollo."),
+	WORKING_FEATURE("§c§lF§e§la§a§lr§b§lu§d§lGames §f§l» §cThis feature is currently under development.",
+			"§c§lF§e§la§a§lr§b§lu§d§lGames §f§l» §cCette fonctionnalité est en développement.",
+			"§c§lF§e§la§a§lr§b§lu§d§lGames §f§l» §cDieses feature ist in der entwicklung.",
+			"§c§lF§e§la§a§lr§b§lu§d§lGames §f§l» §cEsta funcionalidad es en desarrollo."),
 	/* ============================== */
 	
 	
@@ -160,10 +192,10 @@ public enum Lang {
 	
 	
 	/*  ========== JOIN ==========  */
-	JOIN_MESSAGE("%player_rank_prefix% %player%" + ChatColor.GRAY + " has joined the Hub !",
-			"%player_rank_prefix% %player%" + ChatColor.GRAY + " a rejoint le Hub !",
-			"%player_rank_prefix% %player%" + ChatColor.GRAY + "",
-			"%player_rank_prefix% %player%" + ChatColor.GRAY + " entro en el Hub !"),
+	JOIN_MESSAGE("%player_rank_prefix% %player% §ejoined the hub !",
+			"%player_rank_prefix% %player% §ea rejoint le hub !",
+			"%player_rank_prefix% %player% §eist dem hub beigetreten !",
+			"%player_rank_prefix% %player% §eentro en el hub !"),
 	
 	GAME_JOIN_MESSAGE("%player_rank_prefix% %player%" + ChatColor.YELLOW + " has joined the game !",
 			"%player_rank_prefix% %player%" + ChatColor.YELLOW + " a rejoint la partie !",

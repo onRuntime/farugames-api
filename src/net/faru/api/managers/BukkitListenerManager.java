@@ -1,4 +1,4 @@
-package net.faru.api.spigot.managers;
+package net.faru.api.managers;
 
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
