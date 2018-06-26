@@ -26,6 +26,8 @@ public class FaruBungeePlayer {
 	
 	private Map<DataType, Object> mapData = new HashMap<DataType, Object>();
 	
+	private FaruBungeePlayer lastTalk;
+	
 	public FaruBungeePlayer(UUID uuid) {
 		this.uuid = uuid;
 		
@@ -34,6 +36,8 @@ public class FaruBungeePlayer {
 		
 		this.loadData();
 		this.setRank(IRank.getRank(uuid));
+		
+		this.lastTalk = null;
 	}
 	
 	public UUID getUUID() {
@@ -96,7 +100,7 @@ public class FaruBungeePlayer {
 		}
 	}
 	
-	public void setData(DataType dataType, boolean values) {
+	public void setData(DataType dataType, Object values) {
 		this.mapData.put(dataType, values);
 	}
 
@@ -106,6 +110,18 @@ public class FaruBungeePlayer {
 	
 	public Lang getLanguage() {
 		return Lang.valueOf(String.valueOf(this.getData(DataType.LANGUAGE)));
+	}
+	
+	public Boolean isLastTalked() {
+		return this.lastTalk != null ? true : false;
+	}
+	
+	public void setLastTalked(FaruBungeePlayer lastTalk) {
+		this.lastTalk = lastTalk;
+	}
+	
+	public FaruBungeePlayer getLastTalked() {
+		return this.lastTalk;
 	}
 	
 	public void disconnect() {

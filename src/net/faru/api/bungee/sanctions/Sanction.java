@@ -4,8 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import net.faru.api.bungee.BungeeFaruAPI;
-import net.faru.api.menus.sanctions.SanctionMainMenu;
-import net.faru.api.player.FaruPlayer;
+import net.faru.api.spigot.player.FaruPlayer;
 import net.faru.data.database.player.ISanction;
 
 public class Sanction {
@@ -39,7 +38,7 @@ public class Sanction {
 				// new SanctionMute(this);
 				break;
 			default:
-				new SanctionMainMenu(this);
+				//new SanctionMainMenu(this);
 				break;
 		}
 		addSanction(this);

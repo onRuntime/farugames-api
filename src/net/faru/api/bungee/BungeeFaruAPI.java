@@ -79,7 +79,7 @@ public class BungeeFaruAPI extends Plugin {
             		if(!iFaruServers.containsKey(faruServer.getName())) {
             			FaruServerAPI.getServer(faruServer.getName(), faruServer.getHost().getHostAddress(), faruServer.getPort());
             		}
-            		IServer.update(faruServer);
+            		if(faruServer.getStatut() != ServerStatut.DELETE) IServer.update(faruServer);
             	}
             }
         }, 0, 1, TimeUnit.SECONDS);

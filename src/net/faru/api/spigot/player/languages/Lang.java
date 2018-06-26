@@ -17,30 +17,30 @@ public enum Lang {
 	
 	
 	/*  ========== TYPES ==========  */
-	ERROR("§4§m+------§c§m----------§f§m--------------------§c§m----------§4§m-----+\n"
-		+ "\n"
-		+ "    §7§l» §c§lAn error has occurred ⚠\n"
-		+ "\n"
-		+ "    §8■ §eInfo: §7%info%\n"
-		+ "    §8■ §6Reason: §c%reason%\n"
-		+ "\n"
-		+ "§4§m+------§c§m----------§f§m--------------------§c§m----------§4§m-----+",
-		"§4§m+------§c§m----------§f§m--------------------§c§m----------§4§m-----+\n"
-		+ "\n"
-		+ "    §7§l» §c§lUne erreur est survenue ⚠\n"
-		+ "\n"
-		+ "    §8■ §eInfo: §7%info%\n"
-		+ "    §8■ §Raison: §c%reason%\n"
-		+ "\n"
-		+ "§4§m+------§c§m----------§f§m--------------------§c§m----------§4§m-----+",	
-		"§4§m+------§c§m----------§f§m--------------------§c§m----------§4§m-----+\n"
-		+ "\n"
-		+ "    §7§l» §c§lEin fehler ist aufgetreten ⚠\n"
-		+ "\n"
-		+ "    §8■ §eInfo: §7%info%\n"
-		+ "    §8■ §6Grund: §c%reason%\n"
-		+ "\n"
-		+ "§4§m+------§c§m----------§f§m--------------------§c§m----------§4§m-----+",
+	ERROR("§4§m+------§c§m----------§f§m--------------------§c§m----------§4§m-----+§r\n"
+		+ "\n§r"
+		+ "    §7§l» §c§lAn error has occurred ⚠§r\n"
+		+ "\n§r"
+		+ "    §8■ §eInfo: §7%info%§r\n"
+		+ "    §8■ §6Reason: §c%reason%§r\n"
+		+ "\n§r"
+		+ "§4§m+------§c§m----------§f§m--------------------§c§m----------§4§m-----+§r",
+		"§4§m+------§c§m----------§f§m--------------------§c§m----------§4§m-----+§r\n"
+		+ "\n§r"
+		+ "    §7§l» §c§lUne erreur est survenue ⚠§r\n"
+		+ "\n§r"
+		+ "    §8■ §eInfo: §7%info%§r\n"
+		+ "    §8■ §Raison: §c%reason%§r\n"
+		+ "\n§r"
+		+ "§4§m+------§c§m----------§f§m--------------------§c§m----------§4§m-----+§r",	
+		"§4§m+------§c§m----------§f§m--------------------§c§m----------§4§m-----+§r\n"
+		+ "\n§r"
+		+ "    §7§l» §c§lEin fehler ist aufgetreten ⚠§r\n"
+		+ "\n§r"
+		+ "    §8■ §eInfo: §7%info%§r\n"
+		+ "    §8■ §6Grund: §c%reason%§r\n"
+		+ "\n§r"
+		+ "§4§m+------§c§m----------§f§m--------------------§c§m----------§4§m-----+§r",
 		""),
 	/* ============================ */
 	
@@ -102,17 +102,17 @@ public enum Lang {
 	/*  ========== MAINTENANCE ==========  */
 	MAINTENANCE_ENABLE("\n"
 			+ "  §f§l» §6§lMaintenance §f❙ §bMode\n"
-			+ "\n"
+			+ "\n "
 			+ "    §8■ §eInfo: §cMaintenance will be turned §aon§c in §e15 seconds§c.\n"
 			+ "    " + inJSON("§8[§c➟ §c§lCancel§8]", new ClickEvent(ClickEvent.Action.RUN_COMMAND, "maintenance false"), new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§cClick here to cancel.").create())) + "\n",
 			"\n"
 			+ "  §f§l» §6§lMaintenance §f❙ §bMode\n"
-			+ "\n"
+			+ "\n "
 			+ "    §8■ §eInfo: §cLa maintenance va être §aactivée§c dans §e15 secondes§c.\n"
 			+ "    " + inJSON("§8[§c➟ §c§lAnnuler§8]", new ClickEvent(ClickEvent.Action.RUN_COMMAND, "maintenance false"), new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§cCliquez ici pour annuler.").create())) + "\n",
 			"\n"
 			+ "  §f§l» §6§lInstandhaltung §f❙ §bMode\n"
-			+ "\n"
+			+ "\n "
 			+ "    §8■ §eInfo: §cDie wartung wird in §e15 sekunden§a eingeschaltet§c.\n"
 			+ "    " + inJSON("§8[§c➟ §c§lCancel§8]", new ClickEvent(ClickEvent.Action.RUN_COMMAND, "maintenance false"), new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§cKlicken sie hier, um abzubrechen.").create())) + "\n",
 			""),
@@ -144,12 +144,12 @@ public enum Lang {
 			ChatColor.RED + "",
 			ChatColor.RED + "El mantenimiento es ya desactivado."),
 	
-	MAINTENANCE_MOTD("§c§lF§e§la§a§lr§b§lu§d§lGames§8.§dnet §8§l«» §bInnovative Server §8§l«» §f[§a1.9§f-§1.12§f]\n"
-					+ "      §4§l⚠ §cCurrently under development... §4§l⚠",
-					"§c§lF§e§la§a§lr§b§lu§d§lGames§8.§dnet §8§l«» §bInnovative Server §8§l«» §f[§a1.9§f-§1.12§f]\n"
-					+ "      §4§l⚠ §cActuellement en développement... §4§l⚠",
-					"§c§lF§e§la§a§lr§b§lu§d§lGames§8.§dnet §8§l«» §bInnovative Server §8§l«» §f[§a1.9§f-§1.12§f]\n"
-					+ "      §4§l⚠ §cMomentan in entwicklung... §4§l⚠",
+	MAINTENANCE_MOTD("§c§lF§e§la§a§lr§b§lu§d§lGames§8.§dnet §8§l«» §bInnovative Server §8§l«» §f[§a1.9§f-§a1.12§f]\n"
+					+ "         §4§l⚠ §cCurrently under development... §4§l⚠",
+					"§c§lF§e§la§a§lr§b§lu§d§lGames§8.§dnet §8§l«» §bInnovative Server §8§l«» §f[§a1.9§f-§a1.12§f]\n"
+					+ "         §4§l⚠ §cActuellement en développement... §4§l⚠",
+					"§c§lF§e§la§a§lr§b§lu§d§lGames§8.§dnet §8§l«» §bInnovative Server §8§l«» §f[§a1.9§f-§a1.12§f]\n"
+					+ "         §4§l⚠ §cMomentan in entwicklung... §4§l⚠",
 					""),
 	
 	MAINTENANCE_DISCONNECT_MESSAGE("",

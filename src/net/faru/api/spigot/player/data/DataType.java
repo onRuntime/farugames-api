@@ -17,8 +17,7 @@ public enum DataType {
 	ALLOW_CHAT(12, "Chat usage and visibility", "allow_chat"),
 	ALLOW_PLAYER_VISIBLITY(13, "Players visibility", "allow_player_visibility"),
 	ALLOW_LOBBY_DOUBLE_PROCESS_COMMAND(14, "Lobby command protection", "allow_lobby_double_process_command"),
-	ALLOW_CAHT_MENTIONS(15, "Player's mentions", "allow_chat_mention"),
-	VERSION(16, "Player's protocol version", "version");
+	ALLOW_CAHT_MENTIONS(15, "Player's mentions", "allow_chat_mention");
 
 	private Integer id;
 	private String name;

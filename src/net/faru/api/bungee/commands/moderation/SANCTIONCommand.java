@@ -1,9 +1,9 @@
 package net.faru.api.bungee.commands.moderation;
 
-import net.faru.api.player.FaruPlayer;
-import net.faru.api.player.languages.Lang;
-import net.faru.api.player.rank.Rank;
-import net.faru.api.sanctions.Sanction;
+import net.faru.api.bungee.sanctions.Sanction;
+import net.faru.api.spigot.player.FaruPlayer;
+import net.faru.api.spigot.player.languages.Lang;
+import net.faru.api.spigot.player.rank.Rank;
 import net.faru.api.tools.player.UUIDManager;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;

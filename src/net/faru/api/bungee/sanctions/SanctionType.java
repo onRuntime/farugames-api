@@ -1,6 +1,6 @@
 package net.faru.api.bungee.sanctions;
 
-import net.faru.api.player.rank.Rank;
+import net.faru.api.spigot.player.rank.Rank;
 
 public enum SanctionType {
 

@@ -1,7 +1,7 @@
 package net.faru.api.bungee.listeners.proxy;
 
 import net.faru.api.bungee.BungeeFaruAPI;
-import net.faru.api.player.languages.Lang;
+import net.faru.api.spigot.player.languages.Lang;
 import net.md_5.bungee.api.ServerPing;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.event.ProxyPingEvent;

@@ -1,4 +1,4 @@
-package net.faru.api.managers;
+package net.faru.api.spigot.managers;
 
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
@@ -19,6 +19,7 @@ public class BukkitListenerManager {
 	public void register() {
 		for(Listeners listener : Listeners.values()) {
 			this.pluginManager.registerEvents(listener.getListener(), this.plugin);
+			SpigotFaruAPI.getInstance().enableEvent(listener.getListener());
 		}
 	}
 }
