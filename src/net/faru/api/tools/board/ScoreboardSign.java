@@ -1,10 +1,9 @@
 package net.faru.api.tools.board;
 
 import java.lang.reflect.Field;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.apache.commons.lang.Validate;
-import org.bukkit.ChatColor;
 import org.bukkit.craftbukkit.v1_9_R2.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
@@ -17,24 +16,25 @@ import net.minecraft.server.v1_9_R2.PacketPlayOutScoreboardTeam;
 import net.minecraft.server.v1_9_R2.PlayerConnection;
 
 public class ScoreboardSign {
-
+	
 	private boolean created = false;
-	private String[] lines = new String[16];
-	private PacketPlayOutScoreboardTeam[] teams = new PacketPlayOutScoreboardTeam[16];
+	private final VirtualTeam[] lines = new VirtualTeam[15];
 	private final Player player;
 	private String objectiveName;
 
+	/**
+	 * Create a scoreboard sign for a given player and using a specifig objective name
+	 * @param player the player viewing the scoreboard sign
+	 * @param objectiveName the name of the scoreboard sign (displayed at the top of the scoreboard)
+	 */
 	public ScoreboardSign(Player player, String objectiveName) {
 		this.player = player;
 		this.objectiveName = objectiveName;
 	}
 
-	public ScoreboardSign(Player player, String objectiveName, String[] lines) {
-		this.player = player;
-		this.objectiveName = objectiveName;
-		this.lines = lines;
-	}
-
+	/**
+	 * Send the initial creation packets for this scoreboard sign. Must be called at least once.
+	 */
 	public void create() {
 		if (created)
 			return;
@@ -43,20 +43,93 @@ public class ScoreboardSign {
 		player.sendPacket(createObjectivePacket(0, objectiveName));
 		player.sendPacket(setObjectiveSlot());
 		int i = 0;
-		while (i < lines.length) {
+		while (i < lines.length)
 			sendLine(i++);
-		}
 
 		created = true;
 	}
 
+	/**
+	 * Send the packets to remove this scoreboard sign. A destroyed scoreboard sign must be recreated using {@link ScoreboardSign#create()} in order
+	 * to be used again
+	 */
 	public void destroy() {
 		if (!created)
 			return;
 
 		getPlayer().sendPacket(createObjectivePacket(1, null));
+		for (VirtualTeam team : lines)
+			if (team != null)
+				getPlayer().sendPacket(team.removeTeam());
 
 		created = false;
+	}
+
+	/**
+	 * Change the name of the objective. The name is displayed at the top of the scoreboard.
+	 * @param name the name of the objective, max 32 char
+	 */
+	public void setObjectiveName(String name) {
+		this.objectiveName = name;
+		if (created)
+			getPlayer().sendPacket(createObjectivePacket(2, name));
+	}
+
+	/**
+	 * Change a scoreboard line and send the packets to the player. Can be called async.
+	 * @param line the number of the line (0 <= line < 15)
+	 * @param value the new value for the scoreboard line
+	 */
+	public void setLine(int line, String value) {
+		VirtualTeam team = getOrCreateTeam(line);
+		String old = team.getCurrentPlayer();
+
+		if (old != null && created)
+			getPlayer().sendPacket(removeLine(old));
+
+		team.setValue(value);
+		sendLine(line);
+	}
+
+	/**
+	 * Remove a given scoreboard line
+	 * @param line the line to remove
+	 */
+	public void removeLine(int line) {
+		VirtualTeam team = getOrCreateTeam(line);
+		String old = team.getCurrentPlayer();
+
+		if (old != null && created) {
+			getPlayer().sendPacket(removeLine(old));
+			getPlayer().sendPacket(team.removeTeam());
+		}
+
+		lines[line] = null;
+	}
+
+	/**
+	 * Get the current value for a line
+	 * @param line the line
+	 * @return the content of the line
+	 */
+	public String getLine(int line) {
+		if (line > 14)
+			return null;
+		if (line < 0)
+			return null;
+		return getOrCreateTeam(line).getValue();
+	}
+
+	/**
+	 * Get the team assigned to a line
+	 * @return the {@link VirtualTeam} used to display this line
+	 */
+	public VirtualTeam getTeam(int line) {
+		if (line > 14)
+			return null;
+		if (line < 0)
+			return null;
+		return getOrCreateTeam(line);
 	}
 
 	private PlayerConnection getPlayer() {
@@ -64,68 +137,46 @@ public class ScoreboardSign {
 	}
 
 	@SuppressWarnings("rawtypes")
-	private Packet sendLine(int line) {
-		if (line > 15)
-			return null;
+	private void sendLine(int line) {
+		if (line > 14)
+			return;
 		if (line < 0)
-			return null;
+			return;
 		if (!created)
-			return null;
-		PacketPlayOutScoreboardTeam teamPacket = apply(line);
-		int score = line;
-		getPlayer().sendPacket(teamPacket);
-		return sendScore(ChatColor.values()[line].toString() + ChatColor.RESET, score);
+			return;
+
+		int score = (15 - line);
+		VirtualTeam val = getOrCreateTeam(line);
+		for (Packet packet : val.sendLine())
+			getPlayer().sendPacket(packet);
+		getPlayer().sendPacket(sendScore(val.getCurrentPlayer(), score));
+		val.reset();
 	}
 
-	public void setObjectiveName(String name) {
-		this.objectiveName = name;
-		if (created)
-			getPlayer().sendPacket(createObjectivePacket(2, name));
-	}
+	private VirtualTeam getOrCreateTeam(int line) {
+		if (lines[line] == null)
+			lines[line] = new VirtualTeam("__fakeScore" + line);
 
-	public void setLine(int line, String value) {
-		lines[line] = value;
-		getPlayer().sendPacket(sendLine(line));
-	}
-
-	public void removeLine(int line) {
-		String oldLine = getLine(line);
-		if (oldLine != null && created)
-			getPlayer().sendPacket(removeLine(oldLine));
-
-		lines[line] = null;
-	}
-
-	public String getLine(int line) {
-		if (line > 15)
-			return null;
-		if (line < 0)
-			return null;
 		return lines[line];
 	}
 
+	/*
+		Factories
+		 */
 	private PacketPlayOutScoreboardObjective createObjectivePacket(int mode, String displayName) {
 		PacketPlayOutScoreboardObjective packet = new PacketPlayOutScoreboardObjective();
-		try {
-			Field name = packet.getClass().getDeclaredField("a");
-			name.setAccessible(true);
-			name.set(packet, player.getName());
-			
-			Field modeField = packet.getClass().getDeclaredField("d");
-			modeField.setAccessible(true);
-			modeField.set(packet, mode);
+		// Nom de l'objectif
+		setField(packet, "a", player.getName());
 
-			if (mode == 0 || mode == 2) {
-				Field displayNameField = packet.getClass().getDeclaredField("b");
-				displayNameField.setAccessible(true);
-				displayNameField.set(packet, displayName);
+		// Mode
+		// 0 : créer
+		// 1 : Supprimer
+		// 2 : Mettre à jour
+		setField(packet, "d", mode);
 
-				Field display = packet.getClass().getDeclaredField("c");
-				display.setAccessible(true);
-				display.set(packet, IScoreboardCriteria.EnumScoreboardHealthDisplay.INTEGER);
-			}
-		} catch (NoSuchFieldException | IllegalAccessException e) {
-			e.printStackTrace();
+		if (mode == 0 || mode == 2) {
+			setField(packet, "b", displayName);
+			setField(packet, "c", IScoreboardCriteria.EnumScoreboardHealthDisplay.INTEGER);
 		}
 
 		return packet;
@@ -133,38 +184,18 @@ public class ScoreboardSign {
 
 	private PacketPlayOutScoreboardDisplayObjective setObjectiveSlot() {
 		PacketPlayOutScoreboardDisplayObjective packet = new PacketPlayOutScoreboardDisplayObjective();
-		try {
-			Field position = packet.getClass().getDeclaredField("a");
-			position.setAccessible(true);
-			position.set(packet, 1); // SideBar
-
-			Field name = packet.getClass().getDeclaredField("b");
-			name.setAccessible(true);
-			name.set(packet, player.getName());
-		} catch (NoSuchFieldException | IllegalAccessException e) {
-			e.printStackTrace();
-		}
+		// Slot
+		setField(packet, "a", 1);
+		setField(packet, "b", player.getName());
 
 		return packet;
 	}
 
 	private PacketPlayOutScoreboardScore sendScore(String line, int score) {
 		PacketPlayOutScoreboardScore packet = new PacketPlayOutScoreboardScore(line);
-		try {
-			Field name = packet.getClass().getDeclaredField("b");
-			name.setAccessible(true);
-			name.set(packet, player.getName());
-
-			Field scoreField = packet.getClass().getDeclaredField("c");
-			scoreField.setAccessible(true);
-			scoreField.set(packet, score); // SideBar
-
-			Field action = packet.getClass().getDeclaredField("d");
-			action.setAccessible(true);
-			action.set(packet, PacketPlayOutScoreboardScore.EnumScoreboardAction.CHANGE);
-		} catch (NoSuchFieldException | IllegalAccessException e) {
-			e.printStackTrace();
-		}
+		setField(packet, "b", player.getName());
+		setField(packet, "c", score);
+		setField(packet, "d", PacketPlayOutScoreboardScore.EnumScoreboardAction.CHANGE);
 
 		return packet;
 	}
@@ -173,82 +204,174 @@ public class ScoreboardSign {
 		return new PacketPlayOutScoreboardScore(line);
 	}
 
-	public Player getBukkitPlayer() {
-		return player;
-	}
+	/**
+	 * This class is used to manage the content of a line. Advanced users can use it as they want, but they are encouraged to read and understand the
+	 * code before doing so. Use these methods at your own risk.
+	 */
+	public class VirtualTeam {
+		private final String name;
+		private String prefix;
+		private String suffix;
+		private String currentPlayer;
+		private String oldPlayer;
 
-	public String getDisplayName() {
-		return objectiveName;
-	}
+		private boolean prefixChanged, suffixChanged, playerChanged = false;
+		private boolean first = true;
 
-	public String[] getLines() {
-		return lines;
-	}
-
-	private String[] splitString(String string) {
-		Validate.isTrue(string.length() <= 32, "String can't have more than 32 characters ");
-		if (string.isEmpty()) {
-			return new String[] { " ", "" };
-		}
-		StringBuilder prefix = new StringBuilder(string.substring(0, string.length() >= 16 ? 16 : string.length()));
-		StringBuilder suffix = new StringBuilder(string.length() > 16 ? string.substring(16) : "");
-		if (prefix.charAt(prefix.length() - 1) == '�') {
-			prefix.deleteCharAt(prefix.length() - 1);
-			suffix.insert(0, '�');
-		}
-		if (!suffix.toString().isEmpty())
-			suffix.insert(0, ChatColor.getLastColors(prefix.toString()));
-
-		return new String[] { prefix.toString().length() > 16 ? prefix.toString().substring(0, 16) : prefix.toString(),
-				suffix.toString().length() > 16 ? suffix.toString().substring(0, 16) : suffix.toString() };
-	}
-
-	private PacketPlayOutScoreboardTeam apply(int line) {
-		if (teams[line] != null) {
-			setField(getTeamLine(line), "h", 2);
-			setField(getTeamLine(line), "c", splitString(getLine(line))[0]);
-			setField(getTeamLine(line), "d", splitString(getLine(line))[1]);
+		private VirtualTeam(String name, String prefix, String suffix) {
+			this.name = name;
+			this.prefix = prefix;
+			this.suffix = suffix;
 		}
 
-		return getTeamLine(line);
-	}
-
-	private PacketPlayOutScoreboardTeam getTeamLine(int line) {
-		if (teams[line] == null) {
-			PacketPlayOutScoreboardTeam team = new PacketPlayOutScoreboardTeam();
-			setField(team, "a", line + "");
-			setField(team, "b", line + "");
-			setField(team, "c", splitString(getLine(line))[0]);
-			setField(team, "d", splitString(getLine(line))[1]);
-			addEntry(team, ChatColor.values()[line].toString() + ChatColor.RESET);
-			teams[line] = team;
+		private VirtualTeam(String name) {
+			this(name, "", "");
 		}
-		return teams[line];
+
+		public String getName() {
+			return name;
+		}
+
+		public String getPrefix() {
+			return prefix;
+		}
+
+		public void setPrefix(String prefix) {
+			if (this.prefix == null || !this.prefix.equals(prefix))
+				this.prefixChanged = true;
+			this.prefix = prefix;
+		}
+
+		public String getSuffix() {
+			return suffix;
+		}
+
+		public void setSuffix(String suffix) {
+			if (this.suffix == null || !this.suffix.equals(prefix))
+				this.suffixChanged = true;
+			this.suffix = suffix;
+		}
+
+		private PacketPlayOutScoreboardTeam createPacket(int mode) {
+			PacketPlayOutScoreboardTeam packet = new PacketPlayOutScoreboardTeam();
+			setField(packet, "a", name);
+			setField(packet, "b", "");
+			setField(packet, "c", prefix);
+			setField(packet, "d", suffix);
+			setField(packet, "i", 0);
+			setField(packet, "e", "always");
+			setField(packet, "g", 0);
+			setField(packet, "i", mode);
+
+			return packet;
+		}
+
+		public PacketPlayOutScoreboardTeam createTeam() {
+			return createPacket(0);
+		}
+
+		public PacketPlayOutScoreboardTeam updateTeam() {
+			return createPacket(2);
+		}
+
+		public PacketPlayOutScoreboardTeam removeTeam() {
+			PacketPlayOutScoreboardTeam packet = new PacketPlayOutScoreboardTeam();
+			setField(packet, "a", name);
+			setField(packet, "i", 1);
+			first = true;
+			return packet;
+		}
+
+		public void setPlayer(String name) {
+			if (this.currentPlayer == null || !this.currentPlayer.equals(name))
+				this.playerChanged = true;
+			this.oldPlayer = this.currentPlayer;
+			this.currentPlayer = name;
+		}
+
+		public Iterable<PacketPlayOutScoreboardTeam> sendLine() {
+			List<PacketPlayOutScoreboardTeam> packets = new ArrayList<>();
+
+			if (first) {
+				packets.add(createTeam());
+			} else if (prefixChanged || suffixChanged) {
+				packets.add(updateTeam());
+			}
+
+			if (first || playerChanged) {
+				if (oldPlayer != null)										// remove these two lines ?
+					packets.add(addOrRemovePlayer(4, oldPlayer)); 	//
+				packets.add(changePlayer());
+			}
+
+			if (first)
+				first = false;
+
+			return packets;
+		}
+
+		public void reset() {
+			prefixChanged = false;
+			suffixChanged = false;
+			playerChanged = false;
+			oldPlayer = null;
+		}
+
+		public PacketPlayOutScoreboardTeam changePlayer() {
+			return addOrRemovePlayer(3, currentPlayer);
+		}
+
+		@SuppressWarnings("unchecked")
+		public PacketPlayOutScoreboardTeam addOrRemovePlayer(int mode, String playerName) {
+			PacketPlayOutScoreboardTeam packet = new PacketPlayOutScoreboardTeam();
+			setField(packet, "a", name);
+			setField(packet, "i", mode);
+
+			try {
+				Field f = packet.getClass().getDeclaredField("h");
+				f.setAccessible(true);
+				((List<String>) f.get(packet)).add(playerName);
+			} catch (NoSuchFieldException | IllegalAccessException e) {
+				e.printStackTrace();
+			}
+
+			return packet;
+		}
+
+		public String getCurrentPlayer() {
+			return currentPlayer;
+		}
+
+		public String getValue() {
+			return getPrefix() + getCurrentPlayer() + getSuffix();
+		}
+
+		public void setValue(String value) {
+			if (value.length() <= 16) {
+				setPrefix("");
+				setSuffix("");
+				setPlayer(value);
+			} else if (value.length() <= 32) {
+				setPrefix(value.substring(0, 16));
+				setPlayer(value.substring(16));
+				setSuffix("");
+			} else if (value.length() <= 48) {
+				setPrefix(value.substring(0, 16));
+				setPlayer(value.substring(16, 32));
+				setSuffix(value.substring(32));
+			} else {
+				throw new IllegalArgumentException("Too long value ! Max 48 characters, value was " + value.length() + " !");
+			}
+		}
 	}
 
-	private static void setField(PacketPlayOutScoreboardTeam packet, String field, Object value) {
+	private static void setField(Object edit, String fieldName, Object value) {
 		try {
-			Field f = packet.getClass().getDeclaredField(field);
-			f.setAccessible(true);
-			f.set(packet, value);
-			f.setAccessible(false);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
-
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private void addEntry(PacketPlayOutScoreboardTeam packet, String entry) {
-		Field f = null;
-		try {
-			f = packet.getClass().getDeclaredField("g");
-			f.setAccessible(true);
-			((Collection) f.get(packet)).add(entry);
-		} catch (NoSuchFieldException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
+			Field field = edit.getClass().getDeclaredField(fieldName);
+			field.setAccessible(true);
+			field.set(edit, value);
+		} catch (NoSuchFieldException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
-
 	}
 }

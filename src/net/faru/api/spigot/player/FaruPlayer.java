@@ -47,6 +47,10 @@ public class FaruPlayer {
 		ICurrency.createAccount(uuid);
 		IExperience.createAccount(uuid);
 		
+		this.loadPlayer();
+	}
+	
+	public void loadPlayer() {
 		this.setRank(IRank.getRank(uuid));
 		this.loadData();
 		this.loadPermissions();

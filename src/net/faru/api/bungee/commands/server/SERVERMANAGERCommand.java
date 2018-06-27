@@ -1,5 +1,6 @@
 package net.faru.api.bungee.commands.server;
 
+import net.faru.api.bungee.BungeeFaruAPI;
 import net.faru.api.bungee.proxiedplayer.FaruBungeePlayer;
 import net.faru.api.bungee.servers.ServerStatut;
 import net.faru.api.spigot.player.languages.Lang;
@@ -34,7 +35,7 @@ public class SERVERMANAGERCommand extends Command {
 		
 		if(args[0].equalsIgnoreCase("delete")) {
 			if(args[1] == null) { player.sendMessage(this.HELP()); return; }
-			IServer.remove(args[1], ServerStatut.DELETE);
+			BungeeFaruAPI.iFaruServers.get(args[1]).setStatut(ServerStatut.DELETE);
 			player.sendMessage(Lang.SERVER_REMOVE.in(lang).replaceAll("%server%", args[1].toUpperCase().toString()));
 			return;
 		}

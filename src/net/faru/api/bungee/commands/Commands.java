@@ -1,6 +1,7 @@
 package net.faru.api.bungee.commands;
 
 import net.faru.api.bungee.commands.general.MESSAGECommand;
+import net.faru.api.bungee.commands.general.RANKCommand;
 import net.faru.api.bungee.commands.general.REPLYCommand;
 import net.faru.api.bungee.commands.moderation.SANCTIONCommand;
 import net.faru.api.bungee.commands.server.LISTCommand;
@@ -15,6 +16,7 @@ public enum Commands {
 	SERVERMANAGER(new SERVERMANAGERCommand()),
 	MESSAGE(new MESSAGECommand()),
 	REPLY(new REPLYCommand()),
+	RANK(new RANKCommand()),
 	LIST(new LISTCommand());
 	
 	private Command command;

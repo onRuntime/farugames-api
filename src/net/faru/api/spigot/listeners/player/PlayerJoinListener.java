@@ -17,6 +17,7 @@ public class PlayerJoinListener implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 		FaruPlayer faruPlayer = FaruPlayer.getPlayer(player.getUniqueId());
+		faruPlayer.loadPlayer();
 		if(faruPlayer.getRank().getPower() == Rank.OWNER.getPower()) player.setOp(true);
 		Collisions.patch(player.getUniqueId());
 		PvP.patch(player.getUniqueId());
