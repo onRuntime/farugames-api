@@ -71,6 +71,7 @@ public class BungeeFaruAPI extends Plugin {
             		proxyPlayers = getProxy().getPlayers();
             	}
             	for(FaruServerAPI faruServer : IServer.getServers()) {
+            		IServer.update(faruServer);
             		if(faruServer.getStatut() == ServerStatut.FINISH) {
             		}
             		if(faruServer.getStatut() == ServerStatut.UNREGISTERED) {

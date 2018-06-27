@@ -5,7 +5,7 @@ import org.bukkit.World;
 
 public enum Locations {
 
-	HUB((int) -45.5, 16, (int) -1230.5, (float) -90, (float) 0);
+	HUB((int) -44.5, 16, (int) -1229.5, (float) -90, (float) 0);
 	
 	private Integer x, y, z;
 	private Float yaw, pitch;

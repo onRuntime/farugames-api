@@ -57,6 +57,13 @@ public class FaruServerAPI {
 		BungeeFaruAPI.unregisterServer(this.name);
 	}
 	
+	public void delete() {
+		this.joinable = false;
+		this.statut = ServerStatut.DELETE;
+		
+		this.unregister();
+	}
+	
 	public String getName() {
 		return this.name;
 	}
