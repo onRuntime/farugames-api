@@ -15,26 +15,20 @@ import net.minecraft.server.v1_9_R2.PacketPlayOutScoreboardScore;
 import net.minecraft.server.v1_9_R2.PacketPlayOutScoreboardTeam;
 import net.minecraft.server.v1_9_R2.PlayerConnection;
 
+/**
+ * @author zyuiop Updated by MrZalTy
+ */
 public class ScoreboardSign {
-	
 	private boolean created = false;
 	private final VirtualTeam[] lines = new VirtualTeam[15];
 	private final Player player;
 	private String objectiveName;
 
-	/**
-	 * Create a scoreboard sign for a given player and using a specifig objective name
-	 * @param player the player viewing the scoreboard sign
-	 * @param objectiveName the name of the scoreboard sign (displayed at the top of the scoreboard)
-	 */
 	public ScoreboardSign(Player player, String objectiveName) {
 		this.player = player;
 		this.objectiveName = objectiveName;
 	}
 
-	/**
-	 * Send the initial creation packets for this scoreboard sign. Must be called at least once.
-	 */
 	public void create() {
 		if (created)
 			return;
@@ -49,10 +43,6 @@ public class ScoreboardSign {
 		created = true;
 	}
 
-	/**
-	 * Send the packets to remove this scoreboard sign. A destroyed scoreboard sign must be recreated using {@link ScoreboardSign#create()} in order
-	 * to be used again
-	 */
 	public void destroy() {
 		if (!created)
 			return;
@@ -65,21 +55,12 @@ public class ScoreboardSign {
 		created = false;
 	}
 
-	/**
-	 * Change the name of the objective. The name is displayed at the top of the scoreboard.
-	 * @param name the name of the objective, max 32 char
-	 */
 	public void setObjectiveName(String name) {
 		this.objectiveName = name;
 		if (created)
 			getPlayer().sendPacket(createObjectivePacket(2, name));
 	}
 
-	/**
-	 * Change a scoreboard line and send the packets to the player. Can be called async.
-	 * @param line the number of the line (0 <= line < 15)
-	 * @param value the new value for the scoreboard line
-	 */
 	public void setLine(int line, String value) {
 		VirtualTeam team = getOrCreateTeam(line);
 		String old = team.getCurrentPlayer();
@@ -91,10 +72,6 @@ public class ScoreboardSign {
 		sendLine(line);
 	}
 
-	/**
-	 * Remove a given scoreboard line
-	 * @param line the line to remove
-	 */
 	public void removeLine(int line) {
 		VirtualTeam team = getOrCreateTeam(line);
 		String old = team.getCurrentPlayer();
@@ -107,11 +84,6 @@ public class ScoreboardSign {
 		lines[line] = null;
 	}
 
-	/**
-	 * Get the current value for a line
-	 * @param line the line
-	 * @return the content of the line
-	 */
 	public String getLine(int line) {
 		if (line > 14)
 			return null;
@@ -120,10 +92,6 @@ public class ScoreboardSign {
 		return getOrCreateTeam(line).getValue();
 	}
 
-	/**
-	 * Get the team assigned to a line
-	 * @return the {@link VirtualTeam} used to display this line
-	 */
 	public VirtualTeam getTeam(int line) {
 		if (line > 14)
 			return null;
@@ -160,18 +128,10 @@ public class ScoreboardSign {
 		return lines[line];
 	}
 
-	/*
-		Factories
-		 */
 	private PacketPlayOutScoreboardObjective createObjectivePacket(int mode, String displayName) {
 		PacketPlayOutScoreboardObjective packet = new PacketPlayOutScoreboardObjective();
-		// Nom de l'objectif
 		setField(packet, "a", player.getName());
 
-		// Mode
-		// 0 : créer
-		// 1 : Supprimer
-		// 2 : Mettre à jour
 		setField(packet, "d", mode);
 
 		if (mode == 0 || mode == 2) {
@@ -184,7 +144,6 @@ public class ScoreboardSign {
 
 	private PacketPlayOutScoreboardDisplayObjective setObjectiveSlot() {
 		PacketPlayOutScoreboardDisplayObjective packet = new PacketPlayOutScoreboardDisplayObjective();
-		// Slot
 		setField(packet, "a", 1);
 		setField(packet, "b", player.getName());
 
@@ -204,10 +163,6 @@ public class ScoreboardSign {
 		return new PacketPlayOutScoreboardScore(line);
 	}
 
-	/**
-	 * This class is used to manage the content of a line. Advanced users can use it as they want, but they are encouraged to read and understand the
-	 * code before doing so. Use these methods at your own risk.
-	 */
 	public class VirtualTeam {
 		private final String name;
 		private String prefix;
@@ -299,8 +254,8 @@ public class ScoreboardSign {
 			}
 
 			if (first || playerChanged) {
-				if (oldPlayer != null)										// remove these two lines ?
-					packets.add(addOrRemovePlayer(4, oldPlayer)); 	//
+				if (oldPlayer != null)
+					packets.add(addOrRemovePlayer(4, oldPlayer));
 				packets.add(changePlayer());
 			}
 
@@ -360,7 +315,8 @@ public class ScoreboardSign {
 				setPlayer(value.substring(16, 32));
 				setSuffix(value.substring(32));
 			} else {
-				throw new IllegalArgumentException("Too long value ! Max 48 characters, value was " + value.length() + " !");
+				throw new IllegalArgumentException(
+						"Too long value ! Max 48 characters, value was " + value.length() + " !");
 			}
 		}
 	}
