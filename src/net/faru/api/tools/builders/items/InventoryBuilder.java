@@ -1,4 +1,4 @@
-package net.faru.api.tools.builders;
+package net.faru.api.tools.builders.items;
 
 import java.util.ArrayList;
 import java.util.HashMap;

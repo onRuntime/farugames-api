@@ -13,7 +13,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 
 import net.faru.api.spigot.SpigotFaruAPI;
-import net.faru.api.tools.builders.InventoryBuilder;
+import net.faru.api.tools.builders.items.InventoryBuilder;
 
 public class ExampleMenu implements Listener {
 
