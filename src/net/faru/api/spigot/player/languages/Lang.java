@@ -204,6 +204,34 @@ public enum Lang {
 	/* =========================== */
 	
 	
+	/*  ========== ITEMS ==========  */
+	MAIN_MENU("",
+			"",
+			"",
+			""),
+	
+	PROFILE("",
+			"",
+			"",
+			""),
+	
+	PANEL("",
+			"",
+			"",
+			""),
+	
+	COSMETICS("",
+			"",
+			"",
+			""),
+	
+	SHOP("",
+			"",
+			"",
+			""),
+	/* ============================ */
+	
+	
 	/*  ========== SANCTION ==========  */
 	UNPUNISHABLE_PLAYER(ChatColor.GRAY + "This player cannot be punished",
 			ChatColor.GRAY + "Ce joueur ne peut pas être sanctionné",

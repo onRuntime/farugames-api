@@ -19,6 +19,7 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import com.mojang.authlib.properties.PropertyMap;
 
+import net.faru.api.spigot.player.languages.Lang;
 import net.faru.api.tools.reflection.Reflections;
 
 public class HeadBuilder
@@ -53,6 +54,11 @@ public class HeadBuilder
     
     public HeadBuilder setName(final String name) {
         this.name = name;
+        return this;
+    }
+    
+    public HeadBuilder setName(final Lang name) {
+        this.name = name.toString();
         return this;
     }
     
