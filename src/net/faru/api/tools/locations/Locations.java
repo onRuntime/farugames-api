@@ -5,12 +5,12 @@ import org.bukkit.World;
 
 public enum Locations {
 
-	HUB((int) -44.5, 16, (int) -1229.5, (float) -90, (float) 0);
+	HUB(-44.5, 14 + 2, -1229.5, 90, 0);
 	
-	private Integer x, y, z;
-	private Float yaw, pitch;
+	private double x, y, z;
+	private float yaw, pitch;
 	
-	private Locations(Integer x, Integer y, Integer z, Float yaw, Float pitch) {
+	private Locations(double x, double y, double z, float yaw, float pitch) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -18,23 +18,23 @@ public enum Locations {
 		this.pitch = pitch;
 	}
 	
-	public Integer getX() {
+	public double getX() {
 		return this.x;
 	}
 	
-	public Integer getY() {
+	public double getY() {
 		return this.y;
 	}
 	
-	public Integer getZ() {
+	public double getZ() {
 		return this.z;
 	}
 	
-	public Float getYaw() {
+	public float getYaw() {
 		return this.yaw;
 	}
 	
-	public Float getPitch() {
+	public float getPitch() {
 		return this.pitch;
 	}
 	
