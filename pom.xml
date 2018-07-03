@@ -2,8 +2,8 @@
   	
   	<modelVersion>4.0.0</modelVersion>
   	
-  	<groupId>net.faru</groupId>
-  	<artifactId>faru-api</artifactId>
+  	<groupId>net.farugames</groupId>
+  	<artifactId>FaruGamesAPI</artifactId>
   	
   	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -110,11 +110,11 @@
 		
 		<!-- Faru-Data -->
 		<dependency>
-			<groupId>net.faru</groupId>
-			<artifactId>faru-data</artifactId>
-			<version>1.0</version>
+			<groupId>net.farugames</groupId>
+			<artifactId>FaruGamesData</artifactId>
+			<version>0.0.1</version>
 			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/faru-data.jar</systemPath>
+			<systemPath>${project.basedir}/lib/FaruGamesData.jar</systemPath>
 		</dependency>
 	</dependencies>
   

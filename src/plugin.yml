@@ -1,7 +1,7 @@
-main: net.faru.api.spigot.SpigotFaruAPI
+main: net.farugames.api.spigot.Main
 
 authors: [3DX900, ChocoIG]
-version: 0.5.0
-name: FaruAPI
+version: 0.5.1
+name: FaruGamesAPI
 
-depends: [ FaruData ]
+depends: [ FaruGamesData ]
