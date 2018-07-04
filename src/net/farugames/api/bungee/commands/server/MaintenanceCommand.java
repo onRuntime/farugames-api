@@ -11,9 +11,9 @@ import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
-public class MAINTENANCECommand extends Command {
+public class MaintenanceCommand extends Command {
 	
-	public MAINTENANCECommand() {
+	public MaintenanceCommand() {
 		super("maintenance");
 	}
 	

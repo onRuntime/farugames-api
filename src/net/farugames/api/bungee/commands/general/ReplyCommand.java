@@ -7,9 +7,9 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.command.ConsoleCommandSender;
 
-public class REPLYCommand extends Command {
+public class ReplyCommand extends Command {
 
-	public REPLYCommand() {
+	public ReplyCommand() {
 		super("reply", null, new String[] {"rep", "r", "response", "respond", "resp"});
 	}
 	

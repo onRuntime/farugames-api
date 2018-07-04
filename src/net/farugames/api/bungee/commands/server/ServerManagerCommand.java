@@ -10,9 +10,9 @@ import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
-public class SERVERMANAGERCommand extends Command {
+public class ServerManagerCommand extends Command {
 
-	public SERVERMANAGERCommand() {
+	public ServerManagerCommand() {
 		super("servermanager", null, "sm");
 	}
 
@@ -54,6 +54,10 @@ public class SERVERMANAGERCommand extends Command {
 
 	public String HELP() {
 		return "\n"
-			+ "  §f§l» §6§lServerManager §f❙ §eHelp\n";
+			+ "  §f§l» §6§lServerManager §f❙ §eHelp\n"
+			+ "\n"
+			+ "    §8■ §e/" + "servermanager" + " help §f» §bView help.\n"
+			+ "    §8■ §e/" + "servermanager" + " request <stype> §f» §bRequest a server type.\n"
+			+ "    §8■ §e/" + "servermanager" + " delete <sname> §f» §bDelete a bug server.\n";
 	}
 }

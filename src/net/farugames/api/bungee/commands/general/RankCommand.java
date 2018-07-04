@@ -7,9 +7,9 @@ import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
-public class RANKCommand extends Command {
+public class RankCommand extends Command {
 
-	public RANKCommand() {
+	public RankCommand() {
 		super("rank");
 	}
 	
@@ -25,12 +25,14 @@ public class RANKCommand extends Command {
 		if(args[0].equalsIgnoreCase("list")) {
 			String ranks = "";
 			for(Rank rank : Rank.values()) {
-				ranks = ranks + " §7» §f" + rank.getOrder() + " §8/ §3" + rank.getPower() + " §8/ " + rank.getChatColor() + rank.getIdName() + " §8/ " + rank.getColor() + rank.getPrefix() + "\n";
+				ranks = ranks + "    §8■ §a" + rank.getOrder() + " §f❘ §b" + rank.getPower() + " §f❘ §f" + rank.getIdName() + " §f❘ " + rank.getColor() + rank.getPrefix() + " §f❘ §r" + rank.getChatColor() + "ChatColor§r" + "\n";
 			}
 			faruPlayer.getPlayer().sendMessage("");
-			faruPlayer.getPlayer().sendMessage("§7Liste des grades ");
+			faruPlayer.getPlayer().sendMessage("  §f§l» §6§lRank §f❙ §9List");
 			faruPlayer.getPlayer().sendMessage("");
-			faruPlayer.getPlayer().sendMessage(ranks != "" ? ranks : "§cAucun grade disponible.");
+			faruPlayer.getPlayer().sendMessage("    §8■ §aOrder §f❘ §bPower §f❘ §fRandId §f❘ §dRankColor & RankPrefix §f❘  §7Chatcolor");
+			faruPlayer.getPlayer().sendMessage("");
+			faruPlayer.getPlayer().sendMessage(ranks != "" ? ranks : "§cRank unvailable.");
 		}
 		
 		if(args[0].equalsIgnoreCase("reset")) {

@@ -1,10 +1,20 @@
 main: net.farugames.api.spigot.Main
 name: FaruGamesAPI
-version: 0.5.2
+version: 0.5.3
 authors: [3DX900, ChocoIG]
 depends: [FaruGamesData]
 commands:
     gamemode:
       aliases: [gm]
+    list:
+    maintenance:
+    message:
+      aliases: [msg,m,whisper,w,tell,t,mp]
+    punish:
+    rank:
+    reply:
+      aliases: [rep,r,response,respond,resp]
+    servermanager:
+      aliases: [sm]
     teleport:
       aliases: [tp]

@@ -9,9 +9,9 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.command.ConsoleCommandSender;
 
-public class MESSAGECommand extends Command {
+public class MessageCommand extends Command {
 
-	public MESSAGECommand() {
+	public MessageCommand() {
 		super("message", null, new String[] {"msg", "m", "whisper", "w", "tell", "t", "mp"});
 	}
 	

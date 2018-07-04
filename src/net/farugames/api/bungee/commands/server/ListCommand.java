@@ -8,10 +8,10 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.command.ConsoleCommandSender;
 
-public class LISTCommand extends Command {
+public class ListCommand extends Command {
 
-	public LISTCommand() {
-		super("list");
+	public ListCommand() {
+		super("list", "", "glist");
 	}
 
 	@SuppressWarnings("deprecation")
