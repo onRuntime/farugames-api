@@ -1,5 +1,4 @@
-main: net.farugames.api.bungee.BungeeFaruAPI
-
-authors: [3DX900, ChocoIG]
-version: 0.5.1
+main: net.farugames.api.bungee.Main
 name: FaruGamesAPI
+version: 0.5.2
+authors: [3DX900, ChocoIG]

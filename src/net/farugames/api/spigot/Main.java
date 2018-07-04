@@ -9,6 +9,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import net.farugames.api.bungee.servers.ServerStatut;
 import net.farugames.api.managers.BukkitListenerManager;
+import net.farugames.api.spigot.commands.GamemodeCommand;
+import net.farugames.api.spigot.commands.TeleportCommand;
 import net.farugames.data.database.servers.IServer;
 
 public class Main extends JavaPlugin {
@@ -25,15 +27,15 @@ public class Main extends JavaPlugin {
 	
 	public void onEnable() {
 		IServer.create(Bukkit.getServerName(), "149.202.102.63", Bukkit.getPort(), null, null);
-		
 		new BukkitListenerManager().register();
+		getCommand("gamemode").setExecutor(new GamemodeCommand());
+		getCommand("teleport").setExecutor(new TeleportCommand());
 		
 		super.onEnable();
 	}
 	
 	public void onDisable() {
 		IServer.remove(Bukkit.getServerName(), ServerStatut.DELETE);//remove(Bukkit.getServerName(), ServerStatut.DELETE);
-		
 		super.onDisable();
 	}
 	

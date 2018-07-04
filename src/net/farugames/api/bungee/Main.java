@@ -12,11 +12,11 @@ import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
+import net.farugames.api.bungee.listeners.ListenersManager;
 import net.farugames.api.bungee.sanctions.Sanction;
 import net.farugames.api.bungee.servers.FaruServerAPI;
 import net.farugames.api.bungee.servers.ServerStatut;
 import net.farugames.api.managers.BungeeCommandManager;
-import net.farugames.api.managers.BungeeListenerManager;
 import net.farugames.data.database.servers.IMaintenance;
 import net.farugames.data.database.servers.IServer;
 import net.md_5.bungee.BungeeCord;
@@ -60,7 +60,7 @@ public class Main extends Plugin {
 	}
 
 	public void onEnable() {
-		new BungeeListenerManager().register();
+		new ListenersManager(this).registerListeners();
 		new BungeeCommandManager().register();
 		
 		getProxy().getScheduler().schedule(this, new Runnable() {

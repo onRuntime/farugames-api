@@ -1,4 +1,4 @@
-package net.farugames.api.bungee.listeners.proxiedplayer;
+package net.farugames.api.bungee.listeners.event;
 
 import net.farugames.api.bungee.proxiedplayer.FaruBungeePlayer;
 import net.md_5.bungee.api.event.ServerDisconnectEvent;

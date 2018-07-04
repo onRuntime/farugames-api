@@ -54,6 +54,6 @@ public class SERVERMANAGERCommand extends Command {
 
 	public String HELP() {
 		return "\n"
-			+ "  §f§l» §6§lServerManager §f❙ §eHelp";
+			+ "  §f§l» §6§lServerManager §f❙ §eHelp\n";
 	}
 }

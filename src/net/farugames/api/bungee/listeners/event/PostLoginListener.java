@@ -1,4 +1,4 @@
-package net.farugames.api.bungee.listeners.proxiedplayer;
+package net.farugames.api.bungee.listeners.event;
 
 import java.util.Date;
 

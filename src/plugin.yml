@@ -1,7 +1,10 @@
 main: net.farugames.api.spigot.Main
-
-authors: [3DX900, ChocoIG]
-version: 0.5.1
 name: FaruGamesAPI
-
-depends: [ FaruGamesData ]
+version: 0.5.2
+authors: [3DX900, ChocoIG]
+depends: [FaruGamesData]
+commands:
+    gamemode:
+      aliases: [gm]
+    teleport:
+      aliases: [tp]

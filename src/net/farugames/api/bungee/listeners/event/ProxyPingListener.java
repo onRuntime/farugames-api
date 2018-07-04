@@ -1,4 +1,4 @@
-package net.farugames.api.bungee.listeners.proxy;
+package net.farugames.api.bungee.listeners.event;
 
 import net.farugames.api.bungee.Main;
 import net.farugames.api.spigot.player.languages.Lang;
