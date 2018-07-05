@@ -64,7 +64,7 @@ public class TeleportCommand implements CommandExecutor {
 								+ finalPlayer.getName() + "§f.");
 						p.sendMessage("");
 						targetPlayer.sendMessage("");
-						targetPlayer.sendMessage(" §8§l» §1Téléportation §7- §9§lTéléportation");
+						targetPlayer.sendMessage("  §f§l» §6§lTeleportation §f❙ §aTeleport");
 						targetPlayer.sendMessage("");
 						targetPlayer
 								.sendMessage("    §8■ §fYou were teleported to §e" + targetPlayer.getName() + "§f.");

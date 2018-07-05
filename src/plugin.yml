@@ -1,6 +1,6 @@
 main: net.farugames.api.spigot.Main
 name: FaruGamesAPI
-version: 0.5.3
+version: 0.5.4
 authors: [3DX900, ChocoIG]
 depends: [FaruGamesData]
 commands:
@@ -16,5 +16,7 @@ commands:
       aliases: [rep,r,response,respond,resp]
     servermanager:
       aliases: [sm]
+    serverteleport:
+      aliases: [servertp,stp,steleport]
     teleport:
       aliases: [tp]

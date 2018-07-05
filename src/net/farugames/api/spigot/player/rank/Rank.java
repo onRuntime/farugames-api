@@ -8,7 +8,7 @@ public enum Rank {
 	ADMINISTRATOR(950, "B", "ADMINISTRATOR", "Administrator", "Administrator", ChatColor.RED, ChatColor.WHITE),
 	
 	DEVELOPER(900, "C", "DEVELOPER", "Developer", "Developer", ChatColor.DARK_GREEN, ChatColor.WHITE),
-	BUILDER(800, "D", "BUILDER", "Builder", "Builder", ChatColor.DARK_GREEN, ChatColor.WHITE),
+	BUILDER(800, "D", "BUILDER", "Builder", "Builder", ChatColor.GREEN, ChatColor.WHITE),
 	
 	MODERATOR(700, "E", "MODERATOR", "Moderator", "Moderator", ChatColor.BLUE, ChatColor.WHITE),
 	HELPER(600, "F", "HELPER", "Helper", "Helper", ChatColor.AQUA, ChatColor.WHITE),
@@ -18,7 +18,7 @@ public enum Rank {
 	STAFF(500, "I", "STAFF", "Staff", "Staff", ChatColor.DARK_AQUA, ChatColor.WHITE),
 	
 	YOUTUBER(400, "J", "YOUTUBER", "Youtuber", "Youtuber", ChatColor.GOLD, ChatColor.WHITE),
-	FRIEND(300, "K", "FRIEND", "Friend", "Friend", ChatColor.GREEN, ChatColor.WHITE),
+	FRIEND(300, "K", "FRIEND", "Friend", "Friend", ChatColor.LIGHT_PURPLE, ChatColor.WHITE),
 	
 	PLAYER(0, "Y", "PLAYER", "Player", "", ChatColor.GRAY, ChatColor.GRAY);
 	
