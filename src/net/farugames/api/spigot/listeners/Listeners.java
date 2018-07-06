@@ -3,8 +3,9 @@ package net.farugames.api.spigot.listeners;
 import org.bukkit.event.Listener;
 
 import net.farugames.api.spigot.listeners.entity.EntityDamageListener;
-import net.farugames.api.spigot.listeners.player.FoodLevelChangeListener;
+import net.farugames.api.spigot.listeners.entity.FoodLevelChangeListener;
 import net.farugames.api.spigot.listeners.player.PlayerArmorStandManipulateListener;
+import net.farugames.api.spigot.listeners.player.PlayerCommandProcessListener;
 import net.farugames.api.spigot.listeners.player.PlayerJoinListener;
 import net.farugames.api.spigot.listeners.player.PlayerQuitListener;
 import net.farugames.api.spigot.listeners.world.WeatherChangeListener;
@@ -17,6 +18,7 @@ public enum Listeners {
 	PLAYER_QUIT_LISTENER(new PlayerQuitListener()),
 	FOOD_LEVEL_CHANGE_LISTENER(new FoodLevelChangeListener()),
 	PLAYER_ARMOR_STAND_MANIPULATE_LISTENER(new PlayerArmorStandManipulateListener()),
+	PLAYER_COMMAND_PROCESS_LISTENER(new PlayerCommandProcessListener()),
 //	PLAYER_BED_ENTER_LISTENER(new PlayerBedEnterListener()),
 //	PLAYER_BUCKET_LISTENER(new PlayerBucketListener()),
 //	PLAYER_DROP_ITEM_LISTENER(new PlayerDropItemListener()),

@@ -1,4 +1,4 @@
-package net.farugames.api.spigot.listeners.player;
+package net.farugames.api.spigot.listeners.entity;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

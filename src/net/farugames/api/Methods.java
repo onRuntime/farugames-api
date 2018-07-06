@@ -1,4 +1,4 @@
-package net.farugames.api.bungee;
+package net.farugames.api;
 
 public class Methods {
 	

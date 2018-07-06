@@ -1,6 +1,6 @@
 package net.farugames.api.bungee.commands.general;
 
-import net.farugames.api.bungee.Methods;
+import net.farugames.api.Methods;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.config.ServerInfo;
