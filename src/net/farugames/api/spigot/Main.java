@@ -26,7 +26,6 @@ public class Main extends JavaPlugin {
 	}
 	
 	public void onEnable() {
-		IServer.create(Bukkit.getServerName(), "149.202.102.63", Bukkit.getPort(), null, null);
 		new BukkitListenerManager().register();
 		getCommand("gamemode").setExecutor(new GamemodeCommand());
 		getCommand("teleport").setExecutor(new TeleportCommand());

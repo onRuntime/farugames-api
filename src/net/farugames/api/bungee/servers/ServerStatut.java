@@ -1,11 +1,11 @@
 package net.farugames.api.bungee.servers;
 
 public enum ServerStatut {
-
 	UNREGISTERED(),
 	REGISTERED(),
-	DELETE(),
 	LOBBY(),
+	STARTING(),
 	INGAME(),
-	FINISH();
+	FINISH(),
+	DELETE();
 }
