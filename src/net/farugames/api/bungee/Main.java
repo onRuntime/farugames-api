@@ -8,11 +8,13 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
 import net.farugames.api.bungee.listeners.ListenersManager;
+import net.farugames.api.bungee.proxiedplayer.FaruBungeePlayer;
 import net.farugames.api.bungee.sanctions.Sanction;
 import net.farugames.api.bungee.servers.FaruServerAPI;
 import net.farugames.api.bungee.servers.ServerStatut;
@@ -36,6 +38,7 @@ public class Main extends Plugin {
 	
 	public static Map<String, FaruServerAPI> iFaruServers = new HashMap<String, FaruServerAPI>();
 	public Collection<ProxiedPlayer> proxyPlayers = new ArrayList<ProxiedPlayer>();
+	public static Map<UUID, FaruBungeePlayer> iFaruPlayer = new HashMap<UUID, FaruBungeePlayer>();
 
 	public static Boolean maintenance = false;
 	private static List<String> maintenancePlayers = new ArrayList<String>();
