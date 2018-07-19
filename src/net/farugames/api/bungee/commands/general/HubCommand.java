@@ -15,6 +15,8 @@ public class HubCommand extends Command {
 
 	
 	// Je sais c'est pas opti mais c'est pour qu'on arrete de me dire "fait la commande /hub"
+
+	// MDRRRR Tqt je vois ça quand je rentre mdr (La je suis sur le vieux IDE de gitlab dsl)
 	@SuppressWarnings("deprecation")
 	@Override
 	public void execute(CommandSender sender, String[] args) {
