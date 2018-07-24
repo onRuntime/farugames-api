@@ -1,11 +1,11 @@
 package net.farugames.api.bungee.sanctions;
 
+import net.farugames.api.bungee.BungeeFaruAPI;
+import net.farugames.api.spigot.player.FaruPlayer;
+
 import java.util.Date;
 import java.util.List;
 
-import net.farugames.api.bungee.Main;
-import net.farugames.api.spigot.player.FaruPlayer;
-import net.farugames.data.database.player.ISanction;
 
 public class Sanction {
 	
@@ -45,7 +45,7 @@ public class Sanction {
 	}
 	
 	public void create() {
-		ISanction.create(this);
+		net.farugames.data.bungee.BungeeFaruData.getInstance().getBungeeDatabase().create(this);
 		removeSanction(this.target);
 	}
 	
@@ -90,19 +90,19 @@ public class Sanction {
 	}
 	
 	public static void addSanction(Sanction sanction) {
-		Main.sanctions.add(sanction);
+		BungeeFaruAPI.sanctions.add(sanction);
 	}
 	
 	public static void removeSanction(FaruPlayer faruTarget) {
 		for(Sanction sanction : getSanctions()) {
 			if(sanction.getTarget() == faruTarget) {
-				Main.sanctions.remove(sanction);
+				BungeeFaruAPI.sanctions.remove(sanction);
 			}
 		}
 	}
 	
 	public static List<Sanction> getSanctions() {
-		return Main.sanctions;
+		return BungeeFaruAPI.sanctions;
 	}
 	
 	public static Sanction getSanction(FaruPlayer faruTarget) {

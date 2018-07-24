@@ -1,15 +1,15 @@
 package net.farugames.api.bungee.commands.server;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-import net.farugames.api.bungee.Main;
+import net.farugames.api.bungee.BungeeFaruAPI;
 import net.farugames.api.bungee.proxiedplayer.FaruBungeePlayer;
 import net.farugames.api.spigot.player.languages.Lang;
 import net.farugames.api.spigot.player.rank.Rank;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MaintenanceCommand extends Command {
 	
@@ -35,20 +35,20 @@ public class MaintenanceCommand extends Command {
 		
 		if(args[0].equalsIgnoreCase("true") || args[0].equalsIgnoreCase("false")) {
 			if(args[0].equalsIgnoreCase("true")) {
-				if(Main.isMaintenance()) { player.sendMessage(Lang.ERROR.in(lang).replaceAll("%reason%", Lang.MAINTENANCE_ALREADY_ENABLED.in(lang))); return; }
+				if(BungeeFaruAPI.isMaintenance()) { player.sendMessage(Lang.ERROR.in(lang).replaceAll("%reason%", Lang.MAINTENANCE_ALREADY_ENABLED.in(lang))); return; }
 				player.sendMessage(Lang.MAINTENANCE_ENABLE.in(lang));
 			} else {
-				if(!Main.isMaintenance()) { player.sendMessage(Lang.ERROR.in(lang).replaceAll("%reason%", Lang.MAINTENANCE_ALREADY_ENABLED.in(lang))); return; }
+				if(!BungeeFaruAPI.isMaintenance()) { player.sendMessage(Lang.ERROR.in(lang).replaceAll("%reason%", Lang.MAINTENANCE_ALREADY_ENABLED.in(lang))); return; }
 				player.sendMessage(Lang.MAINTENANCE_DISABLE.in(lang));
 			}
-			while(Main.maintenance != Boolean.valueOf(args[0])) {
+			while(BungeeFaruAPI.maintenance != Boolean.valueOf(args[0])) {
 				i = 1;
 				Timer timer = new Timer();
 		    	timer.schedule(new TimerTask() {
 		    	       @Override
 		    	       public void run() {
 		    	    	   if(i == 15) { 
-		    	    		   Main.maintenance = Boolean.valueOf(args[0]);
+		    	    		   BungeeFaruAPI.maintenance = Boolean.valueOf(args[0]);
 		    	    		   timer.cancel();
 		    	    		   return; 
 		    	    	   }

@@ -1,17 +1,16 @@
 package net.farugames.api.tools.builders.title;
 
-import java.util.Collection;
-
+import net.farugames.api.spigot.SpigotFaruAPI;
+import net.minecraft.server.v1_9_R2.IChatBaseComponent;
+import net.minecraft.server.v1_9_R2.Packet;
+import net.minecraft.server.v1_9_R2.PacketPlayOutChat;
+import net.minecraft.server.v1_9_R2.PlayerConnection;
 import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.v1_9_R2.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-import net.farugames.api.spigot.Main;
-import net.minecraft.server.v1_9_R2.IChatBaseComponent;
-import net.minecraft.server.v1_9_R2.Packet;
-import net.minecraft.server.v1_9_R2.PacketPlayOutChat;
-import net.minecraft.server.v1_9_R2.PlayerConnection;
+import java.util.Collection;
 
 public class ActionBar {
 	private String message;
@@ -49,7 +48,7 @@ public class ActionBar {
 		connection.sendPacket((Packet) packet);
 		if (this.stay != 0) {
 			final PlayerConnection playerConnection = null;
-			Bukkit.getScheduler().runTaskLater((Plugin) Main.getInstance(), () -> {
+			Bukkit.getScheduler().runTaskLater((Plugin) SpigotFaruAPI.getInstance(), () -> {
 				final PacketPlayOutChat clear = new PacketPlayOutChat(this.buildChatComponent(""), (byte) 2);
 				playerConnection.sendPacket((Packet) clear);
 			}, this.stay * 20L);

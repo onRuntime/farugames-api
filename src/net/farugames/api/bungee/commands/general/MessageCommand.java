@@ -1,6 +1,6 @@
 package net.farugames.api.bungee.commands.general;
 
-import net.farugames.api.bungee.Main;
+import net.farugames.api.bungee.BungeeFaruAPI;
 import net.farugames.api.bungee.proxiedplayer.FaruBungeePlayer;
 import net.farugames.api.spigot.player.data.DataType;
 import net.farugames.api.spigot.player.languages.Lang;
@@ -34,8 +34,8 @@ public class MessageCommand extends Command {
 			return;
 		}
 		FaruBungeePlayer target;
-		if(Main.getInstance().getProxy().getPlayer(args[0]) != null) {
-			target = FaruBungeePlayer.getPlayer(Main.getInstance().getProxy().getPlayer(args[0]).getUniqueId());
+		if(BungeeFaruAPI.getInstance().getProxy().getPlayer(args[0]) != null) {
+			target = FaruBungeePlayer.getPlayer(BungeeFaruAPI.getInstance().getProxy().getPlayer(args[0]).getUniqueId());
 		} else {
 			player.getPlayer().sendMessage(Lang.ERROR.in(player.getLanguage()).replaceAll("%info%", "").replaceAll("%reason%", ""));
 			return;

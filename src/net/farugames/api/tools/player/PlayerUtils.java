@@ -1,7 +1,6 @@
 package net.farugames.api.tools.player;
 
-import java.util.UUID;
-
+import net.minecraft.server.v1_9_R2.EntityPlayer;
 import org.bukkit.Achievement;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -16,7 +15,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-import net.minecraft.server.v1_9_R2.EntityPlayer;
+import java.util.UUID;
 
 public class PlayerUtils {
 	

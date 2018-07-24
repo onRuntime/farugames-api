@@ -1,12 +1,12 @@
 package net.farugames.api.spigot.player.patchs;
 
-import java.util.Set;
-import java.util.UUID;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
+
+import java.util.Set;
+import java.util.UUID;
 
 public class Collisions {
 

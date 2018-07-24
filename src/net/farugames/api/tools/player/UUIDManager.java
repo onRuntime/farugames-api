@@ -1,5 +1,7 @@
 package net.farugames.api.tools.player;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
@@ -8,8 +10,6 @@ import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
-import org.json.JSONObject;
 
 public class UUIDManager {
 

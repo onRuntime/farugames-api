@@ -1,12 +1,13 @@
 package net.farugames.api.spigot.player.chat;
 
-import org.bukkit.Sound;
-import org.bukkit.entity.Player;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-
 import net.farugames.api.spigot.player.FaruPlayer;
 import net.farugames.api.spigot.player.data.DataType;
 import net.farugames.api.spigot.player.rank.Rank;
+import net.farugames.data.database.entities.PlayerDataEntity;
+import net.farugames.data.spigot.SpigotFaruData;
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class Chat {
 	
@@ -19,23 +20,24 @@ public class Chat {
 
 		e.setCancelled(true);
 
-		if ((boolean) faruSender.getData(DataType.ALLOW_CHAT) == true) {
+		if ((boolean) faruSender.getData(DataType.ALLOW_CHAT)) {
 			for (Player op : e.getRecipients()) {
 				FaruPlayer faruOp = FaruPlayer.getPlayer(op.getUniqueId());
+				PlayerDataEntity pdeOp = SpigotFaruData.getInstance().getSpigotDatabase().getPlayerData(faruOp.getPlayer());
 				Player fOp = faruOp.getPlayer();
 				if (msg.contains(fOp.getName())) {
-					if ((boolean) faruOp.getData(DataType.ALLOW_CHAT_MENTIONS).equals(true)) {
+					if ((boolean) faruOp.getData(DataType.ALLOW_CHAT_MENTIONS)) {
 						fOp.playSound(fOp.getLocation(), Sound.BLOCK_NOTE_PLING, 10, 1);
 						// TitleManager.sendActionBar(fOp, "§a" + fs.getName() +
 						// "§d vous a mentionné dans le chat !");
-						msg = msg.replaceAll(fOp.getName(), "§e@" + fOp.getName() + r.getChatColor());
+						msg = msg.replaceAll(pdeOp.getPlayerNickname(), "§e@" + pdeOp.getPlayerNickname() + r.getChatColor());
 					}
 				}
 			}
 			msg = msg.replaceAll("@", "");
 			for (Player op : e.getRecipients()) {
 				FaruPlayer faruOp = FaruPlayer.getPlayer(op.getUniqueId());
-				if ((boolean) faruOp.getData(DataType.ALLOW_CHAT).equals(true)) {
+				if ((boolean) faruOp.getData(DataType.ALLOW_CHAT)) {
 					op.sendMessage(prefix + r.getColor() + r.getPrefix() + " " + fs.getName() + suffix + " §8»§r "
 							+ r.getChatColor() + msg);
 				}

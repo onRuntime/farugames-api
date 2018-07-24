@@ -1,11 +1,12 @@
 package net.farugames.api.bungee.commands.server;
 
-import net.farugames.api.bungee.Main;
+import net.farugames.api.bungee.BungeeFaruAPI;
 import net.farugames.api.bungee.proxiedplayer.FaruBungeePlayer;
 import net.farugames.api.bungee.servers.ServerStatut;
 import net.farugames.api.spigot.player.languages.Lang;
 import net.farugames.api.spigot.player.rank.Rank;
-import net.farugames.data.database.servers.IServer;
+import net.farugames.data.bungee.BungeeFaruData;
+import net.farugames.data.database.entities.ServerType;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
@@ -28,14 +29,14 @@ public class ServerManagerCommand extends Command {
 		
 		if(args[0].equalsIgnoreCase("request")) {
 			if(args[1] == null) { player.sendMessage(this.HELP()); return; }
-			IServer.request(args[1]);
+			BungeeFaruData.getInstance().getBungeeDatabase().request(ServerType.getServerType(args[1]));
 			player.sendMessage(Lang.SERVER_REQUESTED.in(lang).replaceAll("%server%", args[1].toUpperCase().toString()));
 			return;
 		}
 		
 		if(args[0].equalsIgnoreCase("delete")) {
 			if(args[1] == null) { player.sendMessage(this.HELP()); return; }
-			Main.iFaruServers.get(args[1]).setStatut(ServerStatut.DELETE);
+			BungeeFaruAPI.iFaruServers.get(args[1]).setStatut(ServerStatut.DELETE);
 			player.sendMessage(Lang.SERVER_REMOVE.in(lang).replaceAll("%server%", args[1].toUpperCase().toString()));
 			return;
 		}

@@ -1,6 +1,6 @@
 package net.farugames.api.bungee.listeners.event;
 
-import net.farugames.api.bungee.Main;
+import net.farugames.api.bungee.BungeeFaruAPI;
 import net.farugames.api.spigot.player.languages.Lang;
 import net.md_5.bungee.api.ServerPing;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -15,11 +15,11 @@ public class ProxyPingListener implements Listener {
 	public void onPingEvent(ProxyPingEvent event) {
 		ServerPing serverPing = event.getResponse();
 		
-		serverPing.setDescriptionComponent(new TextComponent(Main.isMaintenance() ?
+		serverPing.setDescriptionComponent(new TextComponent(BungeeFaruAPI.isMaintenance() ?
 				Lang.MAINTENANCE_MOTD.in(Lang.ENGLISH) :
 					Lang.NORMAL_MOTD.in(Lang.ENGLISH)));
-		serverPing.setVersion(Main.protocol != null ? Main.protocol : null);
-		serverPing.setFavicon(Main.favicon != null ? Main.favicon : null);
+		serverPing.setVersion(BungeeFaruAPI.protocol != null ? BungeeFaruAPI.protocol : null);
+		serverPing.setFavicon(BungeeFaruAPI.favicon != null ? BungeeFaruAPI.favicon : null);
 		event.setResponse(serverPing);
 	}
 }

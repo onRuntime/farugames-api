@@ -1,18 +1,17 @@
 package net.farugames.api.tools.builders.title;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
+import net.farugames.api.spigot.SpigotFaruAPI;
+import net.minecraft.server.v1_9_R2.EntityArmorStand;
+import net.minecraft.server.v1_9_R2.PacketPlayOutEntityDestroy;
+import net.minecraft.server.v1_9_R2.PacketPlayOutSpawnEntityLiving;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_9_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_9_R2.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
-import net.farugames.api.spigot.Main;
-import net.minecraft.server.v1_9_R2.EntityArmorStand;
-import net.minecraft.server.v1_9_R2.PacketPlayOutEntityDestroy;
-import net.minecraft.server.v1_9_R2.PacketPlayOutSpawnEntityLiving;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class HologramBuilder {
 
@@ -74,7 +73,7 @@ public class HologramBuilder {
 		PacketPlayOutSpawnEntityLiving packet = new PacketPlayOutSpawnEntityLiving(stand);
 		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
 		if (stay != 0) {
-			Main.getInstance().getServer().getScheduler().runTaskLater(Main.getInstance(), () -> {
+			SpigotFaruAPI.getInstance().getServer().getScheduler().runTaskLater(SpigotFaruAPI.getInstance(), () -> {
 				PacketPlayOutEntityDestroy destroy = new PacketPlayOutEntityDestroy(stand.getId());
 				((CraftPlayer) player).getHandle().playerConnection.sendPacket(destroy);
 			}, stay);
@@ -90,7 +89,7 @@ public class HologramBuilder {
 			((CraftPlayer) playerCollection).getHandle().playerConnection.sendPacket(packet);
 		}
 		if (stay != 0) {
-			Main.getInstance().getServer().getScheduler().runTaskLater(Main.getInstance(), () -> {
+			SpigotFaruAPI.getInstance().getServer().getScheduler().runTaskLater(SpigotFaruAPI.getInstance(), () -> {
 				PacketPlayOutEntityDestroy destroy = new PacketPlayOutEntityDestroy(stand.getId());
 				for (Player playerCollection : players)
 					((CraftPlayer) playerCollection).getHandle().playerConnection.sendPacket(destroy);

@@ -1,8 +1,7 @@
 package net.farugames.api.spigot.menus;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import net.farugames.api.spigot.SpigotFaruAPI;
+import net.farugames.api.tools.builders.items.InventoryBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -12,8 +11,8 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 
-import net.farugames.api.spigot.Main;
-import net.farugames.api.tools.builders.items.InventoryBuilder;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ExampleMenu implements Listener {
 
@@ -21,7 +20,7 @@ public class ExampleMenu implements Listener {
 	public Map<Player, Inventory> menuInventoryMap = new HashMap<Player, Inventory>();
 
 	public ExampleMenu(Player player) {
-		Bukkit.getPluginManager().registerEvents(this, Main.getInstance());
+		Bukkit.getPluginManager().registerEvents(this, SpigotFaruAPI.getInstance());
 		Inventory inventory = new InventoryBuilder(invName)
 				
 				.addLine(new String[] { "", "", "", "", "", "", "", "", "" })

@@ -1,13 +1,13 @@
 package net.farugames.api.tools.builders.items;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 public final class ItemBuilder
 {

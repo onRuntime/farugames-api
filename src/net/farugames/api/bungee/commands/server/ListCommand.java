@@ -1,6 +1,6 @@
 package net.farugames.api.bungee.commands.server;
 
-import net.farugames.api.bungee.Main;
+import net.farugames.api.bungee.BungeeFaruAPI;
 import net.farugames.api.bungee.proxiedplayer.FaruBungeePlayer;
 import net.farugames.api.spigot.player.languages.Lang;
 import net.md_5.bungee.api.CommandSender;
@@ -21,7 +21,7 @@ public class ListCommand extends Command {
 		
 		ProxiedPlayer player = (ProxiedPlayer) sender;
 		player.sendMessage(Lang.ONLINE_PLAYERS.in(FaruBungeePlayer.getPlayer(player.getUniqueId()).getLanguage())
-				.replaceAll("%players%", String.valueOf(Main.getInstance().proxyPlayers.size())));
+				.replaceAll("%players%", String.valueOf(BungeeFaruAPI.getInstance().proxyPlayers.size())));
 		return;
 	}
 }

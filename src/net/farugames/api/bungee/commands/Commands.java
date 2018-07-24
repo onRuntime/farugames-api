@@ -1,10 +1,6 @@
 package net.farugames.api.bungee.commands;
 
-import net.farugames.api.bungee.commands.general.HubCommand;
-import net.farugames.api.bungee.commands.general.MessageCommand;
-import net.farugames.api.bungee.commands.general.RankCommand;
-import net.farugames.api.bungee.commands.general.ReplyCommand;
-import net.farugames.api.bungee.commands.general.ServerTeleportCommand;
+import net.farugames.api.bungee.commands.general.*;
 import net.farugames.api.bungee.commands.moderation.PunishCommand;
 import net.farugames.api.bungee.commands.server.ListCommand;
 import net.farugames.api.bungee.commands.server.MaintenanceCommand;

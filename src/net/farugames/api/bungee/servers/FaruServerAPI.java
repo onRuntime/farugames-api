@@ -1,15 +1,15 @@
 package net.farugames.api.bungee.servers;
 
+import net.farugames.api.bungee.BungeeFaruAPI;
+import net.md_5.bungee.api.ProxyServer;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import net.farugames.api.bungee.Main;
-import net.md_5.bungee.api.ProxyServer;
-import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 public class FaruServerAPI {
 
@@ -38,8 +38,8 @@ public class FaruServerAPI {
 	public void register() {
 		this.joinable = false;
 		
-		Main.iFaruServers.put(this.name, this);
-		Main.registerServer(this.name, this.port);
+		BungeeFaruAPI.iFaruServers.put(this.name, this);
+		BungeeFaruAPI.registerServer(this.name, this.port);
 		
     	this.setStatut(ServerStatut.REGISTERED);
     	
@@ -53,8 +53,8 @@ public class FaruServerAPI {
 	}
 	
 	public void unregister() {
-		Main.iFaruServers.remove(this.name);
-		Main.unregisterServer(this.name);
+		BungeeFaruAPI.iFaruServers.remove(this.name);
+		BungeeFaruAPI.unregisterServer(this.name);
 	}
 	
 	public void delete() {
@@ -105,13 +105,15 @@ public class FaruServerAPI {
 	}
 	
 	public static FaruServerAPI getServer(String name, String host, Integer port) {
-		if(!Main.iFaruServers.containsKey(name)) {
+		if(!BungeeFaruAPI.iFaruServers.containsKey(name)) {
 			try {
-				Main.iFaruServers.put(name, new FaruServerAPI(name, InetAddress.getByName(host), port));
+				BungeeFaruAPI.iFaruServers.put(name, new FaruServerAPI(name, InetAddress.getByName(host), port));
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
 			}
 		}
-		return Main.iFaruServers.get(name);
+		return BungeeFaruAPI.iFaruServers.get(name);
 	}
+
+
 }

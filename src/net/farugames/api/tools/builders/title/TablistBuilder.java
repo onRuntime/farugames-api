@@ -1,14 +1,13 @@
 package net.farugames.api.tools.builders.title;
 
-import java.lang.reflect.Field;
-import java.util.Collection;
-
-import org.bukkit.craftbukkit.v1_9_R2.entity.CraftPlayer;
-import org.bukkit.entity.Player;
-
 import net.minecraft.server.v1_9_R2.IChatBaseComponent;
 import net.minecraft.server.v1_9_R2.PacketPlayOutPlayerListHeaderFooter;
 import net.minecraft.server.v1_9_R2.PlayerConnection;
+import org.bukkit.craftbukkit.v1_9_R2.entity.CraftPlayer;
+import org.bukkit.entity.Player;
+
+import java.lang.reflect.Field;
+import java.util.Collection;
 
 public class TablistBuilder {
 

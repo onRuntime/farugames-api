@@ -1,10 +1,10 @@
 package net.farugames.api.spigot.player.patchs;
 
-import java.util.UUID;
-
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 public class PvP {
 

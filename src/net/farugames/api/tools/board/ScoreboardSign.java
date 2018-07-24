@@ -1,19 +1,12 @@
 package net.farugames.api.tools.board;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-
+import net.minecraft.server.v1_9_R2.*;
 import org.bukkit.craftbukkit.v1_9_R2.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
-import net.minecraft.server.v1_9_R2.IScoreboardCriteria;
-import net.minecraft.server.v1_9_R2.Packet;
-import net.minecraft.server.v1_9_R2.PacketPlayOutScoreboardDisplayObjective;
-import net.minecraft.server.v1_9_R2.PacketPlayOutScoreboardObjective;
-import net.minecraft.server.v1_9_R2.PacketPlayOutScoreboardScore;
-import net.minecraft.server.v1_9_R2.PacketPlayOutScoreboardTeam;
-import net.minecraft.server.v1_9_R2.PlayerConnection;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author zyuiop Updated by MrZalTy

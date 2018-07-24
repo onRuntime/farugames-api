@@ -1,10 +1,6 @@
 package net.farugames.api.tools.builders.items;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import net.farugames.api.spigot.SpigotFaruAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -16,7 +12,10 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import net.farugames.api.spigot.Main;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class InventoryBuilder implements Listener {
 
@@ -26,7 +25,7 @@ public class InventoryBuilder implements Listener {
 	private String inventoryName;
 
 	public InventoryBuilder(String inventoryName) {
-		Bukkit.getPluginManager().registerEvents(this, Main.getInstance());
+		Bukkit.getPluginManager().registerEvents(this, SpigotFaruAPI.getInstance());
 		this.inventoryName = inventoryName;
 		itemsValues.put("", new ItemStack(Material.AIR));
 	}

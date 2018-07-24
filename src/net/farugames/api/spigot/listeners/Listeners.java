@@ -1,7 +1,5 @@
 package net.farugames.api.spigot.listeners;
 
-import org.bukkit.event.Listener;
-
 import net.farugames.api.spigot.listeners.entity.EntityDamageListener;
 import net.farugames.api.spigot.listeners.entity.FoodLevelChangeListener;
 import net.farugames.api.spigot.listeners.player.PlayerArmorStandManipulateListener;
@@ -9,6 +7,7 @@ import net.farugames.api.spigot.listeners.player.PlayerCommandProcessListener;
 import net.farugames.api.spigot.listeners.player.PlayerJoinListener;
 import net.farugames.api.spigot.listeners.player.PlayerQuitListener;
 import net.farugames.api.spigot.listeners.world.WeatherChangeListener;
+import org.bukkit.event.Listener;
 
 public enum Listeners {
 	

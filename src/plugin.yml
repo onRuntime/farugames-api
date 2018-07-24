@@ -1,7 +1,7 @@
-main: net.farugames.api.spigot.Main
+main: net.farugames.api.spigot.SpigotFaruAPI
 name: FaruGamesAPI
-version: 0.5.6
-authors: [3DX900, ChocoIG]
+version: ${project.version}
+authors: [3DX900, ChocoIG, SweetKebab_]
 depends: [FaruGamesData]
 commands:
     gamemode:
