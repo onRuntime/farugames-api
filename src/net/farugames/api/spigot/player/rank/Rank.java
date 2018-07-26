@@ -12,13 +12,14 @@ public enum Rank {
 	
 	MODERATOR(700, "E", "MODERATOR", "Moderator", "Moderator ", ChatColor.BLUE, ChatColor.WHITE),
 	HELPER(600, "F", "HELPER", "Helper", "Helper", ChatColor.AQUA, ChatColor.WHITE),
+
+	ANIMATOR(530, "G", "Animator", "Animator", "Animator ", ChatColor.DARK_AQUA, ChatColor.WHITE),
+	REDACTOR(520, "H", "REDACTOR", "Redactor", "Redactor ", ChatColor.DARK_AQUA, ChatColor.WHITE),
+	GRAPHIST(510, "I", "GRAPHIST", "Graphist", "Graphist ", ChatColor.DARK_AQUA, ChatColor.WHITE),
+	STAFF(500, "J", "STAFF", "Staff", "Staff", ChatColor.DARK_AQUA, ChatColor.WHITE),
 	
-	REDACTOR(520, "G", "REDACTOR", "Redactor", "Redactor ", ChatColor.DARK_AQUA, ChatColor.WHITE),
-	GRAPHIST(510, "H", "GRAPHIST", "Graphist", "Graphist ", ChatColor.DARK_AQUA, ChatColor.WHITE),
-	STAFF(500, "I", "STAFF", "Staff", "Staff", ChatColor.DARK_AQUA, ChatColor.WHITE),
-	
-	YOUTUBER(400, "J", "YOUTUBER", "Youtuber", "Youtuber ", ChatColor.GOLD, ChatColor.WHITE),
-	FRIEND(300, "K", "FRIEND", "Friend", "Friend ", ChatColor.LIGHT_PURPLE, ChatColor.WHITE),
+	YOUTUBER(400, "K", "YOUTUBER", "Youtuber", "Youtuber ", ChatColor.GOLD, ChatColor.WHITE),
+	FRIEND(300, "L", "FRIEND", "Friend", "Friend ", ChatColor.LIGHT_PURPLE, ChatColor.WHITE),
 	
 	PLAYER(0, "Y", "PLAYER", "Player", "", ChatColor.GRAY, ChatColor.GRAY);
 	
