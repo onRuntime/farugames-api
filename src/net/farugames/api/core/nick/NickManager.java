@@ -1,8 +1,8 @@
 package net.farugames.api.core.nick;
 
 import net.farugames.api.core.rank.Rank;
-import net.farugames.api.database.redis.RedisManager;
 import net.farugames.api.spigot.SpigotFaruGamesAPI;
+import net.farugames.database.redis.RedisManager;
 import net.minecraft.server.v1_9_R2.EntityPlayer;
 import net.minecraft.server.v1_9_R2.PacketPlayOutPlayerInfo;
 import net.minecraft.server.v1_9_R2.PacketPlayOutRespawn;

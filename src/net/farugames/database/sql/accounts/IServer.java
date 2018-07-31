@@ -1,8 +1,8 @@
-package net.farugames.api.database.sql.accounts;
+package net.farugames.database.sql.accounts;
 
 import net.farugames.api.core.server.FaruServer;
 import net.farugames.api.core.server.ServerStatut;
-import net.farugames.api.database.sql.SQLManager;
+import net.farugames.database.sql.SQLManager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

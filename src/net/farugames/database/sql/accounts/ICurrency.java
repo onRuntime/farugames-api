@@ -1,7 +1,7 @@
-package net.farugames.api.database.sql.accounts;
+package net.farugames.database.sql.accounts;
 
 import net.farugames.api.core.currency.Currency;
-import net.farugames.api.database.sql.SQLManager;
+import net.farugames.database.sql.SQLManager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

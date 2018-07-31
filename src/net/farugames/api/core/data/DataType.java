@@ -1,12 +1,14 @@
 package net.farugames.api.core.data;
 
+import net.farugames.api.core.lang.Lang;
+
 public enum DataType {
 
 	FIRST_LOGIN(1, "First connection's date", "first_login", System.currentTimeMillis()),
 	FIRST_IP(2, "First connection's IP", "first_ip", ""),
 	LAST_LOGIN(3, "Last connecion's date", "last_login", System.currentTimeMillis()),
 	LAST_IP(4, "Last connection's IP", "last_ip", ""),
-	LANGUAGE(5, "Used language", "language", "ENGLISH"),
+	LANGUAGE(5, "Used language", "language", Lang.ENGLISH.getName()),
 	AFK_STATUT(6, "AFK state", "afk_statut", false),
 	
 	ALLOW_PRIVATE_MESSAGES(7, "Private messages", "allow_private_messages", true),

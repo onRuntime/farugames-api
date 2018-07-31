@@ -1,15 +1,16 @@
 package net.farugames.api.proxy;
 
-import net.farugames.api.core.data.DataType;
-import net.farugames.api.core.lang.LangOld;
-import net.farugames.api.core.rank.Rank;
-import net.farugames.api.database.sql.accounts.IData;
-import net.farugames.api.database.sql.accounts.IRank;
-import net.md_5.bungee.api.connection.ProxiedPlayer;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
+import net.farugames.api.core.data.DataType;
+import net.farugames.api.core.lang.I18n;
+import net.farugames.api.core.lang.Lang;
+import net.farugames.api.core.rank.Rank;
+import net.farugames.database.sql.accounts.IData;
+import net.farugames.database.sql.accounts.IRank;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 public class ProxiedFaruPlayer {
 
@@ -21,7 +22,7 @@ public class ProxiedFaruPlayer {
     private Boolean online = false;
 
     private Boolean needDisconnect = false;
-    private LangOld disconnectReason = LangOld.BAD_ACCOUNT;
+    private String disconnectReason = I18n.tl(getLanguage(), "api_proxy_disconnect_reason_badaccount");
 
     private Map<DataType, Object> mapData = new HashMap<DataType, Object>();
 
@@ -29,13 +30,10 @@ public class ProxiedFaruPlayer {
 
     private int permissionLevel;
 
-    private long cookie;
-    private long candy;
-
     public ProxiedFaruPlayer(UUID uuid) {
         this.uuid = uuid;
 
-//        this.loadData();
+//        this.loadData();arrête de faire le cheval
         IRank.createAccount(uuid);
         IData.createAccount(uuid);
 
@@ -45,11 +43,6 @@ public class ProxiedFaruPlayer {
 
         this.lastTalk = null;
     }
-
-    private void createAccounts() {
-
-    }
-
     public UUID getUUID() {
         return this.uuid;
     }
@@ -78,11 +71,11 @@ public class ProxiedFaruPlayer {
         this.online = online;
     }
 
-    public LangOld getDisconnectReason() {
+    public String getDisconnectReason() {
         return this.disconnectReason;
     }
 
-    public void setDisconnectReason(LangOld disconnectReason) {
+    public void setDisconnectReason(String disconnectReason) {
         this.disconnectReason = disconnectReason;
     }
 
@@ -116,9 +109,8 @@ public class ProxiedFaruPlayer {
     }
 
     //TODO : Fully functionnal lang system
-    public LangOld getLanguage() {
-        return LangOld.ENGLISH;
-//        return Lang.valueOf(String.valueOf(this.getData(DataType.LANGUAGE)));
+    public Lang getLanguage() {
+        return Lang.ENGLISH;
     }
 
     public Boolean isLastTalked() {
@@ -136,7 +128,7 @@ public class ProxiedFaruPlayer {
     public void disconnect() {
         this.online = false;
         this.needDisconnect = false;
-        this.disconnectReason = LangOld.BAD_ACCOUNT;
+        this.disconnectReason = "";
 //        this.pushData();
         ProxyFaruGamesAPI.iFaruPlayer.remove(uuid);
     }

@@ -1,15 +1,16 @@
 package net.farugames.api.proxy.commands;
 
-import net.farugames.api.proxy.ProxyFaruGamesAPI;
-import net.farugames.api.core.lang.LangOld;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import net.farugames.api.core.lang.I18n;
+import net.farugames.api.core.lang.Lang;
 import net.farugames.api.core.rank.Rank;
 import net.farugames.api.proxy.ProxiedFaruPlayer;
+import net.farugames.api.proxy.ProxyFaruGamesAPI;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MaintenanceCommand extends Command {
 	
@@ -28,18 +29,18 @@ public class MaintenanceCommand extends Command {
 	public void execute(CommandSender sender, String[] args) {
 		ProxiedPlayer player = (ProxiedPlayer) sender;
 		ProxiedFaruPlayer faruPlayer = ProxiedFaruPlayer.getPlayer(player.getUniqueId());
-		LangOld lang = faruPlayer.getLanguage();
+		Lang lang = faruPlayer.getLanguage();
 		
-		if(faruPlayer.getPermissionLevel() < Rank.DEV.getPower()) { player.sendMessage(LangOld.ERROR.in(lang) + "\n" + LangOld.NO_PERMISSION_MESSAGE.in(lang)); return; }
+		if(faruPlayer.getPermissionLevel() < Rank.DEV.getPower()) { player.sendMessage(I18n.tl(lang, "api.methods.error")); return; }
 		if(args.length == 0 || args.length > 2 || args[0].equalsIgnoreCase("help")) { player.sendMessage(this.HELP()); return; }
 		
 		if(args[0].equalsIgnoreCase("true") || args[0].equalsIgnoreCase("false")) {
 			if(args[0].equalsIgnoreCase("true")) {
-				if(ProxyFaruGamesAPI.isMaintenance()) { player.sendMessage(LangOld.ERROR.in(lang).replaceAll("%reason%", LangOld.MAINTENANCE_ALREADY_ENABLED.in(lang))); return; }
-				player.sendMessage(LangOld.MAINTENANCE_ENABLE.in(lang));
+				if(ProxyFaruGamesAPI.isMaintenance()) { player.sendMessage(I18n.tl(lang, "api.proxy.error", I18n.tl(lang, "api.proxy.maintnenance.already.enabled"))); return; }
+				player.sendMessage(I18n.tl(lang, "api.proxy.maintenance.enable"));
 			} else {
-				if(!ProxyFaruGamesAPI.isMaintenance()) { player.sendMessage(LangOld.ERROR.in(lang).replaceAll("%reason%", LangOld.MAINTENANCE_ALREADY_ENABLED.in(lang))); return; }
-				player.sendMessage(LangOld.MAINTENANCE_DISABLE.in(lang));
+				if(!ProxyFaruGamesAPI.isMaintenance()) { player.sendMessage(I18n.tl(lang, "api.proxy.error", I18n.tl(lang, "api.proxy.maintnenance.already.enabled"))); return; }
+				player.sendMessage(I18n.tl(lang, "api.proxy.maintenance.disable"));
 			}
 			while(ProxyFaruGamesAPI.maintenance != Boolean.valueOf(args[0])) {
 				i = 1;
@@ -59,12 +60,12 @@ public class MaintenanceCommand extends Command {
 		} else { player.sendMessage(this.HELP()); return; }
 		
 		if(args[0].equalsIgnoreCase("add")) {
-			player.sendMessage(LangOld.WORKING_FEATURE.in(lang));
+			player.sendMessage(I18n.tl(lang, "api.methods.under_developement"));
 			return;
 		}
 		
 		if(args[0].equalsIgnoreCase("remove")) {
-			player.sendMessage(LangOld.WORKING_FEATURE.in(lang));
+			player.sendMessage(I18n.tl(lang, "api.methods.under_developement"));
 			return;
 		}
 		

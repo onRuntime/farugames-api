@@ -16,16 +16,16 @@ import org.bukkit.inventory.meta.SkullMeta;
 
 import net.farugames.api.core.currency.Currency;
 import net.farugames.api.core.data.DataType;
-import net.farugames.api.core.lang.LangOld;
+import net.farugames.api.core.lang.Lang;
 import net.farugames.api.core.nick.NickManager;
 import net.farugames.api.core.rank.Rank;
-import net.farugames.api.database.redis.RedisManager;
-import net.farugames.api.database.sql.accounts.ICurrency;
-import net.farugames.api.database.sql.accounts.IData;
-import net.farugames.api.database.sql.accounts.IExperience;
-import net.farugames.api.database.sql.accounts.IPermission;
-import net.farugames.api.database.sql.accounts.IRank;
 import net.farugames.api.tools.DefaultFontInfo;
+import net.farugames.database.redis.RedisManager;
+import net.farugames.database.sql.accounts.ICurrency;
+import net.farugames.database.sql.accounts.IData;
+import net.farugames.database.sql.accounts.IExperience;
+import net.farugames.database.sql.accounts.IPermission;
+import net.farugames.database.sql.accounts.IRank;
 import net.minecraft.server.v1_9_R2.Packet;
 import redis.clients.jedis.Jedis;
 
@@ -233,8 +233,8 @@ public class FaruPlayer {
         return this.mapData.get(dataType);
     }
 
-    public LangOld getLanguage() {
-        return LangOld.ENGLISH;
+    public Lang getLanguage() {
+        return Lang.valueOf(getData(DataType.LANGUAGE)+"");
     }
 
     public boolean isNick() {

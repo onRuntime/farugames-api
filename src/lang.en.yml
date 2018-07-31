@@ -1,0 +1,4 @@
+api_proxy_disconnect_reason_badaccount: "§cServer currently under developement."
+api_proxy_motd_maintenance: "§c§lF§e§la§a§lr§b§lu§d§lGames§8.§dnet §8§l«» §bInnovative Server §8§l«» §f[§a1.9§f-§a1.12§f]\n§4§l⚠ §cCurrently under development... §4§l⚠"
+api_proxy_motd_normal: "§c§lF§e§la§a§lr§b§lu§d§lGames§8.§dnet §8§l«» §bInnovative Server §8§l«» §f[§a1.9§f-§a1.12§f]\n"
+api_proxy_onlineplayers: "Now: {1}"

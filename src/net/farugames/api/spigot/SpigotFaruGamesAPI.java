@@ -4,14 +4,14 @@ import com.mojang.authlib.GameProfile;
 
 import net.farugames.api.core.nick.NickManager;
 import net.farugames.api.core.server.ServerStatut;
-import net.farugames.api.database.redis.RedisManager;
-import net.farugames.api.database.redis.spigot.PubSubSpigot;
-import net.farugames.api.database.sql.SQLManager;
-import net.farugames.api.database.sql.accounts.IServer;
 import net.farugames.api.spigot.commands.GamemodeCommand;
 import net.farugames.api.spigot.commands.NickCommand;
 import net.farugames.api.spigot.commands.TeleportCommand;
 import net.farugames.api.spigot.listeners.ListenersManager;
+import net.farugames.database.redis.RedisManager;
+import net.farugames.database.redis.spigot.PubSubSpigot;
+import net.farugames.database.sql.SQLManager;
+import net.farugames.database.sql.accounts.IServer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;

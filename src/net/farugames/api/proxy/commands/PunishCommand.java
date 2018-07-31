@@ -1,6 +1,7 @@
 package net.farugames.api.proxy.commands;
 
-import net.farugames.api.core.lang.LangOld;
+import net.farugames.api.core.lang.I18n;
+import net.farugames.api.core.lang.Lang;
 import net.farugames.api.core.rank.Rank;
 import net.farugames.api.core.sanction.Sanction;
 import net.farugames.api.spigot.FaruPlayer;
@@ -20,17 +21,17 @@ public class PunishCommand extends Command {
 	public void execute(CommandSender sender, String[] args) {
 		ProxiedPlayer player = (ProxiedPlayer) sender;
 		FaruPlayer faruPlayer = FaruPlayer.getPlayer(player.getUniqueId());
-		LangOld lang = faruPlayer.getLanguage();
+		Lang lang = faruPlayer.getLanguage();
 		
-		if(faruPlayer.getPermissionLevel() < Rank.HELPER.getPower()) { player.sendMessage(LangOld.ERROR.in(lang) + "\n" + LangOld.NO_PERMISSION_MESSAGE.in(lang)); return; }
+		if(faruPlayer.getPermissionLevel() < Rank.HELPER.getPower()) { player.sendMessage(I18n.tl(lang, "api.methods.error")); return; }
 		if(args == null || args.length > 2 || args[0].equalsIgnoreCase("help")) { player.sendMessage(this.HELP()); return; }
 		
 		if(args.length == 1) {
 			FaruPlayer faruTarget = FaruPlayer.getPlayer(UUIDFetcher.getUUID(args[1])) != null ?
 					FaruPlayer.getPlayer(UUIDFetcher.getUUID(args[1])) :
 						null;
-			if(faruPlayer == faruTarget) { player.sendMessage(LangOld.ERROR.in(lang) + "\n" + LangOld.UNPUNISHABLE_PLAYER.in(lang)); return; }
-			if(faruTarget == null) { player.sendMessage(LangOld.ERROR.in(lang) + "\n" + LangOld.BAD_ACCOUNT.in(lang)); return; }
+			if(faruPlayer == faruTarget) { player.sendMessage(I18n.tl(lang, "api.methods.error")); return; }
+			if(faruTarget == null) { player.sendMessage(I18n.tl(lang, "api.methods.error")); return; }
 			new Sanction(faruPlayer, faruTarget, null);
 			return;
 		}

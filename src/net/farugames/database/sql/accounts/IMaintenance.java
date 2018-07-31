@@ -1,11 +1,11 @@
-package net.farugames.api.database.sql.accounts;
+package net.farugames.database.sql.accounts;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import net.farugames.api.database.sql.SQLManager;
+import net.farugames.database.sql.SQLManager;
 
 /**
  * Created by SweetKebab_ on 2018-07-26

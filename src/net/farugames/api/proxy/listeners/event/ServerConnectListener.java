@@ -10,11 +10,12 @@ public class ServerConnectListener implements Listener {
 
 	@EventHandler
 	public void onServerConnect(ServerConnectEvent event) {
-		ProxiedFaruPlayer faruBungeePlayer = ProxiedFaruPlayer.getPlayer(event.getPlayer().getUniqueId());
-		if(faruBungeePlayer.needDisconnect()) {
-			faruBungeePlayer.getPlayer().disconnect(new TextComponent(faruBungeePlayer.getDisconnectReason().in(faruBungeePlayer.getLanguage())));
-			faruBungeePlayer.disconnect();
+		ProxiedFaruPlayer faruProxiedPlayer = ProxiedFaruPlayer.getPlayer(event.getPlayer().getUniqueId());
+		if(faruProxiedPlayer.needDisconnect()) {
+			faruProxiedPlayer.getPlayer().disconnect(new TextComponent(faruProxiedPlayer.getDisconnectReason()));
+			faruProxiedPlayer.disconnect();
 			event.setCancelled(true);
 		}
+		event.getPlayer().sendMessage("" + faruProxiedPlayer.getLanguage());
 	}
 }

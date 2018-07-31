@@ -1,8 +1,8 @@
-package net.farugames.api.database.redis.spigot;
+package net.farugames.database.redis.spigot;
 
-import net.farugames.api.database.redis.RedisManager;
 import net.farugames.api.spigot.FaruPlayer;
 import net.farugames.api.spigot.SpigotFaruGamesAPI;
+import net.farugames.database.redis.RedisManager;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

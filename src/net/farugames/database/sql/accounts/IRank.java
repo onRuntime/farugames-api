@@ -1,7 +1,7 @@
-package net.farugames.api.database.sql.accounts;
+package net.farugames.database.sql.accounts;
 
 import net.farugames.api.core.rank.Rank;
-import net.farugames.api.database.sql.SQLManager;
+import net.farugames.database.sql.SQLManager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,7 +33,7 @@ public class IRank {
                 preparedStatement = connection.prepareStatement(
                         "INSERT INTO " + table + " (player_uuid, rank_name, rank_power) VALUES(?, ?, ?)");
                 preparedStatement.setString(1, uuid.toString());
-                preparedStatement.setInt(2, 0);
+                preparedStatement.setString(2, Rank.PLAYER.getIdName());
                 preparedStatement.setInt(3, 0);
                 preparedStatement.executeUpdate();
                 connection.close();

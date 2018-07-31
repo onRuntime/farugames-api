@@ -1,11 +1,12 @@
 package net.farugames.api.tools.builders.items;
 
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.properties.Property;
-import com.mojang.authlib.properties.PropertyMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
-import net.farugames.api.core.lang.LangOld;
-import net.farugames.api.tools.reflection.Reflections;
 import org.apache.commons.codec.binary.Base64;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -14,7 +15,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import java.util.*;
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
+import com.mojang.authlib.properties.PropertyMap;
+
+import net.farugames.api.core.lang.Lang;
+import net.farugames.api.tools.reflection.Reflections;
 
 public class HeadBuilder
 {
@@ -51,7 +57,7 @@ public class HeadBuilder
         return this;
     }
     
-    public HeadBuilder setName(final LangOld name) {
+    public HeadBuilder setName(final Lang name) {
         this.name = name.toString();
         return this;
     }

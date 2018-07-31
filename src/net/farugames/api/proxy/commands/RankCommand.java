@@ -1,6 +1,7 @@
 package net.farugames.api.proxy.commands;
 
-import net.farugames.api.core.lang.LangOld;
+import net.farugames.api.core.lang.I18n;
+import net.farugames.api.core.lang.Lang;
 import net.farugames.api.core.rank.Rank;
 import net.farugames.api.proxy.ProxiedFaruPlayer;
 import net.md_5.bungee.api.CommandSender;
@@ -17,9 +18,9 @@ public class RankCommand extends Command {
 	@Override
 	public void execute(CommandSender sender, String[] args) {
 		ProxiedFaruPlayer faruPlayer = ProxiedFaruPlayer.getPlayer(((ProxiedPlayer) sender).getUniqueId());
-		LangOld lang = faruPlayer.getLanguage();
+		Lang lang = faruPlayer.getLanguage();
 		
-		if(faruPlayer.getPermissionLevel() < Rank.ADMIN.getPower()) { faruPlayer.getPlayer().sendMessage(LangOld.ERROR.in(lang) + "\n" + LangOld.NO_PERMISSION_MESSAGE.in(lang)); return; }
+		if(faruPlayer.getPermissionLevel() < Rank.ADMIN.getPower()) { faruPlayer.getPlayer().sendMessage(I18n.tl(lang, "api.methods.error")); return; }
 		if(args.length == 0 || args.length > 2 || args[0].equalsIgnoreCase("help")) { faruPlayer.getPlayer().sendMessage(this.help()); return; }
 		
 		if(args[0].equalsIgnoreCase("list")) {

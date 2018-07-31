@@ -1,0 +1,12 @@
+api:
+    methods:
+        error: "api.methods.error"
+    proxy:
+        disconnect:
+            reason:
+                badaccount: "api.proxy.disconnect.reason.badaccount"
+        motd:
+            maintenance: "api.proxy.motd.maintenance"
+            normal: "api.proxy.motd.normal"
+        online_players: "api.proxy.online_players"
+            

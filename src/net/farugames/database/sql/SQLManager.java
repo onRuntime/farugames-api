@@ -1,4 +1,4 @@
-package net.farugames.api.database.sql;
+package net.farugames.database.sql;
 
 import java.sql.Connection;
 

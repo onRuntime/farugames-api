@@ -1,23 +1,5 @@
 package net.farugames.api.proxy;
 
-import net.farugames.api.core.sanction.Sanction;
-import net.farugames.api.core.server.FaruServer;
-import net.farugames.api.core.server.ServerStatut;
-import net.farugames.api.database.redis.RedisManager;
-import net.farugames.api.database.sql.SQLManager;
-import net.farugames.api.database.sql.accounts.IMaintenance;
-import net.farugames.api.database.sql.accounts.IServer;
-import net.farugames.api.proxy.commands.CommandsManager;
-import net.farugames.api.proxy.listeners.ListenersManager;
-import net.md_5.bungee.BungeeCord;
-import net.md_5.bungee.BungeeServerInfo;
-import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.Favicon;
-import net.md_5.bungee.api.ServerPing.Protocol;
-import net.md_5.bungee.api.connection.ProxiedPlayer;
-import net.md_5.bungee.api.plugin.Plugin;
-
-import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.URL;
@@ -25,8 +7,32 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.imageio.ImageIO;
+
+import net.farugames.api.core.lang.I18n;
+import net.farugames.api.core.lang.Lang;
+import net.farugames.api.core.sanction.Sanction;
+import net.farugames.api.core.server.FaruServer;
+import net.farugames.api.proxy.commands.CommandsManager;
+import net.farugames.api.proxy.listeners.ListenersManager;
+import net.farugames.database.redis.RedisManager;
+import net.farugames.database.sql.SQLManager;
+import net.farugames.database.sql.accounts.IMaintenance;
+import net.farugames.database.sql.accounts.IServer;
+import net.md_5.bungee.BungeeCord;
+import net.md_5.bungee.BungeeServerInfo;
+import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.Favicon;
+import net.md_5.bungee.api.ServerPing.Protocol;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.plugin.Plugin;
 
 public class ProxyFaruGamesAPI extends Plugin {
 
@@ -75,7 +81,7 @@ public class ProxyFaruGamesAPI extends Plugin {
 	public void onEnable() {
 		new ListenersManager(this).registerListeners();
 		new CommandsManager().register();
-		
+		/*
 		getProxy().getScheduler().schedule(this, () -> {
 			for(Iterator<FaruServer> serverI = iFaruServers.values().iterator(); serverI.hasNext();) {
 				FaruServer serverAPI = serverI.next();
@@ -95,9 +101,8 @@ public class ProxyFaruGamesAPI extends Plugin {
 				if(faruServer.getStatut() != ServerStatut.DELETE) update(faruServer);
 			}
 		}, 0, 1, TimeUnit.SECONDS);
-
-		
-		
+		*/
+		I18n.supportProxyTranslate(Lang.ENGLISH);
 		
 		super.onEnable();
 	}

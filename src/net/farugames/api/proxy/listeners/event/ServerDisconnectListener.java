@@ -2,11 +2,11 @@ package net.farugames.api.proxy.listeners.event;
 
 import net.farugames.api.core.currency.Currency;
 import net.farugames.api.core.data.DataType;
-import net.farugames.api.database.redis.RedisManager;
-import net.farugames.api.database.sql.accounts.ICurrency;
-import net.farugames.api.database.sql.accounts.IData;
-import net.farugames.api.database.sql.accounts.IExperience;
 import net.farugames.api.proxy.ProxiedFaruPlayer;
+import net.farugames.database.redis.RedisManager;
+import net.farugames.database.sql.accounts.ICurrency;
+import net.farugames.database.sql.accounts.IData;
+import net.farugames.database.sql.accounts.IExperience;
 import net.md_5.bungee.api.event.ServerDisconnectEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;

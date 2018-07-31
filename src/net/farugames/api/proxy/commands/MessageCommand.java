@@ -1,9 +1,9 @@
 package net.farugames.api.proxy.commands;
 
-import net.farugames.api.proxy.ProxyFaruGamesAPI;
 import net.farugames.api.core.data.DataType;
-import net.farugames.api.core.lang.LangOld;
+import net.farugames.api.core.lang.I18n;
 import net.farugames.api.proxy.ProxiedFaruPlayer;
+import net.farugames.api.proxy.ProxyFaruGamesAPI;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
@@ -37,7 +37,7 @@ public class MessageCommand extends Command {
 		if(ProxyFaruGamesAPI.getInstance().getProxy().getPlayer(args[0]) != null) {
 			target = ProxiedFaruPlayer.getPlayer(ProxyFaruGamesAPI.getInstance().getProxy().getPlayer(args[0]).getUniqueId());
 		} else {
-			player.getPlayer().sendMessage(LangOld.ERROR.in(player.getLanguage()).replaceAll("%info%", "").replaceAll("%reason%", ""));
+			player.getPlayer().sendMessage(I18n.tl(player.getLanguage(), "api.methods.error"));
 			return;
 		}
 		if(!Boolean.getBoolean(player.getData(DataType.ALLOW_PRIVATE_MESSAGES).toString())) {return;}

@@ -1,11 +1,12 @@
 package net.farugames.api.proxy.commands;
 
-import net.farugames.api.proxy.ProxyFaruGamesAPI;
-import net.farugames.api.core.lang.LangOld;
+import net.farugames.api.core.lang.I18n;
+import net.farugames.api.core.lang.Lang;
 import net.farugames.api.core.rank.Rank;
 import net.farugames.api.core.server.ServerStatut;
-import net.farugames.api.database.sql.accounts.IServer;
 import net.farugames.api.proxy.ProxiedFaruPlayer;
+import net.farugames.api.proxy.ProxyFaruGamesAPI;
+import net.farugames.database.sql.accounts.IServer;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
@@ -21,22 +22,22 @@ public class ServerManagerCommand extends Command {
 	public void execute(CommandSender sender, String[] args) {
 		ProxiedPlayer player = (ProxiedPlayer) sender;
 		ProxiedFaruPlayer faruPlayer = ProxiedFaruPlayer.getPlayer(player.getUniqueId());
-		LangOld lang = faruPlayer.getLanguage();
+		Lang lang = faruPlayer.getLanguage();
 
-		if(faruPlayer.getPermissionLevel() < Rank.MINIDEV.getPower()) { player.sendMessage(LangOld.ERROR.in(lang) + "\n" + LangOld.NO_PERMISSION_MESSAGE.in(lang)); return; }
+		if(faruPlayer.getPermissionLevel() < Rank.MINIDEV.getPower()) { player.sendMessage(I18n.tl(lang, "api.methods.error")); return; }
 		if(args.length == 0 || args.length > 2 || args[0].equalsIgnoreCase("help")) { player.sendMessage(this.HELP()); return; }
 		
 		if(args[0].equalsIgnoreCase("request")) {
 			if(args[1] == null) { player.sendMessage(this.HELP()); return; }
 			IServer.request(args[1]);
-			player.sendMessage(LangOld.SERVER_REQUESTED.in(lang).replaceAll("%server%", args[1].toUpperCase().toString()));
+			player.sendMessage(I18n.tl(lang, "api.proxy.servermanager.request", args[1].toUpperCase().toString()));
 			return;
 		}
 		
 		if(args[0].equalsIgnoreCase("delete")) {
 			if(args[1] == null) { player.sendMessage(this.HELP()); return; }
 			ProxyFaruGamesAPI.iFaruServers.get(args[1]).setStatut(ServerStatut.DELETE);
-			player.sendMessage(LangOld.SERVER_REMOVE.in(lang).replaceAll("%server%", args[1].toUpperCase().toString()));
+			player.sendMessage(I18n.tl(lang, "api.proxy.servermanager.delete", args[1].toUpperCase().toString()));
 			return;
 		}
 		

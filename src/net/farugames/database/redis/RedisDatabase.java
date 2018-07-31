@@ -1,4 +1,4 @@
-package net.farugames.api.database.redis;
+package net.farugames.database.redis;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
