@@ -28,7 +28,7 @@ public class TeleportCommand implements CommandExecutor {
 			Player p = (Player) sender;
 			FaruPlayer faruPlayer = FaruPlayer.getPlayer(p.getUniqueId());
 			Rank r = faruPlayer.getRank();
-			if (faruPlayer.getPermissionLevel() >= Rank.MODERATOR.getPower()) {
+			if (faruPlayer.getPermissionLevel() >= Rank.MOD.getPower()) {
 				if (args.length == 1) {
 					if (args[0].equalsIgnoreCase("help")) {
 						cmdTeleportHelp(p, label);

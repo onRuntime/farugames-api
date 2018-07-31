@@ -4,8 +4,8 @@ import net.farugames.api.core.rank.Rank;
 
 public enum SanctionType {
 
-	SERVER_BAN(Rank.MODERATOR.getPower(), Rank.STAFF.getPower()),
-	GAMES_BAN(Rank.MODERATOR.getPower(), Rank.STAFF.getPower()),
+	SERVER_BAN(Rank.MOD.getPower(), Rank.STAFF.getPower()),
+	GAMES_BAN(Rank.MOD.getPower(), Rank.STAFF.getPower()),
 	KICK(Rank.HELPER.getPower(), Rank.STAFF.getPower()),
 	MUTE(Rank.HELPER.getPower(), Rank.STAFF.getPower());
 	

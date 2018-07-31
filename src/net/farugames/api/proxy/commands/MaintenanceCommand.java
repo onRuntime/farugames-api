@@ -30,7 +30,7 @@ public class MaintenanceCommand extends Command {
 		ProxiedFaruPlayer faruPlayer = ProxiedFaruPlayer.getPlayer(player.getUniqueId());
 		LangOld lang = faruPlayer.getLanguage();
 		
-		if(faruPlayer.getPermissionLevel() < Rank.DEVELOPER.getPower()) { player.sendMessage(LangOld.ERROR.in(lang) + "\n" + LangOld.NO_PERMISSION_MESSAGE.in(lang)); return; }
+		if(faruPlayer.getPermissionLevel() < Rank.DEV.getPower()) { player.sendMessage(LangOld.ERROR.in(lang) + "\n" + LangOld.NO_PERMISSION_MESSAGE.in(lang)); return; }
 		if(args.length == 0 || args.length > 2 || args[0].equalsIgnoreCase("help")) { player.sendMessage(this.HELP()); return; }
 		
 		if(args[0].equalsIgnoreCase("true") || args[0].equalsIgnoreCase("false")) {

@@ -19,7 +19,7 @@ public class RankCommand extends Command {
 		ProxiedFaruPlayer faruPlayer = ProxiedFaruPlayer.getPlayer(((ProxiedPlayer) sender).getUniqueId());
 		LangOld lang = faruPlayer.getLanguage();
 		
-		if(faruPlayer.getPermissionLevel() < Rank.ADMINISTRATOR.getPower()) { faruPlayer.getPlayer().sendMessage(LangOld.ERROR.in(lang) + "\n" + LangOld.NO_PERMISSION_MESSAGE.in(lang)); return; }
+		if(faruPlayer.getPermissionLevel() < Rank.ADMIN.getPower()) { faruPlayer.getPlayer().sendMessage(LangOld.ERROR.in(lang) + "\n" + LangOld.NO_PERMISSION_MESSAGE.in(lang)); return; }
 		if(args.length == 0 || args.length > 2 || args[0].equalsIgnoreCase("help")) { faruPlayer.getPlayer().sendMessage(this.help()); return; }
 		
 		if(args[0].equalsIgnoreCase("list")) {

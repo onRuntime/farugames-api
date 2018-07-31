@@ -48,9 +48,9 @@ public class NickCommand implements CommandExecutor {
                 } else {
                     if(args.length >= 2){
                         Rank rank = Rank.PLAYER;
-                        if((faruPlayer.getPermissionLevel() >= Rank.ADMINISTRATOR.getPower()) && (args.length == 3))
+                        if((faruPlayer.getPermissionLevel() >= Rank.ADMIN.getPower()) && (args.length == 3))
                             faruPlayer = FaruPlayer.getPlayer(Bukkit.getPlayer(args[2]).getUniqueId());
-                        if(faruPlayer.getPermissionLevel() >= Rank.MODERATOR.getPower())
+                        if(faruPlayer.getPermissionLevel() >= Rank.ADMIN.getPower())
                             rank = Rank.getRankByIdName(args[1]) != null ? Rank.getRankByIdName(args[1]) : Rank.PLAYER;
                         faruPlayer.setNick(true);
                         if(faruPlayer.isNick())
@@ -64,7 +64,7 @@ public class NickCommand implements CommandExecutor {
                         faruPlayer.sendCenteredMessage("");
                     }
                     if(args[0].equalsIgnoreCase("reset")){
-                        if((faruPlayer.getPermissionLevel() >= Rank.ADMINISTRATOR.getPower()) && (args.length == 3))
+                        if((faruPlayer.getPermissionLevel() >= Rank.ADMIN.getPower()) && (args.length == 3))
                             player = Bukkit.getPlayer(args[2]);
                         faruPlayer.setNick(false);
                         NickManager.removeNick(player.getUniqueId());
