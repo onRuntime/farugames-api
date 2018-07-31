@@ -20,3 +20,4 @@ commands:
       aliases: [servertp,stp,steleport]
     teleport:
       aliases: [tp]
+    nick:

@@ -4,10 +4,9 @@ import net.farugames.api.bungee.BungeeFaruAPI;
 import net.farugames.api.spigot.player.data.DataType;
 import net.farugames.api.spigot.player.languages.Lang;
 import net.farugames.api.spigot.player.rank.Rank;
-import net.farugames.data.bungee.BungeeFaruData;
-import net.farugames.data.database.entities.PlayerDataEntity;
+import net.farugames.api.sql.accounts.IData;
+import net.farugames.api.sql.accounts.IRank;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
-import redis.clients.jedis.Jedis;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,20 +36,19 @@ public class FaruBungeePlayer {
     public FaruBungeePlayer(UUID uuid) {
         this.uuid = uuid;
 
-        this.loadData();
-        this.setRank(Rank.getRankByIdName(BungeeFaruData.getInstance().getBungeeDatabase().getPlayerData(uuid).getPlayerRankName()));
+//        this.loadData();
+        IRank.createAccount(uuid);
+        IData.createAccount(uuid);
+
+
+        this.permissionLevel = IRank.getPermissionLevel(uuid);
+        this.setRank(IRank.getRank(uuid));
 
         this.lastTalk = null;
     }
 
     private void createAccounts() {
-        Jedis jedis = BungeeFaruData.getInstance().getRedisDatabase().getJedisPool().getResource();
-        if (jedis.exists("PlayerData:" + uuid))
-            jedis.set("PlayerData:" + uuid, BungeeFaruData.getGson.toJson(new PlayerDataEntity(uuid, player.getName(),player.getName(), "", Rank.PLAYER.getIdName(), 0,0, 0, 0)));
-        for(DataType dataType : DataType.values()){
-            if (jedis.exists("PlayerData:Preferences:" + uuid+":"+dataType.getColumn()))
-                jedis.set("PlayerData:Preferences:" + uuid+":"+dataType.getColumn(), BungeeFaruData.getGson.toJson(dataType.getDefaultValue()));
-        }
+
     }
 
     public UUID getUUID() {
@@ -96,19 +94,19 @@ public class FaruBungeePlayer {
     public void needDisconnect(Boolean needDisconnect) {
         this.needDisconnect = needDisconnect;
     }
-
-    public void pushData() {
-        for (DataType dataType : DataType.values()) {
-            BungeeFaruData.getInstance().getBungeeDatabase().setData(uuid, dataType, this.mapData.get(dataType));
-        }
-    }
-
-    public void loadData() {
-        for (DataType dataType : DataType.values()) {
-            this.mapData.put(dataType, BungeeFaruData.getInstance().getBungeeDatabase().getData(uuid, dataType));
-        }
-
-    }
+//
+//    public void pushData() {
+//        for (DataType dataType : DataType.values()) {
+//            BungeeFaruData.getInstance().getBungeeDatabase().setData(uuid, dataType, this.mapData.get(dataType));
+//        }
+//    }
+//
+//    public void loadData() {
+//        for (DataType dataType : DataType.values()) {
+//            this.mapData.put(dataType, BungeeFaruData.getInstance().getBungeeDatabase().getData(uuid, dataType));
+//        }
+//
+//    }
 
     public void setData(DataType dataType, Object values) {
         this.mapData.put(dataType, values);
@@ -118,8 +116,10 @@ public class FaruBungeePlayer {
         return this.mapData.get(dataType);
     }
 
+    //TODO : Fully functionnal lang system
     public Lang getLanguage() {
-        return Lang.valueOf(String.valueOf(this.getData(DataType.LANGUAGE)));
+        return Lang.ENGLISH;
+//        return Lang.valueOf(String.valueOf(this.getData(DataType.LANGUAGE)));
     }
 
     public Boolean isLastTalked() {
@@ -138,8 +138,8 @@ public class FaruBungeePlayer {
         this.online = false;
         this.needDisconnect = false;
         this.disconnectReason = Lang.BAD_ACCOUNT;
-        this.pushData();
-        BungeeFaruData.getInstance().getRedisDatabase().getJedisPool().getResource().set("PlayerData:" + uuid, BungeeFaruData.getGson.toJson(new PlayerDataEntity(uuid,player.getName(),player.getName(),player.getName(), this.rank.getName(), permissionLevel, BungeeFaruData.getInstance().getBungeeDatabase().getPlayerData(uuid).getPlayerExperience(), candy, cookie)));
+//        this.pushData();
+        BungeeFaruAPI.iFaruPlayer.remove(uuid);
     }
 
     public static FaruBungeePlayer getPlayer(UUID uuid) {
@@ -147,5 +147,9 @@ public class FaruBungeePlayer {
             BungeeFaruAPI.iFaruPlayer.put(uuid, new FaruBungeePlayer(uuid));
         }
         return BungeeFaruAPI.iFaruPlayer.get(uuid);
+    }
+
+    public int getPermissionLevel() {
+        return permissionLevel;
     }
 }

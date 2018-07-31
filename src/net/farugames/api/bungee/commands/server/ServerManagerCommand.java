@@ -5,8 +5,7 @@ import net.farugames.api.bungee.proxiedplayer.FaruBungeePlayer;
 import net.farugames.api.bungee.servers.ServerStatut;
 import net.farugames.api.spigot.player.languages.Lang;
 import net.farugames.api.spigot.player.rank.Rank;
-import net.farugames.data.bungee.BungeeFaruData;
-import net.farugames.data.database.entities.ServerType;
+import net.farugames.api.sql.accounts.IServer;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
@@ -23,13 +22,13 @@ public class ServerManagerCommand extends Command {
 		ProxiedPlayer player = (ProxiedPlayer) sender;
 		FaruBungeePlayer faruPlayer = FaruBungeePlayer.getPlayer(player.getUniqueId());
 		Lang lang = faruPlayer.getLanguage();
-		
-		if(faruPlayer.getRank().getPower() < Rank.DEVELOPER.getPower()) { player.sendMessage(Lang.ERROR.in(lang) + "\n" + Lang.NO_PERMISSION_MESSAGE.in(lang)); return; }
+
+		if(faruPlayer.getPermissionLevel() < Rank.DEVELOPER.getPower()) { player.sendMessage(Lang.ERROR.in(lang) + "\n" + Lang.NO_PERMISSION_MESSAGE.in(lang)); return; }
 		if(args.length == 0 || args.length > 2 || args[0].equalsIgnoreCase("help")) { player.sendMessage(this.HELP()); return; }
 		
 		if(args[0].equalsIgnoreCase("request")) {
 			if(args[1] == null) { player.sendMessage(this.HELP()); return; }
-			BungeeFaruData.getInstance().getBungeeDatabase().request(ServerType.getServerType(args[1]));
+			IServer.request(args[1]);
 			player.sendMessage(Lang.SERVER_REQUESTED.in(lang).replaceAll("%server%", args[1].toUpperCase().toString()));
 			return;
 		}

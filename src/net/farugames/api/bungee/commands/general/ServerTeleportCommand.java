@@ -32,8 +32,7 @@ public class ServerTeleportCommand extends Command {
 		if (sender instanceof ProxiedPlayer) {
 			ProxiedPlayer p = (ProxiedPlayer) sender;
 			FaruBungeePlayer faruBungeePlayer = FaruBungeePlayer.getPlayer(p.getUniqueId());
-			Rank r = faruBungeePlayer.getRank();
-			if (r.getPower() >= Rank.YOUTUBER.getPower()) {
+			if (faruBungeePlayer.getPermissionLevel() >= Rank.YOUTUBER.getPower()) {
 				if (args.length >= 1) {
 					if (args[0].equalsIgnoreCase("help")) {
 						cmdHelp(sender);

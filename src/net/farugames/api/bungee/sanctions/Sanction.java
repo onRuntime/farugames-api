@@ -45,7 +45,7 @@ public class Sanction {
 	}
 	
 	public void create() {
-		net.farugames.data.bungee.BungeeFaruData.getInstance().getBungeeDatabase().create(this);
+//		create(this);
 		removeSanction(this.target);
 	}
 	

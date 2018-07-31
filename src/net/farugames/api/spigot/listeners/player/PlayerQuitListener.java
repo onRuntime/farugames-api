@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class PlayerQuitListener implements Listener {
 
     @EventHandler
-    public void onPlayerQuit(PlayerQuitEvent event) {
+    public static void onPlayerQuit(PlayerQuitEvent event) {
         System.out.println(SpigotFaruAPI.iFaruPlayer.containsKey(event.getPlayer().getUniqueId()));
         if(SpigotFaruAPI.iFaruPlayer.containsKey(event.getPlayer().getUniqueId()))
             SpigotFaruAPI.iFaruPlayer.remove(event.getPlayer().getUniqueId());

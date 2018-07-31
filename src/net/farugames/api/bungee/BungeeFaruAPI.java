@@ -6,8 +6,10 @@ import net.farugames.api.bungee.sanctions.Sanction;
 import net.farugames.api.bungee.servers.FaruServerAPI;
 import net.farugames.api.bungee.servers.ServerStatut;
 import net.farugames.api.managers.BungeeCommandManager;
-import net.farugames.data.bungee.BungeeFaruData;
-import net.farugames.data.database.BungeeDatabase;
+import net.farugames.api.redis.RedisManager;
+import net.farugames.api.sql.SQLManager;
+import net.farugames.api.sql.accounts.IMaintenance;
+import net.farugames.api.sql.accounts.IServer;
 import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.BungeeServerInfo;
 import net.md_5.bungee.api.ChatColor;
@@ -20,6 +22,10 @@ import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -39,11 +45,20 @@ public class BungeeFaruAPI extends Plugin {
 	public static List<Sanction> sanctions = new ArrayList<Sanction>();
 	
 	public static Map<UUID, FaruBungeePlayer> iFaruPlayer = new HashMap<UUID, FaruBungeePlayer>();
-	
+
+    public SQLManager sqlManager;
+    public RedisManager redisManager;
 
 	public void onLoad() {
 		instance = this;
-		if(BungeeDatabase.Config.getBoolean("config.proxy.maintenance")) maintenance = true;
+
+        redisManager = new RedisManager("149.202.102.63","b4z5MT4Nk6hA",6379);
+        redisManager.connect();
+
+        sqlManager = new SQLManager("149.202.102.63","farugames","proxy","HCK2u7a8Up4d",3306);
+        sqlManager.connect();
+
+		if(IMaintenance.isEnable()) maintenance = true;
 		try {
 			protocol = new Protocol(
 						ChatColor.RED + "@FaruGames" + ChatColor.WHITE + " - " + ChatColor.DARK_RED + "✘" +
@@ -63,12 +78,13 @@ public class BungeeFaruAPI extends Plugin {
 		new BungeeCommandManager().register();
 		
 		getProxy().getScheduler().schedule(this, () -> {
-			for(FaruServerAPI server : iFaruServers.values()) {
-				if(!BungeeFaruData.getInstance().getBungeeDatabase().exists(server.getName())) server.unregister();
+			for(Iterator<FaruServerAPI> serverI = iFaruServers.values().iterator(); serverI.hasNext();) {
+				FaruServerAPI serverAPI = serverI.next();
+				if(!exists(serverAPI.getName())) serverAPI.unregister();
 				proxyPlayers = getProxy().getPlayers();
 			}
-			for(FaruServerAPI faruServer : BungeeFaruData.getInstance().getBungeeDatabase().getFSAServers()) {
-				BungeeFaruData.getInstance().getBungeeDatabase().update(faruServer);
+			for(FaruServerAPI faruServer : IServer.getServers()) {
+				update(faruServer);
 				if(faruServer.getStatut() == ServerStatut.FINISH) {
 				}
 				if(faruServer.getStatut() == ServerStatut.UNREGISTERED) {
@@ -77,7 +93,7 @@ public class BungeeFaruAPI extends Plugin {
 				if(!iFaruServers.containsKey(faruServer.getName())) {
 					FaruServerAPI.getServer(faruServer.getName(), faruServer.getHost().getHostAddress(), faruServer.getPort());
 				}
-				if(faruServer.getStatut() != ServerStatut.DELETE) BungeeFaruData.getInstance().getBungeeDatabase().update(faruServer);
+				if(faruServer.getStatut() != ServerStatut.DELETE) update(faruServer);
 			}
 		}, 0, 1, TimeUnit.SECONDS);
 
@@ -88,7 +104,7 @@ public class BungeeFaruAPI extends Plugin {
 	}
 
 	public void onDisable() {
-		BungeeDatabase.Config.setBoolean("config.proxy.maintenance", maintenance);
+		IMaintenance.setState(maintenance);
 
 		super.onDisable();
 	}
@@ -115,5 +131,51 @@ public class BungeeFaruAPI extends Plugin {
 
 	public static BungeeFaruAPI getInstance() {
 		return instance;
+	}
+
+	private static boolean exists(String serverName){
+		boolean exists = false;
+		try {
+			final Connection connection = SQLManager.getRessource();
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("SELECT name FROM " + IServer.getTable() + " WHERE name = ?");
+			preparedStatement.setString(1, serverName);
+			ResultSet rs = preparedStatement.executeQuery();
+			if(rs.next()) exists = true;
+			connection.close();
+			rs.close();
+			preparedStatement.close();
+		} catch (SQLException e) {
+			System.err.print("[IServer] Error trying to connect to database : ");
+			e.printStackTrace();
+		}
+		return exists;
+	}
+
+	private static void update(FaruServerAPI server) {
+		try {
+			final Connection connection = SQLManager.getRessource();
+			PreparedStatement preparedStatement = (PreparedStatement) connection
+					.prepareStatement("SELECT name FROM " + IServer.getTable() + " WHERE name = ?");
+			preparedStatement.setString(1, server.getName());
+			ResultSet rs = preparedStatement.executeQuery();
+			if(rs.next()) {
+				preparedStatement.close();
+				preparedStatement = (PreparedStatement) connection
+						.prepareStatement("UPDATE " + IServer.getTable() + " SET mode = ?, statut = ?, onlineplayers = ?, onlineplayersname = ? WHERE name = ?");
+				preparedStatement.setString(1, server.getMode().toString());
+				preparedStatement.setString(2, server.getStatut().toString());
+				preparedStatement.setInt(3, server.getOnlinePlayers());
+				preparedStatement.setString(4, server.getPlayers() != null ? server.getPlayers().toString() : "NULL");
+				preparedStatement.setString(5, server.getName());
+				preparedStatement.executeUpdate();
+			}
+			preparedStatement.close();
+			rs.close();
+			connection.close();
+		} catch (SQLException e) {
+			System.err.print("[IServer] Error trying to connect to database : ");
+			e.printStackTrace();
+		}
 	}
 }

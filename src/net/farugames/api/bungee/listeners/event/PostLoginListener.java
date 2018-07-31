@@ -20,10 +20,10 @@ public class PostLoginListener implements Listener {
 		faruBungeePlayer.setData(DataType.LAST_IP, String.valueOf(event.getPlayer().getAddress().getHostString()));
 		faruBungeePlayer.setData(DataType.LAST_LOGIN, new Date());
 		if(faruBungeePlayer.getPlayer() != event.getPlayer()) faruBungeePlayer.setPlayer(event.getPlayer());
-		if(faruBungeePlayer.isOnline() || BungeeFaruAPI.isMaintenance() && faruBungeePlayer.getRank().getPower() < Rank.FRIEND.getPower()) {
+		if(faruBungeePlayer.isOnline() || BungeeFaruAPI.isMaintenance() && faruBungeePlayer.getPermissionLevel() < Rank.FRIEND.getPower()) {
 			faruBungeePlayer.needDisconnect(true);
 			if(faruBungeePlayer.isOnline()) faruBungeePlayer.setDisconnectReason(Lang.BAD_ACCOUNT);
-			if(BungeeFaruAPI.isMaintenance() && faruBungeePlayer.getRank().getPower() < Rank.FRIEND.getPower()) faruBungeePlayer.setDisconnectReason(Lang.MAINTENANCE_DISCONNECT_MESSAGE);
+			if(BungeeFaruAPI.isMaintenance() && faruBungeePlayer.getPermissionLevel() < Rank.FRIEND.getPower()) faruBungeePlayer.setDisconnectReason(Lang.MAINTENANCE_DISCONNECT_MESSAGE);
 		}
 	}
 }
