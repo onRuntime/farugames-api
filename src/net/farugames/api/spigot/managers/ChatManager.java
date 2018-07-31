@@ -36,7 +36,7 @@ public class ChatManager {
 			for (Player op : e.getRecipients()) {
 				FaruPlayer faruOp = FaruPlayer.getPlayer(op.getUniqueId());
 				if ((boolean) faruOp.getData(DataType.ALLOW_CHAT)) {
-					op.sendMessage(prefix + r.getColor() + r.getPrefix() + " " + fs.getName() + suffix + " §8»§r "
+					op.sendMessage(prefix + r.getColor() + r.getPrefix() + fs.getName() + suffix + " §8»§r "
 							+ r.getChatColor() + msg);
 				}
 			}

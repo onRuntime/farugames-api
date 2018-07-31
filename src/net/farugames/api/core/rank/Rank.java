@@ -13,8 +13,8 @@ public enum Rank {
 	MINIDEV(800, "F", "MINIDEV", "MiniDev", ChatColor.BOLD + "DEV", ChatColor.DARK_GREEN, ChatColor.WHITE),
 
 	SUPERMOD(750, "G", "SUPERMOD", "SuperMod", ChatColor.BOLD + "MOD", ChatColor.BLUE, ChatColor.WHITE), 
-	MOD(725, "H", "MODERATOR", "Moderator", ChatColor.BOLD + "MOD", ChatColor.BLUE, ChatColor.WHITE), 
-	MINIMOD(700, "I", "MODERATOR", "Moderator", ChatColor.BOLD + "MOD", ChatColor.BLUE, ChatColor.WHITE),
+	MOD(725, "H", "MOD", "Mod", ChatColor.BOLD + "MOD", ChatColor.BLUE, ChatColor.WHITE), 
+	MINIMOD(700, "I", "MINIMOD", "MiniMod", ChatColor.BOLD + "MOD", ChatColor.BLUE, ChatColor.WHITE),
 
 	SUPERHELPER(650, "J", "SUPERHELPER", "SuperHelper", ChatColor.BOLD + "HELPER", ChatColor.AQUA, ChatColor.WHITE), 
 	HELPER(625, "K", "HELPER", "Helper", ChatColor.BOLD + "HELPER", ChatColor.AQUA, ChatColor.WHITE), 
@@ -28,10 +28,9 @@ public enum Rank {
 	STAFF(400, "Q", "STAFF", "Staff", ChatColor.BOLD + "STAFF", ChatColor.DARK_AQUA, ChatColor.WHITE), 
 	MINISTAFF(400, "R", "MINISTAFF", "MiniStaff", ChatColor.BOLD + "STAFF", ChatColor.DARK_AQUA, ChatColor.WHITE),
 
-	FAMOUS(375, "S", "YOUTUBER", "Youtuber", ChatColor.BOLD + "FAMOUS ", ChatColor.LIGHT_PURPLE,
-			ChatColor.WHITE), YOUTUBER(350, "T", "YOUTUBER", "Youtuber", ChatColor.BOLD + "YOUTUBER ", ChatColor.YELLOW,
-					ChatColor.WHITE), FRIEND(300, "U", "FRIEND", "Friend", ChatColor.BOLD + "§c❤ ", ChatColor.WHITE,
-							ChatColor.WHITE),
+	FAMOUS(375, "S", "FAMOUS", "Famous", ChatColor.BOLD + "FAMOUS ", ChatColor.LIGHT_PURPLE, ChatColor.WHITE), 
+	YOUTUBER(350, "T", "YOUTUBER", "Youtuber", ChatColor.BOLD + "YOUTUBER ", ChatColor.YELLOW, ChatColor.WHITE), 
+	FRIEND(300, "U", "FRIEND", "Friend", ChatColor.BOLD + "§c❤ ", ChatColor.WHITE, ChatColor.WHITE),
 
 	PLAYER(0, "Y", "PLAYER", "Player", "", ChatColor.GRAY, ChatColor.GRAY);
 
@@ -101,14 +100,14 @@ public enum Rank {
 	}
 
 	public String getSuffix() {
-		String suffix = "" + this.color;
+		String suffix = "";
 		if ((MINISTAFF.power <= this.power) && (this.power <= SUPERDEV.power)) {
 			suffix = ChatColor.GREEN + "■ ";
 			if (this.name.contains("Super"))
-				suffix = ChatColor.DARK_PURPLE + "■ ";
+				suffix = ChatColor.LIGHT_PURPLE + "■ ";
 			if (this.name.contains("Mini"))
 				suffix = ChatColor.RED + "■ ";
 		}
-		return suffix;
+		return suffix + this.color;
 	}
 }
