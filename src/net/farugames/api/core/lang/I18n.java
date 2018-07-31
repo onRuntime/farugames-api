@@ -70,7 +70,7 @@ public class I18n {
         if(lang.getWords().containsKey(key)) {
             String text = lang.getWords().get(key);
             MessageFormat messageFormat = new MessageFormat(text);
-            text = text.replaceAll("\\D.*", "");
+            text = text.replaceAll("\\{(\\D*?)\\}", "\\[$1\\]");
             return messageFormat.format(values);
         }
         return key;

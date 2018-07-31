@@ -10,9 +10,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
@@ -20,6 +22,7 @@ import net.farugames.api.core.lang.I18n;
 import net.farugames.api.core.lang.Lang;
 import net.farugames.api.core.sanction.Sanction;
 import net.farugames.api.core.server.FaruServer;
+import net.farugames.api.core.server.ServerStatut;
 import net.farugames.api.proxy.commands.CommandsManager;
 import net.farugames.api.proxy.listeners.ListenersManager;
 import net.farugames.database.redis.RedisManager;
@@ -81,7 +84,7 @@ public class ProxyFaruGamesAPI extends Plugin {
 	public void onEnable() {
 		new ListenersManager(this).registerListeners();
 		new CommandsManager().register();
-		/*
+		
 		getProxy().getScheduler().schedule(this, () -> {
 			for(Iterator<FaruServer> serverI = iFaruServers.values().iterator(); serverI.hasNext();) {
 				FaruServer serverAPI = serverI.next();
@@ -101,7 +104,7 @@ public class ProxyFaruGamesAPI extends Plugin {
 				if(faruServer.getStatut() != ServerStatut.DELETE) update(faruServer);
 			}
 		}, 0, 1, TimeUnit.SECONDS);
-		*/
+		
 		I18n.supportProxyTranslate(Lang.ENGLISH);
 		
 		super.onEnable();

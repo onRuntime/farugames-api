@@ -8,28 +8,25 @@ public enum Rank {
 			"ADMIN", "Admin", ChatColor.BOLD + "ADMIN ", ChatColor.RED,
 			ChatColor.WHITE), RESP(900, "C", "RESP", "Resp", ChatColor.BOLD + "RESP ", ChatColor.GOLD, ChatColor.WHITE),
 
-	SUPERDEV(850, "D", "SUPERDEV", "SuperDev", ChatColor.BOLD + "DEV ", ChatColor.DARK_GREEN, ChatColor.WHITE), DEV(825,
-			"E", "DEV", "Dev", ChatColor.BOLD + "DEV ", ChatColor.DARK_GREEN, ChatColor.WHITE), MINIDEV(800, "F",
-					"MINIDEV", "MiniDev", ChatColor.BOLD + "DEV ", ChatColor.DARK_GREEN, ChatColor.WHITE),
+	SUPERDEV(850, "D", "SUPERDEV", "SuperDev", ChatColor.BOLD + "DEV", ChatColor.DARK_GREEN, ChatColor.WHITE), 
+	DEV(825, "E", "DEV", "Dev", ChatColor.BOLD + "DEV ", ChatColor.DARK_GREEN, ChatColor.WHITE), 
+	MINIDEV(800, "F", "MINIDEV", "MiniDev", ChatColor.BOLD + "DEV", ChatColor.DARK_GREEN, ChatColor.WHITE),
 
-	SUPERMOD(750, "G", "SUPERMOD", "SuperMod", ChatColor.BOLD + "MOD ", ChatColor.BLUE, ChatColor.WHITE), MOD(725, "H",
-			"MODERATOR", "Moderator", ChatColor.BOLD + "MOD ", ChatColor.BLUE, ChatColor.WHITE), MINIMOD(700, "I",
-					"MODERATOR", "Moderator", ChatColor.BOLD + "MOD ", ChatColor.BLUE, ChatColor.WHITE),
+	SUPERMOD(750, "G", "SUPERMOD", "SuperMod", ChatColor.BOLD + "MOD", ChatColor.BLUE, ChatColor.WHITE), 
+	MOD(725, "H", "MODERATOR", "Moderator", ChatColor.BOLD + "MOD", ChatColor.BLUE, ChatColor.WHITE), 
+	MINIMOD(700, "I", "MODERATOR", "Moderator", ChatColor.BOLD + "MOD", ChatColor.BLUE, ChatColor.WHITE),
 
-	SUPERHELPER(650, "J", "SUPERHELPER", "SuperHelper", ChatColor.BOLD + "HELPER ", ChatColor.AQUA,
-			ChatColor.WHITE), HELPER(625, "K", "HELPER", "Helper", ChatColor.BOLD + "HELPER ", ChatColor.AQUA,
-					ChatColor.WHITE), MINIHELPER(600, "L", "MINIHELPER", "MiniHelper", ChatColor.BOLD + "HELPER ",
-							ChatColor.AQUA, ChatColor.WHITE),
+	SUPERHELPER(650, "J", "SUPERHELPER", "SuperHelper", ChatColor.BOLD + "HELPER", ChatColor.AQUA, ChatColor.WHITE), 
+	HELPER(625, "K", "HELPER", "Helper", ChatColor.BOLD + "HELPER", ChatColor.AQUA, ChatColor.WHITE), 
+	MINIHELPER(600, "L", "MINIHELPER", "MiniHelper", ChatColor.BOLD + "HELPER", ChatColor.AQUA, ChatColor.WHITE),
 
-	SUPERBUILDER(550, "M", "SUPERBUILDER", "SuperBuilder ", ChatColor.BOLD + "BUILDER ", ChatColor.GREEN,
-			ChatColor.WHITE), BUILDER(525, "N", "BUILDER", "Builder", ChatColor.BOLD + "BUILDER ", ChatColor.GREEN,
-					ChatColor.WHITE), MINIBUILDER(500, "O", "MINIBUILDER", "MiniBuilder ", ChatColor.BOLD + "BUILDER ",
-							ChatColor.GREEN, ChatColor.WHITE),
+	SUPERBUILDER(550, "M", "SUPERBUILDER", "SuperBuilder ", ChatColor.BOLD + "BUILDER", ChatColor.GREEN, ChatColor.WHITE), 
+	BUILDER(525, "N", "BUILDER", "Builder", ChatColor.BOLD + "BUILDER", ChatColor.GREEN, ChatColor.WHITE), 
+	MINIBUILDER(500, "O", "MINIBUILDER", "MiniBuilder ", ChatColor.BOLD + "BUILDER", ChatColor.GREEN, ChatColor.WHITE),
 
-	SUPERSTAFF(400, "P", "SUPERSTAFF", "SuperStaff", ChatColor.BOLD + "STAFF ", ChatColor.DARK_AQUA,
-			ChatColor.WHITE), STAFF(400, "Q", "STAFF", "Staff", ChatColor.BOLD + "STAFF ", ChatColor.DARK_AQUA,
-					ChatColor.WHITE), MINISTAFF(400, "R", "MINISTAFF", "MiniStaff", ChatColor.BOLD + "STAFF ",
-							ChatColor.DARK_AQUA, ChatColor.WHITE),
+	SUPERSTAFF(400, "P", "SUPERSTAFF", "SuperStaff", ChatColor.BOLD + "STAFF", ChatColor.DARK_AQUA, ChatColor.WHITE), 
+	STAFF(400, "Q", "STAFF", "Staff", ChatColor.BOLD + "STAFF", ChatColor.DARK_AQUA, ChatColor.WHITE), 
+	MINISTAFF(400, "R", "MINISTAFF", "MiniStaff", ChatColor.BOLD + "STAFF", ChatColor.DARK_AQUA, ChatColor.WHITE),
 
 	FAMOUS(375, "S", "YOUTUBER", "Youtuber", ChatColor.BOLD + "FAMOUS ", ChatColor.LIGHT_PURPLE,
 			ChatColor.WHITE), YOUTUBER(350, "T", "YOUTUBER", "Youtuber", ChatColor.BOLD + "YOUTUBER ", ChatColor.YELLOW,
@@ -104,9 +101,9 @@ public enum Rank {
 	}
 
 	public String getSuffix() {
-		String suffix = "";
+		String suffix = "" + this.color;
 		if ((MINISTAFF.power <= this.power) && (this.power <= SUPERDEV.power)) {
-			suffix = ChatColor.GREEN + "■";
+			suffix = ChatColor.GREEN + "■ ";
 			if (this.name.contains("Super"))
 				suffix = ChatColor.DARK_PURPLE + "■ ";
 			if (this.name.contains("Mini"))
