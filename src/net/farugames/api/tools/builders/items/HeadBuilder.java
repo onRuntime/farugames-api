@@ -3,7 +3,8 @@ package net.farugames.api.tools.builders.items;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import com.mojang.authlib.properties.PropertyMap;
-import net.farugames.api.spigot.player.languages.Lang;
+
+import net.farugames.api.core.lang.LangOld;
 import net.farugames.api.tools.reflection.Reflections;
 import org.apache.commons.codec.binary.Base64;
 import org.bukkit.Material;
@@ -50,7 +51,7 @@ public class HeadBuilder
         return this;
     }
     
-    public HeadBuilder setName(final Lang name) {
+    public HeadBuilder setName(final LangOld name) {
         this.name = name.toString();
         return this;
     }

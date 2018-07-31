@@ -1,6 +1,6 @@
 package net.farugames.api.tools.builders.title;
 
-import net.farugames.api.spigot.SpigotFaruAPI;
+import net.farugames.api.spigot.SpigotFaruGamesAPI;
 import net.minecraft.server.v1_9_R2.EntityArmorStand;
 import net.minecraft.server.v1_9_R2.PacketPlayOutEntityDestroy;
 import net.minecraft.server.v1_9_R2.PacketPlayOutSpawnEntityLiving;
@@ -73,7 +73,7 @@ public class HologramBuilder {
 		PacketPlayOutSpawnEntityLiving packet = new PacketPlayOutSpawnEntityLiving(stand);
 		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
 		if (stay != 0) {
-			SpigotFaruAPI.getInstance().getServer().getScheduler().runTaskLater(SpigotFaruAPI.getInstance(), () -> {
+			SpigotFaruGamesAPI.getInstance().getServer().getScheduler().runTaskLater(SpigotFaruGamesAPI.getInstance(), () -> {
 				PacketPlayOutEntityDestroy destroy = new PacketPlayOutEntityDestroy(stand.getId());
 				((CraftPlayer) player).getHandle().playerConnection.sendPacket(destroy);
 			}, stay);
@@ -89,7 +89,7 @@ public class HologramBuilder {
 			((CraftPlayer) playerCollection).getHandle().playerConnection.sendPacket(packet);
 		}
 		if (stay != 0) {
-			SpigotFaruAPI.getInstance().getServer().getScheduler().runTaskLater(SpigotFaruAPI.getInstance(), () -> {
+			SpigotFaruGamesAPI.getInstance().getServer().getScheduler().runTaskLater(SpigotFaruGamesAPI.getInstance(), () -> {
 				PacketPlayOutEntityDestroy destroy = new PacketPlayOutEntityDestroy(stand.getId());
 				for (Player playerCollection : players)
 					((CraftPlayer) playerCollection).getHandle().playerConnection.sendPacket(destroy);

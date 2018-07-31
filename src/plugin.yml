@@ -1,8 +1,7 @@
-main: net.farugames.api.spigot.SpigotFaruAPI
+main: net.farugames.api.spigot.SpigotFaruGamesAPI
 name: FaruGamesAPI
 version: ${project.version}
 authors: [3DX900, ChocoIG, SweetKebab_]
-depends: [FaruGamesData]
 commands:
     gamemode:
       aliases: [gm]

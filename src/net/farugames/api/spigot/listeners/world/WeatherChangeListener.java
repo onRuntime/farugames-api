@@ -1,6 +1,6 @@
 package net.farugames.api.spigot.listeners.world;
 
-import net.farugames.api.spigot.SpigotFaruAPI;
+import net.farugames.api.spigot.SpigotFaruGamesAPI;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -10,7 +10,7 @@ public class WeatherChangeListener implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onWeatherChange(WeatherChangeEvent event) {
-		if(!SpigotFaruAPI.getInstance().getEvent(this)) {
+		if(!SpigotFaruGamesAPI.getInstance().getEvent(this)) {
 			event.setCancelled(true);
 		}
 	}

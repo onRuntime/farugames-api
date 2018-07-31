@@ -1,9 +1,10 @@
 package net.farugames.api.spigot.listeners.player;
 
-import net.farugames.api.spigot.player.FaruPlayer;
-import net.farugames.api.spigot.player.patchs.Collisions;
-import net.farugames.api.spigot.player.patchs.PvP;
-import net.farugames.api.spigot.player.rank.Rank;
+import net.farugames.api.core.rank.Rank;
+import net.farugames.api.spigot.FaruPlayer;
+import net.farugames.api.spigot.patchs.CollisionsPatch;
+import net.farugames.api.spigot.patchs.PvpPatch;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -17,8 +18,8 @@ public class PlayerJoinListener implements Listener {
 		Player player = event.getPlayer();
 		FaruPlayer faruPlayer = FaruPlayer.getPlayer(player.getUniqueId());
 		if(faruPlayer.getPermissionLevel() == Rank.OWNER.getPower()) player.setOp(true);
-		Collisions.patch(player.getUniqueId());
-		PvP.patch(player.getUniqueId());
+		CollisionsPatch.patch(player.getUniqueId());
+		PvpPatch.patch(player.getUniqueId());
 		event.setJoinMessage(null);
 	}
 

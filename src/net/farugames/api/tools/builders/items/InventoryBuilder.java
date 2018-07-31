@@ -1,6 +1,6 @@
 package net.farugames.api.tools.builders.items;
 
-import net.farugames.api.spigot.SpigotFaruAPI;
+import net.farugames.api.spigot.SpigotFaruGamesAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -25,7 +25,7 @@ public class InventoryBuilder implements Listener {
 	private String inventoryName;
 
 	public InventoryBuilder(String inventoryName) {
-		Bukkit.getPluginManager().registerEvents(this, SpigotFaruAPI.getInstance());
+		Bukkit.getPluginManager().registerEvents(this, SpigotFaruGamesAPI.getInstance());
 		this.inventoryName = inventoryName;
 		itemsValues.put("", new ItemStack(Material.AIR));
 	}

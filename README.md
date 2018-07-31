@@ -9,7 +9,7 @@ Ce projet est privé, nous nous engageons à lancer des pousuites judiciaires po
 - Nom : FaruGamesAPI
 - Type : Infrastructure
 - État : Progression continuelle
-- Développeur(s) : 3DX900, ChocoIG
+- Développeur(s) : 3DX900, ChocoIG, SweetKebab_
 
 ## Description
 FaruGamesAPI est le projet contenant l'API utilisée sur les serveurs de jeu.

@@ -1,7 +1,8 @@
 package net.farugames.api.spigot.commands;
 
-import net.farugames.api.spigot.player.FaruPlayer;
-import net.farugames.api.spigot.player.rank.Rank;
+import net.farugames.api.core.rank.Rank;
+import net.farugames.api.spigot.FaruPlayer;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

@@ -1,4 +1,4 @@
-main: net.farugames.api.bungee.BungeeFaruAPI
+main: net.farugames.api.proxy.ProxyFaruGamesAPI
 name: FaruGamesAPI
 version: ${project.version}
 authors: [3DX900, ChocoIG, SweetKebab_]
