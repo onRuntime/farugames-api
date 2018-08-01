@@ -28,11 +28,11 @@ public class ChatManager {
 						fOp.playSound(fOp.getLocation(), Sound.BLOCK_NOTE_PLING, 10, 1);
 						// TitleManager.sendActionBar(fOp, "§a" + fs.getName() +
 						// "§d vous a mentionné dans le chat !");
+						msg = msg.replaceAll("@", "");
 						msg = msg.replaceAll(fOp.getDisplayName(), "§e@" + fOp.getDisplayName() + r.getChatColor());
 					}
 				}
 			}
-			msg = msg.replaceAll("@", "");
 			for (Player op : e.getRecipients()) {
 				FaruPlayer faruOp = FaruPlayer.getPlayer(op.getUniqueId());
 				if ((boolean) faruOp.getData(DataType.ALLOW_CHAT)) {

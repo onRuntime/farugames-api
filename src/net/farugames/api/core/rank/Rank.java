@@ -4,9 +4,9 @@ import net.md_5.bungee.api.ChatColor;
 
 public enum Rank {
 
-	OWNER(1000, "A", "OWNER", "Owner", ChatColor.BOLD + "OWNER ", ChatColor.DARK_RED, ChatColor.WHITE), ADMIN(950, "B",
-			"ADMIN", "Admin", ChatColor.BOLD + "ADMIN ", ChatColor.RED,
-			ChatColor.WHITE), RESP(900, "C", "RESP", "Resp", ChatColor.BOLD + "RESP ", ChatColor.GOLD, ChatColor.WHITE),
+	OWNER(1000, "A", "OWNER", "Owner", ChatColor.BOLD + "OWNER ", ChatColor.DARK_RED, ChatColor.WHITE), 
+	ADMIN(950, "B",	"ADMIN", "Admin", ChatColor.BOLD + "ADMIN ", ChatColor.RED, ChatColor.WHITE), 
+	RESP(900, "C", "RESP", "Resp", ChatColor.BOLD + "RESP ", ChatColor.GOLD, ChatColor.WHITE),
 
 	SUPERDEV(850, "D", "SUPERDEV", "SuperDev", ChatColor.BOLD + "DEV", ChatColor.DARK_GREEN, ChatColor.WHITE), 
 	DEV(825, "E", "DEV", "Dev", ChatColor.BOLD + "DEV ", ChatColor.DARK_GREEN, ChatColor.WHITE), 
