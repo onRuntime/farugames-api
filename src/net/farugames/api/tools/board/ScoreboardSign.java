@@ -85,6 +85,14 @@ public class ScoreboardSign {
 		return getOrCreateTeam(line).getValue();
 	}
 
+	public List<VirtualTeam> getLines() {
+		List<VirtualTeam> list = new ArrayList<VirtualTeam>();
+		for(Integer i = 0; i <= 15; i++) {
+			if(lines[i].name != null) list.add(lines[i]);
+		}
+		return list;
+	}
+
 	public VirtualTeam getTeam(int line) {
 		if (line > 14)
 			return null;
