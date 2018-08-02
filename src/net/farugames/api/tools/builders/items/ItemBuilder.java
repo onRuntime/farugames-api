@@ -41,16 +41,16 @@ public class ItemBuilder {
 	
 	public ItemBuilder(final ItemType itemType, final Object type) {
 		if(itemType == ItemType.BLOCK && type instanceof Material) {
-			
 			this.itemType = itemType;
 			this.material = Material.valueOf(String.valueOf(type));
-		} else if(itemType == ItemType.PLAYER_HEAD && type instanceof String) {
 			
+		} else if(itemType == ItemType.PLAYER_HEAD && type instanceof String) {
 			this.itemType = itemType;
 			this.head = String.valueOf(type);
 			this.material = Material.SKULL_ITEM;
-		} else if(itemType == ItemType.CUSTOM_HEAD && type instanceof String) {
+			this.data = (byte) 3;
 			
+		} else if(itemType == ItemType.CUSTOM_HEAD && type instanceof String) {
 			this.itemType = itemType;
 			this.profile = new GameProfile(UUID.randomUUID(), null);
 	    	PropertyMap propertyMap = profile.getProperties();
@@ -60,6 +60,7 @@ public class ItemBuilder {
 	    	byte[] encodedData = base.encode(String.format("{textures:{SKIN:{url:\"%s\"}}}", new Object[] { String.valueOf(type) }).getBytes());
 	    	propertyMap.put("textures", new Property("textures", new String(encodedData)));
 	    	this.material = Material.SKULL_ITEM;
+	    	this.data = (byte) 3;
 		}
 	}
 	
@@ -157,22 +158,11 @@ public class ItemBuilder {
 	public ItemStack build() {
     	ItemStack itemStack = new ItemStack(this.material, this.amount, this.data);
     	ItemMeta itemMeta = itemStack.getItemMeta();
-    	if(this.itemType != ItemType.BLOCK) {
-            if(this.head == null) {
-            	Reflections.getField(((SkullMeta) itemMeta).getClass(), "profile", GameProfile.class).set(((SkullMeta) itemMeta), this.profile);
-            } else {
-            	((SkullMeta) itemMeta).setOwner(this.head);
-            }
-    	}
-        if((this.name != null) || (this.lore != null)) {
-			itemMeta = itemStack.getItemMeta();
-			if (this.name != null) {
-				itemMeta.setDisplayName(this.name);
-			}
-			if (this.lore != null) {
-				itemMeta.setLore(this.lore);
-			}
-		}
+    	
+        if(this.profile != null) Reflections.getField(((SkullMeta) itemMeta).getClass(), "profile", GameProfile.class).set(((SkullMeta) itemMeta), this.profile);
+        if(this.head != null) ((SkullMeta) itemMeta).setOwner(this.head);
+		if (this.name != null) itemMeta.setDisplayName(this.name);
+		if (this.lore != null) itemMeta.setLore(this.lore);
 		if(this.enchantments != null) {
 			for(Enchantment ench : this.enchantments.keySet()) {
 				int level = ((Integer) this.enchantments.get(ench)).intValue();
