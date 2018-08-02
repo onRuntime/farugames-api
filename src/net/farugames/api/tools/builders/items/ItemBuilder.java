@@ -2,6 +2,7 @@ package net.farugames.api.tools.builders.items;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -22,73 +23,52 @@ import net.farugames.api.tools.reflection.Reflections;
 
 public class ItemBuilder {
 
-	private ItemType itemType;
+	private ItemType itemType = ItemType.BLOCK;
 	
-	private Material material;
-	private Byte data;
-	private String head;
-	private GameProfile profile;
+	private Material material = Material.STONE;
+	private Byte data = (byte) 0;
+	private String head = null;
+	private GameProfile profile = null;
 	
 	private Base64 base = new Base64();
 	
-	private Integer amount;
-    private String name;
+	private Integer amount = 1;
+    private String name = "Unknow name";
     
-    private List<String> lore;
-    private Map<Enchantment, Integer> enchantments;
-    private List<ItemFlag> flags;
+    private List<String> lore = new ArrayList<String>();
+    private Map<Enchantment, Integer> enchantments = new HashMap<Enchantment, Integer>();
+    private List<ItemFlag> flags = new ArrayList<ItemFlag>();
 	
-	public ItemBuilder() {
-		this.itemType = ItemType.BLOCK;
-		this.material = Material.STONE;
-		this.data = (byte) 0;
-		this.head = null;
-		this.profile = null;
-		
-		this.amount = 1;
-		this.name = "Unknow name";
-		
-		this.lore = new ArrayList<String>();
-	}
-	
-	public ItemBuilder withType(final ItemType itemType) {
-		this.itemType = itemType;
-		return this;
-	}
-	
-	public ItemBuilder withMaterial(final Material material) {
-		if(this.itemType != ItemType.BLOCK) return null;
-		this.material = material;
-		this.itemType = ItemType.BLOCK;
-		return this;
+	public ItemBuilder(final ItemType itemType, final Object type) {
+		if(itemType == ItemType.BLOCK && type instanceof Material) {
+			
+			this.itemType = itemType;
+			this.material = Material.valueOf(String.valueOf(type));
+		} else if(itemType == ItemType.PLAYER_HEAD && type instanceof String) {
+			
+			this.itemType = itemType;
+			this.head = String.valueOf(type);
+			this.material = Material.SKULL_ITEM;
+		} else if(itemType == ItemType.CUSTOM_HEAD && type instanceof String) {
+			
+			this.itemType = itemType;
+			this.profile = new GameProfile(UUID.randomUUID(), null);
+	    	PropertyMap propertyMap = profile.getProperties();
+	    	if(propertyMap == null) {
+	    		throw new IllegalStateException("Unknow PropertyMap.");
+	    	}
+	    	byte[] encodedData = base.encode(String.format("{textures:{SKIN:{url:\"%s\"}}}", new Object[] { String.valueOf(type) }).getBytes());
+	    	propertyMap.put("textures", new Property("textures", new String(encodedData)));
+	    	this.material = Material.SKULL_ITEM;
+		} else {
+			return;
+		}
 	}
 	
 	public ItemBuilder withData(final Byte data) {
 		if(this.itemType != ItemType.BLOCK) return null;
 		this.data = data;
 		return this;
-	}
-	
-	public ItemBuilder withHead(final String head) {
-		if(this.itemType != ItemType.PLAYER_HEAD) return null;
-		this.material = Material.SKULL_ITEM;
-		this.head = head;
-		this.itemType = ItemType.PLAYER_HEAD;
-		return this;
-	}
-	
-	public ItemBuilder withTexture(final String texture) {
-		if(this.itemType != ItemType.CUSTOM_HEAD) return null;
-		this.material = Material.SKULL_ITEM;
-		this.profile = new GameProfile(UUID.randomUUID(), null);
-    	PropertyMap propertyMap = profile.getProperties();
-    	if(propertyMap == null) {
-    		throw new IllegalStateException("Unknow PropertyMap.");
-    	}
-    	byte[] encodedData = base.encode(String.format("{textures:{SKIN:{url:\"%s\"}}}", new Object[] { texture }).getBytes());
-    	propertyMap.put("textures", new Property("textures", new String(encodedData)));
-    	this.itemType = ItemType.CUSTOM_HEAD;
-    	return this;
 	}
 	
 	public ItemBuilder withAmount(final Integer amount) {
@@ -178,17 +158,15 @@ public class ItemBuilder {
 	
 	public ItemStack build() {
     	ItemStack itemStack = new ItemStack(this.material, this.amount, this.data);
-    	SkullMeta skullMeta;
+    	ItemMeta itemMeta = itemStack.getItemMeta();
     	if(this.itemType != ItemType.BLOCK) {
-    		skullMeta = (SkullMeta) itemStack.getItemMeta();
             if(this.head == null) {
-            	Reflections.getField(skullMeta.getClass(), "profile", GameProfile.class).set(skullMeta, this.profile);
+            	Reflections.getField(((SkullMeta) itemMeta).getClass(), "profile", GameProfile.class).set(((SkullMeta) itemMeta), this.profile);
             } else {
-            	skullMeta.setOwner(this.head);
+            	((SkullMeta) itemMeta).setOwner(this.head);
             }
     	}
-		ItemMeta itemMeta;
-        if ((this.name != null) || (this.lore != null)) {
+        if((this.name != null) || (this.lore != null)) {
 			itemMeta = itemStack.getItemMeta();
 			if (this.name != null) {
 				itemMeta.setDisplayName(this.name);
@@ -196,14 +174,19 @@ public class ItemBuilder {
 			if (this.lore != null) {
 				itemMeta.setLore(this.lore);
 			}
-			itemStack.setItemMeta(itemMeta);
 		}
-		if (this.enchantments != null) {
-			for (Enchantment ench : this.enchantments.keySet()) {
+		if(this.enchantments != null) {
+			for(Enchantment ench : this.enchantments.keySet()) {
 				int level = ((Integer) this.enchantments.get(ench)).intValue();
 				itemStack.addUnsafeEnchantment(ench, level);
 			}
 		}
+		if(this.flags != null) {
+			for(ItemFlag flag : this.flags) {
+				itemMeta.addItemFlags(flag);
+			}
+		}
+		itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
 	
