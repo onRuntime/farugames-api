@@ -1,5 +1,6 @@
 package net.farugames.api.spigot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,7 @@ import net.minecraft.server.v1_9_R2.Packet;
 import redis.clients.jedis.Jedis;
 
 public class FaruPlayer {
+	
     private UUID uuid;
     private Player player;
 
@@ -39,6 +41,8 @@ public class FaruPlayer {
 
     private Boolean muted;
     private Boolean banned;
+    
+    private List<FaruPlayer> friends = new ArrayList<FaruPlayer>();
 
     private Integer experience;
 
@@ -111,6 +115,19 @@ public class FaruPlayer {
             }
             this.mapCurrency.put(currency, iCoins);
         }
+        
+        // Friends
+        try(Jedis jedis = RedisManager.getJedisPool().getResource()) {
+        	if(jedis.exists("friends:" + uuid.toString())) {
+        		jedis.set("friends:" + uuid.toString(), null);
+        		for(String friendUUID : jedis.smembers("friends:" + uuid.toString())) {
+        			this.friends.add(FaruPlayer.getPlayer(UUID.fromString(friendUUID)));
+        		}
+        	}
+        } catch(Exception exception) {
+        	System.out.println("[FaruPlayer - Friends] Error trying to get Redis Resource.");
+            exception.printStackTrace();
+        }
 
         //xp
         try (Jedis jedis = RedisManager.getJedisPool().getResource()) {
@@ -172,6 +189,22 @@ public class FaruPlayer {
 
     public void setBanned(Boolean banned) {
         this.banned = banned;
+    }
+    
+    public Boolean isFriend(UUID target) {
+    	return this.friends.contains(FaruPlayer.getPlayer(target));
+    }
+    
+    public List<FaruPlayer> getFriends() {
+    	return this.friends;
+    }
+    
+    public void addFriend(UUID target) {
+    	this.friends.add(FaruPlayer.getPlayer(target));
+    }
+    
+    public void removeFriend(UUID target) {
+    	this.friends.remove(FaruPlayer.getPlayer(target));
     }
 
     public boolean hasPermission(String permission) {

@@ -38,6 +38,8 @@ public class ItemBuilder {
     private List<String> lore = new ArrayList<String>();
     private Map<Enchantment, Integer> enchantments = new HashMap<Enchantment, Integer>();
     private List<ItemFlag> flags = new ArrayList<ItemFlag>();
+    
+    private ItemMeta itemMeta = null;
 	
 	public ItemBuilder(final ItemType itemType, final Object type) {
 		if(itemType == ItemType.BLOCK && type instanceof Material) {
@@ -155,9 +157,13 @@ public class ItemBuilder {
 		return this.flags;
 	}
 	
+	public ItemMeta getItemMeta() {
+		return this.itemMeta;
+	}
+	
 	public ItemStack build() {
     	ItemStack itemStack = new ItemStack(this.material, this.amount, this.data);
-    	ItemMeta itemMeta = itemStack.getItemMeta();
+    	this.itemMeta = itemStack.getItemMeta();
     	
         if(this.profile != null) Reflections.getField(((SkullMeta) itemMeta).getClass(), "profile", GameProfile.class).set(((SkullMeta) itemMeta), this.profile);
         if(this.head != null) ((SkullMeta) itemMeta).setOwner(this.head);
