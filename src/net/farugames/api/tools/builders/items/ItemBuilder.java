@@ -60,8 +60,6 @@ public class ItemBuilder {
 	    	byte[] encodedData = base.encode(String.format("{textures:{SKIN:{url:\"%s\"}}}", new Object[] { String.valueOf(type) }).getBytes());
 	    	propertyMap.put("textures", new Property("textures", new String(encodedData)));
 	    	this.material = Material.SKULL_ITEM;
-		} else {
-			return;
 		}
 	}
 	
@@ -190,7 +188,7 @@ public class ItemBuilder {
         return itemStack;
     }
 	
-	public enum ItemType {
+	public static enum ItemType {
 		BLOCK, PLAYER_HEAD, CUSTOM_HEAD;
 	}
 }
