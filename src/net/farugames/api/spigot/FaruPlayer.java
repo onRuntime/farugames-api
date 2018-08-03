@@ -25,6 +25,7 @@ import net.farugames.database.redis.RedisManager;
 import net.farugames.database.sql.accounts.ICurrency;
 import net.farugames.database.sql.accounts.IData;
 import net.farugames.database.sql.accounts.IExperience;
+import net.farugames.database.sql.accounts.IFriend;
 import net.farugames.database.sql.accounts.IPermission;
 import net.farugames.database.sql.accounts.IRank;
 import net.minecraft.server.v1_9_R2.Packet;
@@ -119,7 +120,7 @@ public class FaruPlayer {
         // Friends
         try(Jedis jedis = RedisManager.getJedisPool().getResource()) {
         	if(jedis.exists("friends:" + uuid.toString())) {
-        		jedis.set("friends:" + uuid.toString(), null);
+        		jedis.set("friends:" + uuid.toString(), IFriend.getFriends(uuid).toString().replaceAll("[", "").replaceAll("]", ""));
         		for(String friendUUID : jedis.smembers("friends:" + uuid.toString())) {
         			this.friends.add(FaruPlayer.getPlayer(UUID.fromString(friendUUID)));
         		}
