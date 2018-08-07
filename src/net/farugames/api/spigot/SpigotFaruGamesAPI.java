@@ -1,23 +1,26 @@
 package net.farugames.api.spigot;
 
-import com.mojang.authlib.GameProfile;
-
-import net.farugames.api.core.nick.NickManager;
-import net.farugames.api.core.server.ServerStatut;
-import net.farugames.api.spigot.commands.GamemodeCommand;
-import net.farugames.api.spigot.commands.NickCommand;
-import net.farugames.api.spigot.commands.TeleportCommand;
-import net.farugames.api.spigot.listeners.ListenersManager;
-import net.farugames.database.redis.RedisManager;
-import net.farugames.database.redis.spigot.PubSubSpigot;
-import net.farugames.database.sql.SQLManager;
-import net.farugames.database.sql.accounts.IServer;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.*;
+import com.mojang.authlib.GameProfile;
+
+import net.farugames.api.core.nick.NickManager;
+import net.farugames.api.spigot.commands.GamemodeCommand;
+import net.farugames.api.spigot.commands.NickCommand;
+import net.farugames.api.spigot.commands.TeleportCommand;
+import net.farugames.api.spigot.listeners.ListenersManager;
+import net.farugames.database.redis.RedisManager;
+import net.farugames.database.redis.servers.IServer;
+import net.farugames.database.redis.spigot.PubSubSpigot;
+import net.farugames.database.sql.SQLManager;
 
 public class SpigotFaruGamesAPI extends JavaPlugin {
 	
@@ -56,7 +59,7 @@ public class SpigotFaruGamesAPI extends JavaPlugin {
 	}
 	
 	public void onDisable() {
-		IServer.remove(Bukkit.getServerName(), ServerStatut.DELETE);
+		IServer.remove(Bukkit.getServerName());
 		super.onDisable();
 	}
 	

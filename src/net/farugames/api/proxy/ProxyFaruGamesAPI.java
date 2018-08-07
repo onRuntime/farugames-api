@@ -3,32 +3,23 @@ package net.farugames.api.proxy;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
 import net.farugames.api.core.lang.I18n;
 import net.farugames.api.core.lang.Lang;
 import net.farugames.api.core.sanction.Sanction;
-import net.farugames.api.core.server.FaruServer;
-import net.farugames.api.core.server.ServerStatut;
 import net.farugames.api.proxy.commands.CommandsManager;
 import net.farugames.api.proxy.listeners.ListenersManager;
 import net.farugames.database.redis.RedisManager;
 import net.farugames.database.sql.SQLManager;
 import net.farugames.database.sql.accounts.IMaintenance;
-import net.farugames.database.sql.accounts.IServer;
 import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.BungeeServerInfo;
 import net.md_5.bungee.api.ChatColor;
@@ -44,7 +35,6 @@ public class ProxyFaruGamesAPI extends Plugin {
 	public static Favicon favicon;
 	public static Protocol protocol;
 	
-	public static Map<String, FaruServer> iFaruServers = new HashMap<String, FaruServer>();
 	public Collection<ProxiedPlayer> proxyPlayers = new ArrayList<ProxiedPlayer>();
 
 	public static Boolean maintenance = false;
@@ -85,6 +75,7 @@ public class ProxyFaruGamesAPI extends Plugin {
 		new ListenersManager(this).registerListeners();
 		new CommandsManager().register();
 		
+		/*
 		getProxy().getScheduler().schedule(this, () -> {
 			for(Iterator<FaruServer> serverI = iFaruServers.values().iterator(); serverI.hasNext();) {
 				FaruServer serverAPI = serverI.next();
@@ -93,17 +84,17 @@ public class ProxyFaruGamesAPI extends Plugin {
 			}
 			for(FaruServer faruServer : IServer.getServers()) {
 				update(faruServer);
-				if(faruServer.getStatut() == ServerStatut.FINISH) {
+				if(faruServer.getStatut() == ServerStatus.FINISH) {
 				}
-				if(faruServer.getStatut() == ServerStatut.UNREGISTERED) {
+				if(faruServer.getStatut() == ServerStatus.UNREGISTERED) {
 					faruServer.register();
 				}
 				if(!iFaruServers.containsKey(faruServer.getName())) {
 					FaruServer.getServer(faruServer.getName(), faruServer.getHost().getHostAddress(), faruServer.getPort());
 				}
-				if(faruServer.getStatut() != ServerStatut.DELETE) update(faruServer);
+				if(faruServer.getStatut() != ServerStatus.DELETE) update(faruServer);
 			}
-		}, 0, 1, TimeUnit.SECONDS);
+		}, 0, 1, TimeUnit.SECONDS);*/
 		
 		I18n.supportProxyTranslate(Lang.ENGLISH);
 		
@@ -114,10 +105,6 @@ public class ProxyFaruGamesAPI extends Plugin {
 		IMaintenance.setState(maintenance);
 
 		super.onDisable();
-	}
-	
-	public Map<String, FaruServer> getServers() {
-		return iFaruServers;
 	}
 
 	public static void registerServer(String name, Integer port) {
@@ -139,7 +126,7 @@ public class ProxyFaruGamesAPI extends Plugin {
 	public static ProxyFaruGamesAPI getInstance() {
 		return instance;
 	}
-
+	/*
 	private static boolean exists(String serverName){
 		boolean exists = false;
 		try {
@@ -184,5 +171,5 @@ public class ProxyFaruGamesAPI extends Plugin {
 			System.err.print("[IServer] Error trying to connect to database : ");
 			e.printStackTrace();
 		}
-	}
+	}*/
 }
