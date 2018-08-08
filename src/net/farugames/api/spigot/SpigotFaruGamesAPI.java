@@ -17,6 +17,7 @@ import net.farugames.api.spigot.commands.GamemodeCommand;
 import net.farugames.api.spigot.commands.NickCommand;
 import net.farugames.api.spigot.commands.TeleportCommand;
 import net.farugames.api.spigot.listeners.ListenersManager;
+import net.farugames.api.spigot.runnables.ActiveLobbyRunnable;
 import net.farugames.database.redis.RedisManager;
 import net.farugames.database.redis.servers.IServer;
 import net.farugames.database.redis.spigot.PubSubSpigot;
@@ -49,6 +50,7 @@ public class SpigotFaruGamesAPI extends JavaPlugin {
 	
 	public void onEnable() {
 		new ListenersManager().register();
+		new ActiveLobbyRunnable().runTaskLater(instance, 1000);
 		getCommand("gamemode").setExecutor(new GamemodeCommand());
 		getCommand("teleport").setExecutor(new TeleportCommand());
 		getCommand("nick").setExecutor(new NickCommand());

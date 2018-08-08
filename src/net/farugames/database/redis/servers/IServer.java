@@ -2,7 +2,9 @@ package net.farugames.database.redis.servers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.farugames.api.core.server.ServerStatus;
 import net.farugames.api.core.server.ServerType;
@@ -10,6 +12,8 @@ import net.farugames.database.redis.RedisManager;
 import redis.clients.jedis.Jedis;
 
 public class IServer {
+	
+	public static Map<String, ServerStatus> serverStatus = new HashMap<String, ServerStatus>();
 
 	public static void create(String name, String ip, Integer port, String host, String map) {
 		try (Jedis jedis = RedisManager.getRedisDatabase().getJedisPool().getResource()) {
@@ -81,6 +85,28 @@ public class IServer {
 		}
 		return serverStatus;
 	}
+	
+	public static Integer getOnlinePlayers(String serverName) {
+		Integer integer = 0;
+        try (Jedis jedis = RedisManager.getRedisDatabase().getJedisPool().getResource()) {
+        	integer = Integer.parseInt(jedis.get("servers:onlineplayers" + ":" + serverName));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return integer;
+    }
+	
+	public static List<String> getOnlinePlayersNameList(String serverName) {
+        List<String> list = new ArrayList<String>();
+        try (Jedis jedis = RedisManager.getRedisDatabase().getJedisPool().getResource()) {
+            for (String string : jedis.lrange("servers:onlineplayersname" + ":" + serverName, 0, 1000)) {
+                list.add(string);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 	
 	public static List<String> getServersStatusList() {
 		List<String> list = new ArrayList<String>();
