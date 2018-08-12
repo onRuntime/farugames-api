@@ -107,15 +107,6 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/lib/Travertine-b23.jar</systemPath>
 		</dependency>
-		
-		<!-- Faru-Data -->
-<!--		<dependency>
-			<groupId>net.farugames</groupId>
-			<artifactId>FaruGamesData</artifactId>
-			<version>0.0.1</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/FaruGamesData.jar</systemPath>
-		</dependency>-->
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>

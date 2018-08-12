@@ -85,7 +85,8 @@ public class GameProfileBuilder {
         }
     }
 
-    public static String fetchRaw(UUID uuid) throws IOException {
+    @SuppressWarnings("unused")
+	public static String fetchRaw(UUID uuid) throws IOException {
 
         HttpURLConnection connection = (HttpURLConnection) new URL(
                 String.format(SERVICE_URL, UUIDTypeAdapter.fromUUID(uuid))).openConnection();

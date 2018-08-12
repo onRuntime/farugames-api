@@ -13,9 +13,12 @@ import net.farugames.database.redis.servers.IServer;
 public class FaruServer {
 
 	private String name;
+	
 	private InetSocketAddress address;
 	private ServerType type;
 	private ServerStatus status;
+	private Boolean avaible;
+	
 	private Collection<FaruPlayer> players;
 	
 	public FaruServer(String name, InetSocketAddress address, ServerType type, ServerStatus status) {
@@ -23,6 +26,7 @@ public class FaruServer {
 		this.address = address;
 		this.type = type;
 		this.status = status;
+		this.avaible = false;
 		
 		this.players = new ArrayList<FaruPlayer>();
 		
@@ -31,6 +35,9 @@ public class FaruServer {
 	
 	public void update() {
 		this.status = IServer.getStatus(this.name);
+		
+		if(this.status == ServerStatus.LOBBY) this.avaible = true;
+		
 		this.players.clear();
 		IServer.getOnlinePlayersNameList(this.name).forEach(playerName -> this.players.add(FaruPlayer.getPlayer(UUIDFetcher.getUUID(playerName))));
 	}
@@ -52,10 +59,16 @@ public class FaruServer {
 		this.status = status;
 	}
 	
+	public void setAvaible(Boolean avaible) {
+		this.avaible = avaible;
+	}
+	
 	public String getName() {return this.name;}
 	public InetSocketAddress getAddress() {return this.address;}
 	public ServerType getType() {return this.type;}
 	public ServerStatus getStatus() {return this.status;}
+	
+	public Boolean isAvaible() {return this.avaible;}
 	
 	public List<FaruPlayer> getOnlinePlayers() {return (List<FaruPlayer>) this.players;}
 	
