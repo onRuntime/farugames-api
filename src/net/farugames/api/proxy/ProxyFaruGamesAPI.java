@@ -45,8 +45,6 @@ public class ProxyFaruGamesAPI extends Plugin {
 	public static Boolean maintenance = false;
 	private static List<String> maintenancePlayers = new ArrayList<String>();
 
-	public static List<Sanction> sanctions = new ArrayList<Sanction>();
-	
 	public static Map<UUID, ProxiedFaruPlayer> iFaruPlayer = new HashMap<UUID, ProxiedFaruPlayer>();
 	public static Map<String, FaruServer> iFaruServer = new HashMap<String, FaruServer>();
 
