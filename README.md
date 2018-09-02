@@ -1,4 +1,5 @@
-<img src="https://farugames.net/assets/img/logo.png" alt="test" width="100" height="100" />
+.. image:: https://farugames.net/assets/img/logo.png
+<img src="" alt="test" width="100" height="100" />
 
 ## FaruGames - FaruGamesAPI
 
